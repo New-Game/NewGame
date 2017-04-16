@@ -30,7 +30,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -139,6 +139,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="3DPipelineTools.h" />
+    <ClInclude Include="AECollision.h" />
+    <ClInclude Include="AEEngine.h" />
+    <ClInclude Include="AEExport.h" />
+    <ClInclude Include="AEFrameRateController.h" />
+    <ClInclude Include="AEGameStateMgr.h" />
+    <ClInclude Include="AEGraphics.h" />
+    <ClInclude Include="AEInput.h" />
+    <ClInclude Include="AELineSegment2.h" />
+    <ClInclude Include="AEMath.h" />
+    <ClInclude Include="AEMtx33.h" />
+    <ClInclude Include="AESystem.h" />
+    <ClInclude Include="AETypes.h" />
+    <ClInclude Include="AEUtil.h" />
+    <ClInclude Include="AEVec2.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="System.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Alpha_Engine.dll" />
+    <None Include="glew32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Alpha_Engine.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="System.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
