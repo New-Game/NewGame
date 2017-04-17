@@ -6,6 +6,8 @@
  */
 
 #include "GameStateManager.h"
+#include "GameState.h"
+#include "Level.h"
 
 //------------------------------------------------------------------------------
 // Private Consts:
@@ -38,6 +40,24 @@
 //------------------------------------------------------------------------------
 // Public Memeber Functions:
 //------------------------------------------------------------------------------
+void GameStateManager::Initialize() {
+	game_state_[PREFACE] = new Preface();
+	game_state_[BACKGROUND_STORY] = new BackgroundStory();
+	game_state_[CHARACTER_PICK] = new CharacterPick();
+	game_state_[LEVEL1] = new Level();    // level1 ¹Ø¿¨1
+	game_state_[LEVEL2] = new Level();    // level2 ¹Ø¿¨2
+	game_state_[LEVEL3] = new Level();    // level3 ¹Ø¿¨3
+	game_state_[PRIZE] = new Prize();
+	game_state_[ENDING] = new Ending();
+	game_state_[GAME_OVER] = new GameOver();
+	game_state_pointer_ = game_state_;
+}
+
+void GameStateManager::Exit() {
+	for (int i = 0; i < NUM_OF_GAME_STATES; ++i) {
+		delete game_state_[i];
+	}
+}
 
 //------------------------------------------------------------------------------
 // Private Member Functions:

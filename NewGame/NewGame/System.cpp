@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
 #include "AEEngine.h"
 #include "System.h"
 #include "Input.h"
@@ -51,7 +50,7 @@ using namespace std;
 void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	// 利用Alpha创建窗口
 	sys_init_info_.mAppInstance = hInstance;  // WinMain的第1个参数
-	sys_init_info_.mShow = nCmdShow;		  // WinMain的第4个参数
+	sys_init_info_.mShow = nCmdShow;          // WinMain的第4个参数
 	sys_init_info_.mWinWidth = 800;
 	sys_init_info_.mWinHeight = 400;
 	sys_init_info_.mCreateConsole = 1;        // 是否需要打开控制台，1表示是，0表示否

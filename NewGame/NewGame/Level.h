@@ -26,6 +26,12 @@
 //------------------------------------------------------------------------------
 class Level : public GameState {
 public:
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
 
 private:
 

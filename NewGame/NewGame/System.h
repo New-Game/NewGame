@@ -35,16 +35,20 @@ class System {
 public:
 	// 生成一个文件流对象，可以通过它打开文件,之后就可以向该文件中写log
 	static ofstream log_file_;
+
 	// 系统初始化函数
 	static void Initialize(HINSTANCE, int);
+
 	// 系统退出函数
 	static void Exit();
 
 private:
 	// AE系统初始化信息的结构体
 	static AESysInitInfo sys_init_info_;
+
 	// 生成一个文件流对象，用来和AE控制台输出流相连
 	static ofstream console_out_;
+
 	// 保存cout被重定向前的流对象缓冲指针，之后可用于恢复该流对象缓冲指针
 	static streambuf* streambuf_pointer_;
 };

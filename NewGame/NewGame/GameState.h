@@ -31,10 +31,19 @@ public:
 	virtual void Draw() = 0;
 	virtual void Free() = 0;
 	virtual void Unload() = 0;
+
+protected:
+
 };
 
-class Preface : public GameState{
+class Preface : public GameState {
 public:
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
 
 private:
 
@@ -42,6 +51,12 @@ private:
 
 class BackgroundStory : public GameState {
 public:
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
 
 private:
 
@@ -49,6 +64,12 @@ private:
 
 class CharacterPick : public GameState {
 public:
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
 
 private:
 
@@ -56,6 +77,12 @@ private:
 
 class Prize : public GameState {
 public:
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
 	
 private:
 
@@ -63,6 +90,25 @@ private:
 
 class Ending : public GameState {
 public:
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
+
+private:
+
+};
+
+class GameOver : public GameState {
+public:
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
 
 private:
 

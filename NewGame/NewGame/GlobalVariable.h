@@ -1,9 +1,9 @@
 /* Project:      NewGame
-* File Name:    Level.h
-* Author:       Atlas Shen
-* Date:         2017/4/16
-* Purpose:      关卡类头文件
-*/
+ * File Name:    GlobalVariable.h
+ * Author:       Atlas Shen
+ * Date:         2017/4/17
+ * Purpose:      全局变量头文件
+ */
 
 #pragma once
 
@@ -11,6 +11,7 @@
 #include "AEEngine.h"
 #include "System.h"
 #include "Input.h"
+#include "GameStateManager.h"
 
 //------------------------------------------------------------------------------
 // Typedef:
@@ -36,7 +37,10 @@ AESysInitInfo System::sys_init_info_;
 streambuf* System::streambuf_pointer_;
 ofstream System::console_out_;
 
-bool Input::key_pressed_[KEY_NUM];
+bool Input::key_pressed_[NUM_OF_KEY];
+
+GameState* GameStateManager::game_state_[NUM_OF_GAME_STATES];
+GameState** GameStateManager::game_state_pointer_;
 
 //------------------------------------------------------------------------------
 // Public Functions:

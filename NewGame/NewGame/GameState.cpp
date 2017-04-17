@@ -38,6 +38,29 @@
 //------------------------------------------------------------------------------
 // Public Memeber Functions:
 //------------------------------------------------------------------------------
+void Preface::Load() {
+	
+}
+
+void Preface::Initialize() {
+	
+}
+
+void Preface::Update() {
+	
+}
+
+void Preface::Draw() {
+	
+}
+
+void Preface::Free() {
+	
+}
+
+void Preface::Unload() {
+	
+}
 
 //------------------------------------------------------------------------------
 // Private Member Functions:
