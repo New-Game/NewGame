@@ -8,6 +8,7 @@
 #include <iostream>
 #include <Windows.h>
 #include "System.h"
+#include "GlobalVariable.h"
 
 //------------------------------------------------------------------------------
 // Private Consts:
@@ -36,10 +37,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// 我们只需要用到第一个和第四个参数
 
 	// System Initialize
-	SystemInitialize(hInstance, nCmdShow);
+	System::Initialize(hInstance, nCmdShow);
 
 	// System Exit
-	SystemExit();
+	System::Exit();
 
 	return 0;
 }

@@ -75,6 +75,9 @@
     <ClInclude Include="GameStateManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GlobalVariable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />

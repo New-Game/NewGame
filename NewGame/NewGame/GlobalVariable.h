@@ -1,16 +1,15 @@
 /* Project:      NewGame
- * File Name:    System.h
- * Author:       Atlas Shen
- * Date:         2017/4/15
- * Purpose:      系统管理器头文件
- */
+* File Name:    Level.h
+* Author:       Atlas Shen
+* Date:         2017/4/16
+* Purpose:      关卡类头文件
+*/
 
 #pragma once
 
 #include <fstream>
-#include <Windows.h>
-
-using namespace std;
+#include "System.h"
+#include "Input.h"
 
 //------------------------------------------------------------------------------
 // Typedef:
@@ -27,25 +26,12 @@ using namespace std;
 //------------------------------------------------------------------------------
 // Public Classes:
 //------------------------------------------------------------------------------
-// System类的实现完全只是为了封装与它相关的状态量（成员变量）和行为（成员函数）
-// 因此它的成员变量和成员函数都是static的
-// System类不能用于生成对象（实例）
-class System {
-public:
-	// 生成一个文件流对象，可以通过它打开文件,之后就可以向该文件中写log
-	static ofstream out_file_log;
-	// 系统初始化函数
-	static void Initialize(HINSTANCE, int);
-	// 系统推出函数
-	static void Exit();
-
-private:
-
-};
 
 //------------------------------------------------------------------------------
 // Public Variables:
 //------------------------------------------------------------------------------
+ofstream System::out_file_log;
+bool Input::key_pressed[KEY_NUM];
 
 //------------------------------------------------------------------------------
 // Public Functions:

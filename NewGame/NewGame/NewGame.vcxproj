@@ -156,6 +156,7 @@
     <ClInclude Include="AEVec2.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="GlobalVariable.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="System.h" />
