@@ -8,6 +8,7 @@
 #pragma once
 
 #include <fstream>
+#include "AEEngine.h"
 #include "System.h"
 #include "Input.h"
 
@@ -30,8 +31,12 @@
 //------------------------------------------------------------------------------
 // Public Variables:
 //------------------------------------------------------------------------------
-ofstream System::out_file_log;
-bool Input::key_pressed[KEY_NUM];
+ofstream System::log_file_;
+AESysInitInfo System::sys_init_info_;
+streambuf* System::streambuf_pointer_;
+ofstream System::console_out_;
+
+bool Input::key_pressed_[KEY_NUM];
 
 //------------------------------------------------------------------------------
 // Public Functions:

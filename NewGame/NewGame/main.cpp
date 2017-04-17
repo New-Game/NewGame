@@ -36,10 +36,8 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	// 我们只需要用到第一个和第四个参数
 
-	// System Initialize
 	System::Initialize(hInstance, nCmdShow);
 
-	// System Exit
 	System::Exit();
 
 	return 0;

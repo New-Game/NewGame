@@ -47,7 +47,7 @@ LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 	PAINTSTRUCT ps;   // ÷ÿªÊΩ·ππ
 
 	// –¥log
-	System::out_file_log << "Input: Handle." << endl;
+	System::log_file_ << "Input: Handle." << endl;
 
 	switch (msg) {
 		// ¥∞ø⁄¥¥Ω®
@@ -69,56 +69,56 @@ LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 		// ¥∞ø⁄πÿ±’
 		case WM_DESTROY:
-			key_pressed[KEY_ESC] = true;
+			key_pressed_[KEY_ESC] = true;
 			// –¥log
-			System::out_file_log << "Input: Forcing Shut Down." << endl;
+			System::log_file_ << "Input: Forcing Shut Down." << endl;
 			break;
 
 		case WM_KEYDOWN:
 			if (wParam == VK_RETURN) {
-				key_pressed[KEY_ENTER] = true;
+				key_pressed_[KEY_ENTER] = true;
 				// –¥log
-				System::out_file_log << "Input: ENTER." << endl;
+				System::log_file_ << "Input: ENTER." << endl;
 			}
 			if (wParam == VK_SPACE) {
-				key_pressed[KEY_SPACE] = true;
+				key_pressed_[KEY_SPACE] = true;
 				// –¥log
-				System::out_file_log << "Input: SPACE." << endl;
+				System::log_file_ << "Input: SPACE." << endl;
 			}
 			if (wParam == VK_ESCAPE) {
-				key_pressed[KEY_ESC] = true;
+				key_pressed_[KEY_ESC] = true;
 				// –¥log
-				System::out_file_log << "Input: ESC." << endl;
+				System::log_file_ << "Input: ESC." << endl;
 			}
 			if (wParam == 'A') {
-				key_pressed[KEY_A] = true;
+				key_pressed_[KEY_A] = true;
 				// –¥log
-				System::out_file_log << "Input: A" << endl;
+				System::log_file_ << "Input: A" << endl;
 			}
 			if (wParam == 'S') {
-				key_pressed[KEY_S] = true;
+				key_pressed_[KEY_S] = true;
 				// –¥log
-				System::out_file_log << "Input: S" << endl;
+				System::log_file_ << "Input: S" << endl;
 			}
 			if (wParam == VK_UP) {
-				key_pressed[KEY_UP] = true;
+				key_pressed_[KEY_UP] = true;
 				// –¥log
-				System::out_file_log << "Input: UP" << endl;
+				System::log_file_ << "Input: UP" << endl;
 			}
 			if (wParam == VK_DOWN) {
-				key_pressed[KEY_DOWN] = true;
+				key_pressed_[KEY_DOWN] = true;
 				// –¥log
-				System::out_file_log << "Input: DOWN" << endl;
+				System::log_file_ << "Input: DOWN" << endl;
 			}
 			if (wParam == VK_LEFT) {
-				key_pressed[KEY_LEFT] = true;
+				key_pressed_[KEY_LEFT] = true;
 				// –¥log
-				System::out_file_log << "Input: LEFT" << endl;
+				System::log_file_ << "Input: LEFT" << endl;
 			}
 			if (wParam == VK_RIGHT) {
-				key_pressed[KEY_RIGHT] = true;
+				key_pressed_[KEY_RIGHT] = true;
 				// –¥log
-				System::out_file_log << "Input: RIGHT" << endl;
+				System::log_file_ << "Input: RIGHT" << endl;
 			}
 			break;
 
@@ -136,7 +136,7 @@ LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 void Input::Set() {
 	for (int i = 0; i < KEY_NUM; ++i)
-		key_pressed[i] = false;
+		key_pressed_[i] = false;
 }
 
 //------------------------------------------------------------------------------

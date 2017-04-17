@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "AEEngine.h"
 #include <fstream>
 #include <Windows.h>
 
@@ -28,19 +29,24 @@ using namespace std;
 // Public Classes:
 //------------------------------------------------------------------------------
 // System类的实现完全只是为了封装与它相关的状态量（成员变量）和行为（成员函数）
-// 因此它的成员变量和成员函数都是static的
+// 因此它的成员都是static的，static成员变量相当于全局变量，static成员函数相当于全局函数
 // System类不能用于生成对象（实例）
 class System {
 public:
 	// 生成一个文件流对象，可以通过它打开文件,之后就可以向该文件中写log
-	static ofstream out_file_log;
+	static ofstream log_file_;
 	// 系统初始化函数
 	static void Initialize(HINSTANCE, int);
-	// 系统推出函数
+	// 系统退出函数
 	static void Exit();
 
 private:
-
+	// AE系统初始化信息的结构体
+	static AESysInitInfo sys_init_info_;
+	// 生成一个文件流对象，用来和AE控制台输出流相连
+	static ofstream console_out_;
+	// 保存cout被重定向前的流对象缓冲指针，之后可用于恢复该流对象缓冲指针
+	static streambuf* streambuf_pointer_;
 };
 
 //------------------------------------------------------------------------------

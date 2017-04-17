@@ -49,31 +49,43 @@ using namespace std;
 //------------------------------------------------------------------------------
 // 系统初始化函数
 void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
-	// 打开文件用于之后写log，该文件成为一个输入输出的流
-	out_file_log.open("log.txt", ios::out);
+	// 利用Alpha创建窗口
+	sys_init_info_.mAppInstance = hInstance;  // WinMain的第1个参数
+	sys_init_info_.mShow = nCmdShow;		  // WinMain的第4个参数
+	sys_init_info_.mWinWidth = 800;
+	sys_init_info_.mWinHeight = 400;
+	sys_init_info_.mCreateConsole = 1;        // 是否需要打开控制台，1表示是，0表示否
+	sys_init_info_.mCreateWindow = 1;         // 是否需要创建窗口，1表示是，0表示否
+	sys_init_info_.mMaxFrameRate = 60;        // 设置帧率（如果使用Alpha的帧率控制功能的话）
+	sys_init_info_.mpWinCallBack = Input::Handle;
+	sys_init_info_.mClassStyle = CS_HREDRAW | CS_VREDRAW;  // 窗口类定义的重绘方式，水平重绘和垂直重绘
+	sys_init_info_.mWindowStyle = WS_OVERLAPPEDWINDOW;     // 窗口风格
+
+	// Alpha系统初始化，记录返回值
+	int AESysInit_return_value = AESysInit(&sys_init_info_);
+
+	// 分配控制台来帮助debug，把标准输出流重定向到AE系统的控制台
+	if (sys_init_info_.mCreateConsole) {
+		AllocConsole();
+		console_out_.open("CONOUT$");
+		streambuf_pointer_ = cout.rdbuf(console_out_.rdbuf());
+		cout << "Console is ready for debug." << endl;
+	}
+	// 之后所有标准输出都会在AE系统的控制台上打印出来
+
+	// 打开文件用于之后写log，该文件成为一个输出的流
+	log_file_.open("log.txt", ios::out);
 	// 如果打开文件失败，向控制台输出错误信息，并直接退出程序
-	if (!out_file_log) {
-		clog << "Fail to open the log file!" << endl;
+	if (!log_file_) {
+		cout << "Fail to open the log file!" << endl;
+		log_file_ << "Fail to open the log file!" << endl;
 		exit(EXIT_FAILURE);
 	}
 
-	// 利用Alpha创建窗口
-	AESysInitInfo sysInitInfo;
-	sysInitInfo.mAppInstance = hInstance;  // WinMain的第1个参数
-	sysInitInfo.mShow = nCmdShow;		   // WinMain的第4个参数
-	sysInitInfo.mWinWidth = 800;
-	sysInitInfo.mWinHeight = 400;
-	sysInitInfo.mCreateConsole = 1;        // 是否需要打开控制台，1表示是，0表示否
-	sysInitInfo.mCreateWindow = 1;         // 是否需要创建窗口，1表示是，0表示否
-	sysInitInfo.mMaxFrameRate = 60;        // 设置帧率（如果使用Alpha的帧率控制功能的话）
-	sysInitInfo.mpWinCallBack = Input::Handle;
-	sysInitInfo.mClassStyle = CS_HREDRAW | CS_VREDRAW;  // 窗口类定义的重绘方式，水平重绘和垂直重绘
-	sysInitInfo.mWindowStyle = WS_OVERLAPPEDWINDOW;     // 窗口风格
-
-	// Alpha系统初始化
 	// 如果系统初始化失败，向控制台输出错误信息，并直接退出程序
-	if (0 == AESysInit(&sysInitInfo)) {
-		clog << "Fail to init the AE system!" << endl;
+	if (AESysInit_return_value == 0) {
+		cout << "Fail to init the AE system!" << endl;
+		log_file_ << "Fail to open the log file!" << endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -104,19 +116,26 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	AEGfxMeshFree(test);*/
 
 	// 写log
-	out_file_log << "System: Initialize." << endl;
+	log_file_ << "System: Initialize." << endl;
 }
 
 // 系统退出函数
 void System::Exit() {
+	// 如果选择开出AE系统控制台的话
+	if (sys_init_info_.mCreateConsole) {
+		// 恢复cout的流对象缓冲指针并关闭console_out_流
+		cout.rdbuf(streambuf_pointer_);
+		console_out_.close();
+	}
+
 	// Alpha系统退出
 	AESysExit();
 
 	// 写log
-	out_file_log << "System: Exit." << endl;
+	log_file_ << "System: Exit." << endl;
 
 	// 关闭文件，结束对log记录文件的写入
-	out_file_log.close();
+	log_file_.close();
 }
 
 //------------------------------------------------------------------------------

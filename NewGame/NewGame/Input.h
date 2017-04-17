@@ -37,11 +37,11 @@ enum Key {
 // Public Classes:
 //------------------------------------------------------------------------------
 // Input类的实现完全只是为了封装与它相关的状态量（成员变量）和行为（成员函数）
-// 因此它的成员变量和成员函数都是static的
+// 因此它的成员都是static的，static成员变量相当于全局变量，static成员函数相当于全局函数
 // Input类不能用于生成对象（实例）
 class Input {
 public:
-	static bool key_pressed[KEY_NUM];
+	static bool key_pressed_[KEY_NUM];
 	// 处理、响应输入的回调函数
 	static LRESULT CALLBACK Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	// 用于初始化或者重置key_pressed[]数组
