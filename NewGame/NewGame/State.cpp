@@ -1,15 +1,11 @@
 /* Project:      NewGame
- * File Name:    main.cpp
+ * File Name:    State.cpp
  * Author:       Atlas Shen
- * Date:         2017/4/15
- * Purpose:      游戏main函所在文件，main函数实现Game Loop
+ * Date:         2017/4/18
+ * Purpose:      状态类实现文件
  */
 
-#include <iostream>
-#include <Windows.h>
-#include "GameStateManager.h"
-#include "System.h"
-#include "Global.h"
+#include "State.h"
 
 //------------------------------------------------------------------------------
 // Private Consts:
@@ -35,18 +31,6 @@
 // Public Functions:
 //------------------------------------------------------------------------------
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	// 我们只需要用到第一个和第四个参数
-
-	System::Initialize(hInstance, nCmdShow);
-	GameStateManager::Initialize();
-
-	GameStateManager::Exit();
-	System::Exit();
-
-	return 0;
-}
-
 //------------------------------------------------------------------------------
 // Private Functions:
 //------------------------------------------------------------------------------
@@ -54,6 +38,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 //------------------------------------------------------------------------------
 // Public Memeber Functions:
 //------------------------------------------------------------------------------
+
+// 必须提供纯虚析构函数的定义，否则链接时会出问题
+// 这个定义是必需的，因为虚析构函数工作的方式是：
+// 最底层的派生类的析构函数最先被调用，然后各个基类的析构函数被调用。
+// 这就是说，即使是抽象类，编译器也会产生对~State()的调用，所以要保证为它提供函数体
+State::~State() {}
 
 //------------------------------------------------------------------------------
 // Private Member Functions:

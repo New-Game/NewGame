@@ -1,11 +1,11 @@
 /* Project:      NewGame
- * File Name:    Level.cpp
+ * File Name:    Character.cpp
  * Author:       Atlas Shen
- * Date:         2017/4/16
- * Purpose:      关卡类实现文件
+ * Date:         2017/4/18
+ * Purpose:      人物类实现文件
  */
 
-#include "Level.h"
+#include "Character.h"
 
 //------------------------------------------------------------------------------
 // Private Consts:
@@ -39,12 +39,7 @@
 // Public Memeber Functions:
 //------------------------------------------------------------------------------
 
-void Level::Load() {}
-void Level::Initialize() {}
-void Level::Update() {}
-void Level::Draw() {}
-void Level::Free() {}
-void Level::Unload() {}
+Character::~Character() {}
 
 //------------------------------------------------------------------------------
 // Private Member Functions:

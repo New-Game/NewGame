@@ -1,17 +1,13 @@
 /* Project:      NewGame
- * File Name:    GlobalVariable.h
+ * File Name:    Resource.h
  * Author:       Atlas Shen
- * Date:         2017/4/17
- * Purpose:      全局变量头文件
+ * Date:         2017/4/18
+ * Purpose:      资源类头文件
  */
 
 #pragma once
 
-#include <fstream>
-#include "AEEngine.h"
-#include "System.h"
-#include "Input.h"
-#include "GameStateManager.h"
+#include "GameElement.h"
 
 //------------------------------------------------------------------------------
 // Typedef:
@@ -29,20 +25,18 @@
 // Public Classes:
 //------------------------------------------------------------------------------
 
+// 资源类，继承了GameElement类，同样还是抽象类，不能用于生成对象
+// 用于派生具体资源类，所有成员函数均为纯虚函数
+class Resource : public GameElement {
+public:
+
+protected:
+	virtual ~Resource() = 0;
+};
+
 //------------------------------------------------------------------------------
 // Public Variables:
 //------------------------------------------------------------------------------
-// 必须为静态成员变量提供类外部的声明，否则链接时会出问题
-
-ofstream System::log_file_;
-AESysInitInfo System::sys_init_info_;
-streambuf* System::streambuf_pointer_;
-ofstream System::console_out_;
-
-bool Input::key_pressed_[NUM_OF_KEY];
-
-GameState* GameStateManager::game_state_[NUM_OF_GAME_STATES];
-GameState** GameStateManager::game_state_pointer_;
 
 //------------------------------------------------------------------------------
 // Public Functions:

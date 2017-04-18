@@ -39,10 +39,6 @@
 // Public Memeber Functions:
 //------------------------------------------------------------------------------
 
-// 必须提供纯虚析构函数的定义，否则链接时会出问题
-// 这个定义是必需的，因为虚析构函数工作的方式是：
-// 最底层的派生类的析构函数最先被调用，然后各个基类的析构函数被调用。
-// 这就是说，即使是抽象类，编译器也会产生对~GameState()的调用，所以要保证为它提供函数体
 GameState::~GameState() {}
 
 void Menu::Load() {}
@@ -72,6 +68,13 @@ void LevelPreface::Update() {}
 void LevelPreface::Draw() {}
 void LevelPreface::Free() {}
 void LevelPreface::Unload() {}
+
+void Level::Load() {}
+void Level::Initialize() {}
+void Level::Update() {}
+void Level::Draw() {}
+void Level::Free() {}
+void Level::Unload() {}
 
 void Prize::Load() {}
 void Prize::Initialize() {}

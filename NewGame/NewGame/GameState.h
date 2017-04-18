@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "State.h"
+
 //------------------------------------------------------------------------------
 // Typedef:
 //------------------------------------------------------------------------------
@@ -23,19 +25,13 @@
 // Public Classes:
 //------------------------------------------------------------------------------
 
-// 游戏状态抽象类，用于派生具体游戏状态类，所有成员函数均为纯虚函数
-class GameState {
+// 游戏状态类，继承了State类，同样还是抽象类，不能用于生成对象
+// 用于派生具体游戏状态类，所有成员函数均为纯虚函数
+class GameState : public State {
 public:
-	virtual ~GameState() = 0;
-	virtual void Load() = 0;
-	virtual void Initialize() = 0;
-	virtual void Update() = 0;
-	virtual void Draw() = 0;
-	virtual void Free() = 0;
-	virtual void Unload() = 0;
-
+	friend class GameStateManager; // 友元声明放在public或private或protected中都可以
 protected:
-
+	virtual ~GameState() = 0;
 };
 
 // 以下为具体的游戏状态类
@@ -89,6 +85,21 @@ private:
 class LevelPreface : public GameState {
 public:
 	~LevelPreface() {}
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
+
+private:
+
+};
+
+// 关卡类，多实例类，每个关卡都是它的一个对象
+class Level : public GameState {
+public:
+	~Level() {}
 	void Load() override;
 	void Initialize() override;
 	void Update() override;

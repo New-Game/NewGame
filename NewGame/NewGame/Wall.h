@@ -1,13 +1,13 @@
 /* Project:      NewGame
- * File Name:    Level.h
+ * File Name:    Wall.h
  * Author:       Atlas Shen
- * Date:         2017/4/16
- * Purpose:      关卡类头文件
+ * Date:         2017/4/18
+ * Purpose:      墙体类头文件
  */
 
 #pragma once
 
-#include "GameState.h"
+#include "GameElement.h"
 
 //------------------------------------------------------------------------------
 // Typedef:
@@ -25,17 +25,10 @@
 // Public Classes:
 //------------------------------------------------------------------------------
 
-// 关卡类，多实例类，每个关卡都是它的一个对象
-class Level : public GameState {
+// 墙体类，可直接生成对象
+class Wall : public GameElement {
 public:
-	~Level() {}
-	void Load() override;
-	void Initialize() override;
-	void Update() override;
-	void Draw() override;
-	void Free() override;
-	void Unload() override;
-
+	~Wall() {}
 private:
 
 };

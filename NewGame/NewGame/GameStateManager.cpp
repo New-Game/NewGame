@@ -7,7 +7,6 @@
 
 #include "GameStateManager.h"
 #include "GameState.h"
-#include "Level.h"
 #include "System.h"
 
 //------------------------------------------------------------------------------
@@ -67,6 +66,26 @@ void GameStateManager::Exit() {
 
 	// дlog
 	System::log_file_ << "GameStateManager: Exit." << endl;
+}
+
+void GameStateManager::RestartFromBeginning() {
+	
+}
+
+void GameStateManager::RestartFromCurrentLevel() {
+	
+}
+
+void GameStateManager::Quit() {
+	
+}
+
+void GameStateManager::Pause() {
+	
+}
+
+void GameStateManager::Resume() {
+	
 }
 
 //------------------------------------------------------------------------------
