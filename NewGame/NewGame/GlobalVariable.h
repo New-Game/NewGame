@@ -32,6 +32,8 @@
 //------------------------------------------------------------------------------
 // Public Variables:
 //------------------------------------------------------------------------------
+// 必须为静态成员变量提供类外部的声明，否则链接时会出问题
+
 ofstream System::log_file_;
 AESysInitInfo System::sys_init_info_;
 streambuf* System::streambuf_pointer_;

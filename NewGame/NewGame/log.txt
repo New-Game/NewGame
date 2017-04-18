@@ -3,4 +3,6 @@ Input: Default.
 Input: Handle.
 Input: Default.
 System: Initialize.
+GameStateManager: Initialize.
+GameStateManager: Exit.
 System: Exit.

@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <Windows.h>
+#include "GameStateManager.h"
 #include "System.h"
 #include "GlobalVariable.h"
 
@@ -33,11 +34,14 @@
 //------------------------------------------------------------------------------
 // Public Functions:
 //------------------------------------------------------------------------------
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	// 我们只需要用到第一个和第四个参数
 
 	System::Initialize(hInstance, nCmdShow);
+	GameStateManager::Initialize();
 
+	GameStateManager::Exit();
 	System::Exit();
 
 	return 0;

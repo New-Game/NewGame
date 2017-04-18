@@ -46,6 +46,7 @@ using namespace std;
 //------------------------------------------------------------------------------
 // Public Memeber Functions:
 //------------------------------------------------------------------------------
+
 // 系统初始化函数
 void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	// 利用Alpha创建窗口

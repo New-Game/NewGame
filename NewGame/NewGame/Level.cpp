@@ -39,6 +39,13 @@
 // Public Memeber Functions:
 //------------------------------------------------------------------------------
 
+void Level::Load() {}
+void Level::Initialize() {}
+void Level::Update() {}
+void Level::Draw() {}
+void Level::Free() {}
+void Level::Unload() {}
+
 //------------------------------------------------------------------------------
 // Private Member Functions:
 //------------------------------------------------------------------------------

@@ -24,8 +24,11 @@
 //------------------------------------------------------------------------------
 // Public Classes:
 //------------------------------------------------------------------------------
+
+// 关卡类，多实例类，每个关卡都是它的一个对象
 class Level : public GameState {
 public:
+	~Level() {}
 	void Load() override;
 	void Initialize() override;
 	void Update() override;

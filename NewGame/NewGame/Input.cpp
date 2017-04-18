@@ -42,6 +42,7 @@ using namespace std;
 //------------------------------------------------------------------------------
 // Public Memeber Functions:
 //------------------------------------------------------------------------------
+
 LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	HDC dc;           // 设备
 	PAINTSTRUCT ps;   // 重绘结构
@@ -148,6 +149,9 @@ LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 void Input::Set() {
 	for (int i = 0; i < NUM_OF_KEY; ++i)
 		key_pressed_[i] = false;
+
+	// 写log
+	System::log_file_ << "Input: Set" << endl;
 }
 
 //------------------------------------------------------------------------------

@@ -22,9 +22,11 @@
 //------------------------------------------------------------------------------
 // Public Classes:
 //------------------------------------------------------------------------------
+
+// 游戏状态抽象类，用于派生具体游戏状态类，所有成员函数均为纯虚函数
 class GameState {
 public:
-	virtual	~GameState() = 0;
+	virtual ~GameState() = 0;
 	virtual void Load() = 0;
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;
@@ -36,8 +38,12 @@ protected:
 
 };
 
-class Preface : public GameState {
+// 以下为具体的游戏状态类
+
+// 菜单类，单实例类
+class Menu : public GameState {
 public:
+	~Menu() {}
 	void Load() override;
 	void Initialize() override;
 	void Update() override;
@@ -49,8 +55,10 @@ private:
 
 };
 
+// 背景故事类，单实例类
 class BackgroundStory : public GameState {
 public:
+	~BackgroundStory() {}
 	void Load() override;
 	void Initialize() override;
 	void Update() override;
@@ -62,8 +70,10 @@ private:
 
 };
 
+// 人物选择类，单实例类
 class CharacterPick : public GameState {
 public:
+	~CharacterPick() {}
 	void Load() override;
 	void Initialize() override;
 	void Update() override;
@@ -75,8 +85,25 @@ private:
 
 };
 
+// 关卡前序类，多实例类，每个关卡前的序都是它带的一个对象
+class LevelPreface : public GameState {
+public:
+	~LevelPreface() {}
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
+
+private:
+
+};
+
+// 奖励类，单实例类
 class Prize : public GameState {
 public:
+	~Prize() {}
 	void Load() override;
 	void Initialize() override;
 	void Update() override;
@@ -88,8 +115,10 @@ private:
 
 };
 
+// 结尾花絮类，单实例类
 class Ending : public GameState {
 public:
+	~Ending() {}
 	void Load() override;
 	void Initialize() override;
 	void Update() override;
@@ -101,8 +130,10 @@ private:
 
 };
 
+// 最终结尾类，单实例类
 class GameOver : public GameState {
 public:
+	~GameOver() {}
 	void Load() override;
 	void Initialize() override;
 	void Update() override;
