@@ -39,7 +39,7 @@ AESysInitInfo System::sys_init_info_;
 streambuf* System::streambuf_pointer_;
 ofstream System::console_out_;
 
-bool Input::key_pressed_[NUM_OF_KEY];
+bool Input::pressed_key_[NUM_OF_KEY];
 
 GameState* GameStateManager::game_state_[NUM_OF_GAME_STATES];
 GameState** GameStateManager::game_state_pointer_;

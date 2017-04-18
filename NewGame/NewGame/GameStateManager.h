@@ -18,18 +18,20 @@
 //------------------------------------------------------------------------------
 
 enum GameStates {
-	MENU,
+	GAME_PREFACE,
 	BACKGROUND_STORY,
 	CHARACTER_PICK,
 	LEVEL1_PREFACE,
 	LEVEL1,
+	LEVEL1_ENDING,
 	LEVEL2_PREFACE,
 	LEVEL2,
+	LEVEL2_ENDING,
 	LEVEL3_PREFACE,
 	LEVEL3,
+	LEVEL3_ENDING,
 	PRIZE,
-	ENDING,
-	GAME_OVER,
+	GAME_ENDING,
 	NUM_OF_GAME_STATES
 };
 
@@ -58,11 +60,11 @@ public:
 	}
 
 	// 是否还有下一个游戏状态
-	static bool HaveNextGameState() {
-		return *game_state_pointer_ != game_state_[GAME_OVER];
+	static bool HasNextGameState() {
+		return *game_state_pointer_ != game_state_[GAME_ENDING];
 	}
 
-	// 把当前游戏状态更新为下一个状态（必须在HaveNextGameState()返回true的情况下调用）
+	// 把当前游戏状态更新为下一个状态（必须在HasNextGameState()返回true的情况下调用）
 	static void NextGameState() {
 		++game_state_pointer_;
 	}

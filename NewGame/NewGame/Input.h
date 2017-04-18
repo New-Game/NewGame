@@ -43,16 +43,18 @@ enum Key {
 // Input类不能用于生成对象（实例）
 class Input {
 public:
-	static bool key_pressed_[NUM_OF_KEY];
-
 	// 处理、响应输入的回调函数
 	static LRESULT CALLBACK Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
+	static bool GetPressedKey(enum Key key) {
+		return pressed_key_[key];
+	}
+
 	// 用于初始化或者重置key_pressed[]数组
-	static void Set();
+	static void SetPressedKey();
 
 private:
-
+	static bool pressed_key_[NUM_OF_KEY];
 };
 
 //------------------------------------------------------------------------------

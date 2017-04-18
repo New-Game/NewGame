@@ -35,15 +35,26 @@
 // Public Functions:
 //------------------------------------------------------------------------------
 
+// 程序主函数，我们只需要用到第一个和第四个参数
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	// 我们只需要用到第一个和第四个参数
-
 	System::Initialize(hInstance, nCmdShow);
 	GameStateManager::Initialize();
-
+	while (true) {
+		GameStateManager::GetGameState()->Load();
+		GameStateManager::GetGameState()->Initialize();
+		while (!GameStateManager::GetGameState()->GetIsReadyForNextGameState()) {
+			GameStateManager::GetGameState()->Update();
+			GameStateManager::GetGameState()->Draw();
+		}
+		GameStateManager::GetGameState()->Free();
+		GameStateManager::GetGameState()->Unload();
+		if (GameStateManager::HasNextGameState())
+			GameStateManager::NextGameState();
+		else
+			break;
+	}
 	GameStateManager::Exit();
 	System::Exit();
-
 	return 0;
 }
 

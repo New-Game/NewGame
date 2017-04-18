@@ -42,22 +42,24 @@
 //------------------------------------------------------------------------------
 
 void GameStateManager::Initialize() {
-	game_state_[MENU] = new Menu();
-	game_state_[BACKGROUND_STORY] = new BackgroundStory();
+	game_state_[GAME_PREFACE] = new Interval();
+	game_state_[BACKGROUND_STORY] = new Interval();
 	game_state_[CHARACTER_PICK] = new CharacterPick();
-	game_state_[LEVEL1_PREFACE] = new LevelPreface();
+	game_state_[LEVEL1_PREFACE] = new Interval();
 	game_state_[LEVEL1] = new Level(); // level1 ¹Ø¿¨1
-	game_state_[LEVEL2_PREFACE] = new LevelPreface();
+	game_state_[LEVEL1_ENDING] = new Interval();
+	game_state_[LEVEL2_PREFACE] = new Interval();
 	game_state_[LEVEL2] = new Level(); // level2 ¹Ø¿¨2
-	game_state_[LEVEL3_PREFACE] = new LevelPreface();
+	game_state_[LEVEL2_ENDING] = new Interval();
+	game_state_[LEVEL3_PREFACE] = new Interval();
 	game_state_[LEVEL3] = new Level(); // level3 ¹Ø¿¨3
-	game_state_[PRIZE] = new Prize();
-	game_state_[ENDING] = new Ending();
-	game_state_[GAME_OVER] = new GameOver();
+	game_state_[LEVEL3_ENDING] = new Interval();
+	game_state_[PRIZE] = new Interval();
+	game_state_[GAME_ENDING] = new Interval();
 	game_state_pointer_ = game_state_;
 
 	// Ð´log
-	System::log_file_ << "GameStateManager: Initialize." << endl;
+	System::GetLogFile() << "GameStateManager: Initialize." << endl;
 }
 
 void GameStateManager::Exit() {
@@ -65,7 +67,7 @@ void GameStateManager::Exit() {
 		delete game_state_[i];
 
 	// Ð´log
-	System::log_file_ << "GameStateManager: Exit." << endl;
+	System::GetLogFile() << "GameStateManager: Exit." << endl;
 }
 
 void GameStateManager::RestartFromBeginning() {

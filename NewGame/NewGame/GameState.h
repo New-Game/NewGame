@@ -30,41 +30,25 @@
 class GameState : public State {
 public:
 	friend class GameStateManager; // 友元声明放在public或private或protected中都可以
+	bool GetIsReadyForNextGameState() const {
+		return is_ready_for_next_game_state_;
+	}
+	void SetIsReadyForNextGameState() {
+		is_ready_for_next_game_state_ = true;
+	}
 protected:
+	bool is_ready_for_next_game_state_;
+	GameState() : is_ready_for_next_game_state_(false) {}
+	GameState(GameState& game_state) {
+		is_ready_for_next_game_state_ = game_state.GetIsReadyForNextGameState();
+	}
 	virtual ~GameState() = 0;
 };
 
-// 以下为具体的游戏状态类
-
-// 菜单类，单实例类
-class Menu : public GameState {
-public:
-	~Menu() {}
-	void Load() override;
-	void Initialize() override;
-	void Update() override;
-	void Draw() override;
-	void Free() override;
-	void Unload() override;
-
-private:
-
-};
-
-// 背景故事类，单实例类
-class BackgroundStory : public GameState {
-public:
-	~BackgroundStory() {}
-	void Load() override;
-	void Initialize() override;
-	void Update() override;
-	void Draw() override;
-	void Free() override;
-	void Unload() override;
-
-private:
-
-};
+// 以下为具体的游戏状态类，所有游戏状态可以抽象为三种类
+// 第一种是在状态中按左右方向键来选择人物的
+// 第二种是在状态中显示相关信息，按Enter可以进入下一状态的
+// 第三种就是关卡状态，每个关卡都是关卡类的一个对象
 
 // 人物选择类，单实例类
 class CharacterPick : public GameState {
@@ -76,22 +60,21 @@ public:
 	void Draw() override;
 	void Free() override;
 	void Unload() override;
-
 private:
 
 };
 
-// 关卡前序类，多实例类，每个关卡前的序都是它带的一个对象
-class LevelPreface : public GameState {
+// 间隔类，多实例类，实例化出：
+// 游戏前序、背景故事、关卡1前序、关卡1后续、关卡2前序、关卡2后续、关卡3前序、关卡3后续、奖励环节、游戏后续 这些状态
+class Interval : public GameState {
 public:
-	~LevelPreface() {}
+	~Interval() {}
 	void Load() override;
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 	void Free() override;
 	void Unload() override;
-
 private:
 
 };
@@ -106,52 +89,6 @@ public:
 	void Draw() override;
 	void Free() override;
 	void Unload() override;
-
-private:
-
-};
-
-// 奖励类，单实例类
-class Prize : public GameState {
-public:
-	~Prize() {}
-	void Load() override;
-	void Initialize() override;
-	void Update() override;
-	void Draw() override;
-	void Free() override;
-	void Unload() override;
-	
-private:
-
-};
-
-// 结尾花絮类，单实例类
-class Ending : public GameState {
-public:
-	~Ending() {}
-	void Load() override;
-	void Initialize() override;
-	void Update() override;
-	void Draw() override;
-	void Free() override;
-	void Unload() override;
-
-private:
-
-};
-
-// 最终结尾类，单实例类
-class GameOver : public GameState {
-public:
-	~GameOver() {}
-	void Load() override;
-	void Initialize() override;
-	void Update() override;
-	void Draw() override;
-	void Free() override;
-	void Unload() override;
-
 private:
 
 };

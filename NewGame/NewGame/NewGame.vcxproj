@@ -154,12 +154,18 @@
     <ClInclude Include="AETypes.h" />
     <ClInclude Include="AEUtil.h" />
     <ClInclude Include="AEVec2.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="GameElement.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
-    <ClInclude Include="GlobalVariable.h" />
+    <ClInclude Include="Global.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="Level.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="Trap.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
@@ -169,12 +175,18 @@
     <Library Include="Alpha_Engine.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="GameElement.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="Trap.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
