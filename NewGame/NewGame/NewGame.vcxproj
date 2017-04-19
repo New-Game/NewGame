@@ -183,7 +183,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Resource.cpp" />
-    <ClCompile Include="State.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Trap.cpp" />
     <ClCompile Include="Wall.cpp" />

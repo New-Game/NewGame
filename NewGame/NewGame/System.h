@@ -40,6 +40,11 @@ public:
 	// 系统退出函数
 	static void Exit();
 
+	// 返回AE系统初始化信息的结构体
+	static AESysInitInfo& GetAESysInitInfo() {
+		return sys_init_info_;
+	}
+
 	// 返回用来写log的文件流对象
 	static ofstream& GetLogFile() {
 		return log_file_;

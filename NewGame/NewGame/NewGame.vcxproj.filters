@@ -120,9 +120,6 @@
     <ClCompile Include="GameStateManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GameElement.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

@@ -70,26 +70,6 @@ void GameStateManager::Exit() {
 	System::GetLogFile() << "GameStateManager: Exit." << endl;
 }
 
-void GameStateManager::RestartFromBeginning() {
-	
-}
-
-void GameStateManager::RestartFromCurrentLevel() {
-	
-}
-
-void GameStateManager::Quit() {
-	
-}
-
-void GameStateManager::Pause() {
-	
-}
-
-void GameStateManager::Resume() {
-	
-}
-
 //------------------------------------------------------------------------------
 // Private Member Functions:
 //------------------------------------------------------------------------------

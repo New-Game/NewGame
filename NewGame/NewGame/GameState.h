@@ -26,24 +26,56 @@
 //------------------------------------------------------------------------------
 
 // 游戏状态类，继承了State类，同样还是抽象类，不能用于生成对象
-// 用于派生具体游戏状态类，所有成员函数均为纯虚函数
+// 用于派生具体游戏状态类，成员函数使用虚函数来实现多态
 class GameState : public State {
 public:
 	friend class GameStateManager; // 友元声明放在public或private或protected中都可以
+
+	// 用来给子类（派生类）重写的 纯虚函数，每个子类都必须重写这个函数来定义其游戏状态的运行方式
 	virtual void Process() = 0;
+
 	bool GetIsReadyForNextGameState() const {
 		return is_ready_for_next_game_state_;
 	}
+
+	bool GetIsReadyForRestart() const {
+		return is_ready_for_restart_;
+	}
+
+	bool GetIsReadyForGameEnding() const {
+		return is_ready_for_game_ending_;
+	}
+
+	// 在非关卡状态时按下Enter键时调用，结束该状态，准备进入下一状态
 	void SetIsReadyForNextGameState() {
 		is_ready_for_next_game_state_ = true;
 	}
+
+	// 在关卡状态时按下Backspace时调用，准备重新开始本关
+	void SetIsReadyForRestart() {
+		is_ready_for_restart_ = true;
+	}
+
+	// 在已经重新进入本状态准备初始化本状态前调用，重置flag数值
+	void ResetIsReadyForRestart() {
+		is_ready_for_restart_ = false;
+	}
+
+	// 在任何状态下按下ESC键时调用，准备进入GameEnding状态
+	void SetIsReadyForGameEnding() {
+		is_ready_for_game_ending_ = true;
+	}
+
 protected:
 	bool is_ready_for_next_game_state_;
-	GameState() : is_ready_for_next_game_state_(false) {}
-	GameState(GameState& game_state) {
-		is_ready_for_next_game_state_ = game_state.GetIsReadyForNextGameState();
-	}
-	virtual ~GameState() = 0;
+	bool is_ready_for_restart_;
+	bool is_ready_for_game_ending_;
+
+	GameState() : is_ready_for_next_game_state_(false),
+	              is_ready_for_restart_(false),
+	              is_ready_for_game_ending_(false) {}
+
+	virtual ~GameState() {}
 };
 
 // 以下为具体的游戏状态类，所有游戏状态可以抽象为三种类

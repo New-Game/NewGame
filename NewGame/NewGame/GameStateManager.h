@@ -69,22 +69,10 @@ public:
 		++game_state_pointer_;
 	}
 
-	// 只能在当前状态为Level1或者Level2或者Level3时才能调用该函数
-	// 从第一关重新开始（即先在当前状态执行Free()和Unload()，再把当前状态设为Level1）
-	static void RestartFromBeginning();
-
-	// 只能在当前状态为Level1或者Level2或者Level3时才能调用该函数
-	// 从当前关重新开始（先在当前状态执行Free()，再从头开始执行该状态）
-	static void RestartFromCurrentLevel();
-
-	// 推出游戏
-	static void Quit();
-
-	// 暂停当前状态
-	static void Pause();
-
-	// 继续当前状态
-	static void Resume();
+	// 让游戏状态指针指向游戏结尾状态（已在游戏状态中按了ESC键准备退出的）
+	static void SetGameEnding() {
+		*game_state_pointer_ = game_state_[GAME_ENDING];
+	}
 
 private:
 	static GameState* game_state_[NUM_OF_GAME_STATES];

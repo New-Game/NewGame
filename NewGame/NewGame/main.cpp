@@ -40,24 +40,46 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	System::Initialize(hInstance, nCmdShow);
 	GameStateManager::Initialize();
+
+	// Game Flow
 	while (true) {
-		GameStateManager::GetGameState()->Load();
+		if (!GameStateManager::GetGameState()->GetIsReadyForRestart())
+			GameStateManager::GetGameState()->Load();
+		else
+			GameStateManager::GetGameState()->ResetIsReadyForRestart();
+
 		GameStateManager::GetGameState()->Initialize();
-		while (!GameStateManager::GetGameState()->GetIsReadyForNextGameState()) {
+
+		while (!GameStateManager::GetGameState()->GetIsReadyForNextGameState() 
+			&& !GameStateManager::GetGameState()->GetIsReadyForGameEnding() 
+			&& !GameStateManager::GetGameState()->GetIsReadyForRestart()) {
 			AESysFrameStart();
 			GameStateManager::GetGameState()->Draw();
 			GameStateManager::GetGameState()->Process();
 			AESysFrameEnd();
 		}
+
 		GameStateManager::GetGameState()->Free();
-		GameStateManager::GetGameState()->Unload();
+
+		if (!GameStateManager::GetGameState()->GetIsReadyForRestart())
+			GameStateManager::GetGameState()->Unload();
+		else
+			continue;
+
+		if (GameStateManager::GetGameState()->GetIsReadyForGameEnding()) {
+			GameStateManager::SetGameEnding();
+			continue;
+		}
+
 		if (GameStateManager::HasNextGameState())
 			GameStateManager::NextGameState();
 		else
 			break;
 	}
+
 	GameStateManager::Exit();
 	System::Exit();
+
 	return 0;
 }
 
