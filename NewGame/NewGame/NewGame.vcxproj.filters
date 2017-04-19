@@ -96,6 +96,15 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterPick.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Interval.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
@@ -112,9 +121,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="System.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GameStateManager.cpp">
@@ -136,6 +142,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterPick.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Interval.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

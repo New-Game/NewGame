@@ -5,9 +5,7 @@
  * Purpose:      游戏main函所在文件，main函数实现Game Loop
  */
 
-#include <iostream>
 #include <Windows.h>
-#include "AEEngine.h"
 #include "GameStateManager.h"
 #include "System.h"
 #include "Global.h"
@@ -49,16 +47,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			GameStateManager::GetGameState()->ResetIsReadyForRestart();
 
 		GameStateManager::GetGameState()->Initialize();
-
-		while (!GameStateManager::GetGameState()->GetIsReadyForNextGameState() 
-			&& !GameStateManager::GetGameState()->GetIsReadyForGameEnding() 
-			&& !GameStateManager::GetGameState()->GetIsReadyForRestart()) {
-			AESysFrameStart();
-			GameStateManager::GetGameState()->Draw();
-			GameStateManager::GetGameState()->Process();
-			AESysFrameEnd();
-		}
-
+		GameStateManager::GetGameState()->Draw();
+		GameStateManager::GetGameState()->Process();
 		GameStateManager::GetGameState()->Free();
 
 		if (!GameStateManager::GetGameState()->GetIsReadyForRestart())

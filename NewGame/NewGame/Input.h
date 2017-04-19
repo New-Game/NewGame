@@ -60,7 +60,7 @@ public:
 		memset(pressed_key_, false, NUM_OF_KEY);
 
 		// дlog
-		System::GetLogFile() << "Input: Set" << endl;
+		System::GetLogFile() << "Input: Reset" << endl;
 	}
 
 private:

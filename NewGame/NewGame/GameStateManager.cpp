@@ -6,7 +6,9 @@
  */
 
 #include "GameStateManager.h"
-#include "GameState.h"
+#include "CharacterPick.h"
+#include "Interval.h"
+#include "Level.h"
 #include "System.h"
 
 //------------------------------------------------------------------------------
