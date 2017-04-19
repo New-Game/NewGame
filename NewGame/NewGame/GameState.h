@@ -1,4 +1,5 @@
-/* Project:      NewGame
+/**
+ * Project:      NewGame
  * File Name:    GameState.h
  * Author:       Atlas Shen
  * Date:         2017/4/16

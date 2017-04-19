@@ -12,7 +12,9 @@
 #include "GameState.h"
 #include "System.h"
 
- // 关卡类，多实例类，每个关卡都是它的一个对象
+using namespace std;
+
+// 关卡类，多实例类，每个关卡都是它的一个对象
 class Level : public GameState {
 public:
 	~Level() {}

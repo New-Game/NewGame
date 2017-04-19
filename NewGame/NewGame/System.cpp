@@ -1,4 +1,5 @@
-/* Project:      NewGame
+/**
+ * Project:      NewGame
  * File Name:    System.cpp
  * Author:       Atlas Shen
  * Date:         2017/4/15
@@ -11,42 +12,6 @@
 #include "AEEngine.h"
 #include "System.h"
 #include "Input.h"
-
-using namespace std;
-
-#pragma comment (lib, "Alpha_Engine.lib")
-
-//------------------------------------------------------------------------------
-// Private Consts:
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Private Structures:
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Public Variables:
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Private Variables:
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Private Function Declarations:
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Public Functions:
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Private Functions:
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Public Memeber Functions:
-//------------------------------------------------------------------------------
 
 // 系统初始化函数
 void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
@@ -69,24 +34,24 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	if (sys_init_info_.mCreateConsole) {
 		AllocConsole();
 		console_out_.open("CONOUT$");
-		streambuf_pointer_ = cout.rdbuf(console_out_.rdbuf());
-		cout << "Console is ready for debug." << endl;
+		streambuf_pointer_ = std::cout.rdbuf(console_out_.rdbuf());
+		std::cout << "Console is ready for debug." << std::endl;
 	}
 	// 之后所有标准输出都会在AE系统的控制台上打印出来
 
 	// 打开文件用于之后写log，该文件成为一个输出的流
-	log_file_.open("log.txt", ios::out);
+	log_file_.open("log.txt", std::ios::out);
 	// 如果打开文件失败，向控制台输出错误信息，并直接退出程序
 	if (!log_file_) {
-		cout << "Fail to open the log file!" << endl;
-		log_file_ << "Fail to open the log file!" << endl;
+		std::cout << "Fail to open the log file!" << std::endl;
+		log_file_ << "Fail to open the log file!" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
 	// 如果系统初始化失败，向控制台输出错误信息，并直接退出程序
 	if (AESysInit_return_value == 0) {
-		cout << "Fail to init the AE system!" << endl;
-		log_file_ << "Fail to open the log file!" << endl;
+		std::cout << "Fail to init the AE system!" << std::endl;
+		log_file_ << "Fail to open the log file!" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -97,7 +62,7 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	AESysSetWindowTitle("New Game!");
 
 	// 写log
-	log_file_ << "System: Initialize." << endl;
+	log_file_ << "System: Initialize." << std::endl;
 }
 
 // 系统退出函数
@@ -105,7 +70,7 @@ void System::Exit() {
 	// 如果选择开出AE系统控制台的话
 	if (sys_init_info_.mCreateConsole) {
 		// 恢复cout的流对象缓冲指针并关闭console_out_流
-		cout.rdbuf(streambuf_pointer_);
+		std::cout.rdbuf(streambuf_pointer_);
 		console_out_.close();
 	}
 
@@ -113,12 +78,8 @@ void System::Exit() {
 	AESysExit();
 
 	// 写log
-	log_file_ << "System: Exit." << endl;
+	log_file_ << "System: Exit." << std::endl;
 
 	// 关闭文件，结束对log记录文件的写入
 	log_file_.close();
 }
-
-//------------------------------------------------------------------------------
-// Private Member Functions:
-//------------------------------------------------------------------------------

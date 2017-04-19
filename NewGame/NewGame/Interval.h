@@ -12,6 +12,8 @@
 #include "GameState.h"
 #include "System.h"
 
+using namespace std;
+
 // 间隔类，多实例类，实例化出：
 // 游戏前序、背景故事、关卡1前序、关卡1后续、关卡2前序、关卡2后续、关卡3前序、关卡3后续、奖励环节、游戏后续 这些状态
 class Interval : public GameState {
