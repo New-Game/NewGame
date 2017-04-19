@@ -30,6 +30,7 @@
 class GameState : public State {
 public:
 	friend class GameStateManager; // 友元声明放在public或private或protected中都可以
+	virtual void Process() = 0;
 	bool GetIsReadyForNextGameState() const {
 		return is_ready_for_next_game_state_;
 	}
@@ -56,8 +57,8 @@ public:
 	~CharacterPick() {}
 	void Load() override;
 	void Initialize() override;
-	void Update() override;
 	void Draw() override;
+	void Process() override;
 	void Free() override;
 	void Unload() override;
 private:
@@ -71,8 +72,8 @@ public:
 	~Interval() {}
 	void Load() override;
 	void Initialize() override;
-	void Update() override;
 	void Draw() override;
+	void Process() override;
 	void Free() override;
 	void Unload() override;
 private:
@@ -85,8 +86,8 @@ public:
 	~Level() {}
 	void Load() override;
 	void Initialize() override;
-	void Update() override;
 	void Draw() override;
+	void Process() override;
 	void Free() override;
 	void Unload() override;
 private:

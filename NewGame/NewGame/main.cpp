@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <Windows.h>
+#include "AEEngine.h"
 #include "GameStateManager.h"
 #include "System.h"
 #include "Global.h"
@@ -43,8 +44,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		GameStateManager::GetGameState()->Load();
 		GameStateManager::GetGameState()->Initialize();
 		while (!GameStateManager::GetGameState()->GetIsReadyForNextGameState()) {
-			GameStateManager::GetGameState()->Update();
+			AESysFrameStart();
 			GameStateManager::GetGameState()->Draw();
+			GameStateManager::GetGameState()->Process();
+			AESysFrameEnd();
 		}
 		GameStateManager::GetGameState()->Free();
 		GameStateManager::GetGameState()->Unload();

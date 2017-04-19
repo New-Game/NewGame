@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include "AEEngine.h"
 #include "System.h"
 #include "Input.h"
@@ -62,7 +63,7 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	sys_init_info_.mWindowStyle = WS_OVERLAPPEDWINDOW;     // 窗口风格
 
 	// Alpha系统初始化，记录返回值
-	int AESysInit_return_value = AESysInit(&sys_init_info_);
+	auto AESysInit_return_value = AESysInit(&sys_init_info_);
 
 	// 分配控制台来帮助debug，把标准输出流重定向到AE系统的控制台
 	if (sys_init_info_.mCreateConsole) {
@@ -94,26 +95,6 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 
 	// 修改窗口标题
 	AESysSetWindowTitle("New Game!");
-
-	/*AEGfxMeshStart();
-	AEGfxTriAdd(
-		-25.5f, -25.5f, 0xFFFF0000, 0.0f, 0.0f,
-		25.5f, 0.0f, 0x00FF0000, 0.0f, 0.0f,
-		-25.5f, 25.5f, 0xFFFFFF00, 0.0f, 0.0f);
-	AEGfxVertexList *test = AEGfxMeshEnd();
-	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-
-	//AESysFrameStart();
-	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	AEGfxSetPosition(0.0f, 0.0f);
-	//AEGfxTextureSet(NULL, 0, 0);
-	//AEGfxSetTransparency(1);
-	//AEGfxSetBlendColor(0.0f, 0.0f, 0.0, 0.0f);
-	AEGfxMeshDraw(test, AE_GFX_MDM_TRIANGLES);
-	//AESysFrameEnd();
-
-	AEGfxMeshFree(test);*/
 
 	// 写log
 	log_file_ << "System: Initialize." << endl;

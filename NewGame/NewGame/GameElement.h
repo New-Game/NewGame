@@ -29,6 +29,7 @@
 // 用于派生具体游戏元素类，所有成员函数均为纯虚函数
 class GameElement : public State {
 public:
+	virtual void Update() = 0;
 
 protected:
 	virtual ~GameElement() = 0;

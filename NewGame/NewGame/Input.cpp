@@ -9,8 +9,6 @@
 #include "Input.h"
 #include "System.h"
 
-using namespace std;
-
 //------------------------------------------------------------------------------
 // Private Consts:
 //------------------------------------------------------------------------------
@@ -67,7 +65,7 @@ LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			System::GetLogFile() << "Input: Mouse Move." << endl;
 			break;
 
-		// ÖØ»æ
+			// ÖØ»æ
 		case WM_PAINT:
 			dc = BeginPaint(hWnd, &ps);
 			EndPaint(hWnd, &ps);
@@ -75,7 +73,7 @@ LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			System::GetLogFile() << "Input: Paint." << endl;
 			break;
 
-		// ´°¿Ú¹Ø±Õ
+			// ´°¿Ú¹Ø±Õ
 		case WM_DESTROY:
 			pressed_key_[KEY_ESC] = true;
 			// Ð´log
@@ -93,6 +91,11 @@ LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				// Ð´log
 				System::GetLogFile() << "Input: SPACE." << endl;
 			}
+			if (wParam == VK_BACK) {
+				pressed_key_[KEY_BACKSPACE] = true;
+				// Ð´log
+				System::GetLogFile() << "Input: BACKSPACE." << endl;
+			}
 			if (wParam == VK_ESCAPE) {
 				pressed_key_[KEY_ESC] = true;
 				// Ð´log
@@ -107,6 +110,16 @@ LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				pressed_key_[KEY_S] = true;
 				// Ð´log
 				System::GetLogFile() << "Input: S." << endl;
+			}
+			if (wParam == 'Y') {
+				pressed_key_[KEY_Y] = true;
+				// Ð´log
+				System::GetLogFile() << "Input: Y." << endl;
+			}
+			if (wParam == 'N') {
+				pressed_key_[KEY_N] = true;
+				// Ð´log
+				System::GetLogFile() << "Input: N." << endl;
 			}
 			if (wParam == VK_UP) {
 				pressed_key_[KEY_UP] = true;
@@ -144,14 +157,6 @@ LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 	}
 
 	return 0;
-}
-
-void Input::SetPressedKey() {
-	for (int i = 0; i < NUM_OF_KEY; ++i)
-		pressed_key_[i] = false;
-
-	// Ð´log
-	System::GetLogFile() << "Input: Set" << endl;
 }
 
 //------------------------------------------------------------------------------

@@ -63,7 +63,7 @@ void GameStateManager::Initialize() {
 }
 
 void GameStateManager::Exit() {
-	for (int i = 0; i < NUM_OF_GAME_STATES; ++i)
+	for (auto i = 0; i < NUM_OF_GAME_STATES; ++i)
 		delete game_state_[i];
 
 	// дlog

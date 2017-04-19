@@ -43,22 +43,22 @@ GameState::~GameState() {}
 
 void CharacterPick::Load() {}
 void CharacterPick::Initialize() {}
-void CharacterPick::Update() {}
 void CharacterPick::Draw() {}
+void CharacterPick::Process() {}
 void CharacterPick::Free() {}
 void CharacterPick::Unload() {}
 
 void Interval::Load() {}
 void Interval::Initialize() {}
-void Interval::Update() {}
 void Interval::Draw() {}
+void Interval::Process() {}
 void Interval::Free() {}
 void Interval::Unload() {}
 
 void Level::Load() {}
 void Level::Initialize() {}
-void Level::Update() {}
 void Level::Draw() {}
+void Level::Process() {}
 void Level::Free() {}
 void Level::Unload() {}
 
