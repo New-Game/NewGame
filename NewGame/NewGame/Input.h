@@ -18,8 +18,6 @@ enum Key {
 	KEY_ESC,
 	KEY_A,
 	KEY_S,
-	KEY_Y,
-	KEY_N,
 	KEY_UP,
 	KEY_DOWN,
 	KEY_LEFT,
@@ -35,6 +33,10 @@ public:
 	// 处理、响应输入的回调函数
 	static LRESULT CALLBACK Handle(HWND, UINT, WPARAM, LPARAM);
 
+	static INT_PTR CALLBACK HandleForExit(HWND, UINT, WPARAM, LPARAM);
+
+	static INT_PTR CALLBACK HandleForResume(HWND, UINT, WPARAM, LPARAM);
+
 	static bool GetPressedKey(enum Key key) {
 		return pressed_key_[key];
 	}
@@ -42,9 +44,6 @@ public:
 	// 用于重置key_pressed[]数组
 	static void ResetPressedKey() {
 		memset(pressed_key_, false, NUM_OF_KEY);
-
-		// 写log
-		System::GetLogFile() << "Input: Reset" << std::endl;
 	}
 
 private:

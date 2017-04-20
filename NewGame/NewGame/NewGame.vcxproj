@@ -159,12 +159,13 @@
     <ClInclude Include="GameElement.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
-    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Global.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Interval.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Trap.h" />
@@ -190,6 +191,15 @@
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Trap.cpp" />
     <ClCompile Include="Wall.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NewGame.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

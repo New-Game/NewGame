@@ -11,6 +11,9 @@
 #include "AEEngine.h"
 #include "System.h"
 #include "Input.h"
+#include "Global.h"
+#include "resource.h"
+#include <winuser.h>
 
 // 系统初始化函数
 void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
@@ -20,8 +23,8 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	// Alpha系统初始化信息设置
 	sys_init_info_.mAppInstance = hInstance;              // WinMain的第1个参数
 	sys_init_info_.mShow = nCmdShow;                      // WinMain的第4个参数
-	sys_init_info_.mWinWidth = 800;                       // 窗口宽度
-	sys_init_info_.mWinHeight = 600;                      // 窗口高度
+	sys_init_info_.mWinWidth = WINDOW_WIDTH;              // 窗口宽度
+	sys_init_info_.mWinHeight = WINDOW_HEIGHT;            // 窗口高度
 	sys_init_info_.mCreateConsole = 1;                    // 是否需要打开控制台，1表示是，0表示否
 	sys_init_info_.mCreateWindow = 0;                     // 是否需要创建窗口，1表示是，0表示否
 	sys_init_info_.mMaxFrameRate = 60;                    // 设置帧率（使用Alpha的帧率控制功能）
@@ -35,14 +38,21 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	win_class_.cbClsExtra = 0;
 	win_class_.cbWndExtra = 0;
 	win_class_.hInstance = sys_init_info_.mAppInstance;
-	win_class_.hIcon = LoadIcon(nullptr, IDI_EXCLAMATION);
+	win_class_.hIcon = LoadIcon(win_class_.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 	win_class_.hCursor = LoadCursor(nullptr, IDC_ARROW);
-	win_class_.hbrBackground = HBRUSH(GetStockObject(GRAY_BRUSH));
+	win_class_.hbrBackground = HBRUSH(GetStockObject(BLACK_BRUSH));
 	win_class_.lpszMenuName = nullptr;
 	win_class_.lpszClassName = "NewGame";
 
 	// 窗口注册
 	RegisterClass(&win_class_);
+
+	RECT rect;
+	rect.left = 0;
+	rect.top = 0;
+	rect.right = WINDOW_WIDTH;
+	rect.bottom = WINDOW_HEIGHT;
+	AdjustWindowRect(&rect, sys_init_info_.mWindowStyle, 0);
 
 	// 窗口创建
 	/**
@@ -58,8 +68,9 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	 * hInstance,            WinMain的第1个参数
 	 * NULL);                WM_Create消息传递用到的
 	 */
-	HWND win_handle = CreateWindow(win_class_.lpszClassName, "从零开始的迷宫大作战", WS_OVERLAPPEDWINDOW,
-		                           200, 100, 800, 600, nullptr, nullptr, hInstance, nullptr);
+	HWND win_handle = CreateWindow(win_class_.lpszClassName, "从零开始的迷宫大作战", WS_OVERLAPPEDWINDOW, 
+		                           0, 0, rect.right - rect.left, rect.bottom - rect.top, nullptr, nullptr,
+		                           hInstance, nullptr);
 	ShowWindow(win_handle, nCmdShow);
 	UpdateWindow(win_handle);
 

@@ -28,6 +28,11 @@ public:
 		return sys_init_info_;
 	}
 
+	// 返回当前窗口实例
+	static HINSTANCE& GetHInstance() {
+		return h_instance_;
+	}
+
 	// 返回用来写log的文件流对象
 	static std::ofstream& GetLogFile() {
 		return log_file_;

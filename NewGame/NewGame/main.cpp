@@ -9,7 +9,6 @@
 #include <Windows.h>
 #include "GameStateManager.h"
 #include "System.h"
-#include "Global.h"
 
 #pragma comment (lib, "Alpha_Engine.lib")
 
@@ -38,10 +37,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		else
 			continue;
 
-		if (GameStateManager::GetGameState()->GetIsReadyForGameEnding()) {
-			GameStateManager::SetGameEnding();
-			continue;
-		}
+		if (GameStateManager::GetGameState()->GetIsReadyForGameEnding())
+			break;
 
 		if (GameStateManager::HasNextGameState())
 			GameStateManager::NextGameState();
