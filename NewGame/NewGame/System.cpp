@@ -39,7 +39,7 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	win_class_.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	win_class_.hbrBackground = HBRUSH(GetStockObject(GRAY_BRUSH));
 	win_class_.lpszMenuName = nullptr;
-	win_class_.lpszClassName = "从零开始的迷宫大作战";
+	win_class_.lpszClassName = "NewGame";
 
 	// 窗口注册
 	RegisterClass(&win_class_);
@@ -81,12 +81,6 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 
 	// 打开文件用于之后写log，该文件成为一个输出的流
 	log_file_.open("log.txt", std::ios::out);
-	// 如果打开文件失败，向控制台输出错误信息，并直接退出程序
-	if (!log_file_) {
-		std::cout << "Fail to open the log file!" << std::endl;
-		log_file_ << "Fail to open the log file!" << std::endl;
-		exit(EXIT_FAILURE);
-	}
 
 	// 写log
 	log_file_ << "System: Initialize." << std::endl;

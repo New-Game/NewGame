@@ -46,7 +46,7 @@ public:
 
 	// 是否还有下一个游戏状态
 	static bool HasNextGameState() {
-		return *game_state_pointer_ != game_state_[GAME_ENDING];
+		return game_state_pointer_ != game_state_ + GAME_ENDING;
 	}
 
 	// 把当前游戏状态更新为下一个状态（必须在HasNextGameState()返回true的情况下调用）
@@ -56,7 +56,7 @@ public:
 
 	// 让游戏状态指针指向游戏结尾状态（已在游戏状态中按了ESC键准备退出的）
 	static void SetGameEnding() {
-		game_state_pointer_ = &game_state_[GAME_ENDING];
+		game_state_pointer_ = game_state_ + GAME_ENDING;
 	}
 
 private:

@@ -3,7 +3,7 @@
  * File Name:    Global.h
  * Author:       Atlas Shen
  * Date:         2017/4/17
- * Purpose:      资源头文件
+ * Purpose:      全局变量常量头文件
  */
 
 #pragma once

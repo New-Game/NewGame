@@ -9,7 +9,7 @@
 #include <Windows.h>
 #include "GameStateManager.h"
 #include "System.h"
-#include "Resource.h"
+#include "Global.h"
 
 #pragma comment (lib, "Alpha_Engine.lib")
 
