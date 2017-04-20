@@ -14,7 +14,6 @@
 // 用于派生具体怪物类，成员函数使用虚函数来实现多态
 class Monster : public GameElement {
 public:
-
-protected:
 	virtual ~Monster() {}
+protected:
 };

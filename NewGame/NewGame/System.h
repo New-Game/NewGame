@@ -37,6 +37,12 @@ private:
 	// AE系统初始化信息的结构体
 	static AESysInitInfo sys_init_info_;
 
+	// Window Class窗口类
+	static WNDCLASS win_class_;
+
+	// 当前实例
+	static HINSTANCE h_instance_;
+
 	// 生成一个文件流对象，可以通过它打开文件,之后就可以向该文件中写log
 	static std::ofstream log_file_;
 

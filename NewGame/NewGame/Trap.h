@@ -14,7 +14,6 @@
 // 用于派生具体陷阱类，成员函数使用虚函数来实现多态
 class Trap : public GameElement {
 public:
-
-protected:
 	virtual ~Trap() {}
+protected:
 };

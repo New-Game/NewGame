@@ -9,7 +9,6 @@
 #pragma once
 
 #include <Windows.h>
-#include <cstdlib>
 #include "System.h"
 
 enum Key {
@@ -34,7 +33,7 @@ enum Key {
 class Input {
 public:
 	// 处理、响应输入的回调函数
-	static LRESULT CALLBACK Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK Handle(HWND, UINT, WPARAM, LPARAM);
 
 	static bool GetPressedKey(enum Key key) {
 		return pressed_key_[key];

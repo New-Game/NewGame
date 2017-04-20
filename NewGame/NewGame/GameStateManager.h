@@ -56,7 +56,7 @@ public:
 
 	// 让游戏状态指针指向游戏结尾状态（已在游戏状态中按了ESC键准备退出的）
 	static void SetGameEnding() {
-		*game_state_pointer_ = game_state_[GAME_ENDING];
+		game_state_pointer_ = &game_state_[GAME_ENDING];
 	}
 
 private:

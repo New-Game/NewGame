@@ -14,7 +14,6 @@
 // 用于派生具体人物类，成员函数使用虚函数来实现多态
 class Character : public GameElement {
 public:
-
-protected:
 	virtual ~Character() {}
+protected:
 };

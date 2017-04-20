@@ -78,9 +78,6 @@
     <ClInclude Include="GameElement.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Global.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -93,9 +90,6 @@
     <ClInclude Include="Trap.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="CharacterPick.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -103,6 +97,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -139,9 +139,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Trap.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CharacterPick.cpp">

@@ -20,7 +20,11 @@
 
 class GameState : public State {
 public:
-	friend class GameStateManager; // 友元声明放在public或private或protected中都可以
+	GameState() : is_ready_for_next_game_state_(false),
+	              is_ready_for_restart_(false),
+	              is_ready_for_game_ending_(false) {}
+
+	virtual ~GameState() {}
 
 	// 用来给子类（派生类）重写的 纯虚函数，每个子类都必须重写这个函数来定义其游戏状态的运行方式
 	virtual void Process() = 0;
@@ -62,10 +66,4 @@ protected:
 	bool is_ready_for_next_game_state_;
 	bool is_ready_for_restart_;
 	bool is_ready_for_game_ending_;
-
-	GameState() : is_ready_for_next_game_state_(false),
-	              is_ready_for_restart_(false),
-	              is_ready_for_game_ending_(false) {}
-
-	virtual ~GameState() {}
 };

@@ -9,12 +9,15 @@
 #include <Windows.h>
 #include "GameStateManager.h"
 #include "System.h"
-#include "Global.h"
+#include "Resource.h"
 
 #pragma comment (lib, "Alpha_Engine.lib")
 
 // 程序主函数，我们只需要用到第一个和第四个参数
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	UNREFERENCED_PARAMETER(lpCmdLine);
+
 	System::Initialize(hInstance, nCmdShow);
 	GameStateManager::Initialize();
 

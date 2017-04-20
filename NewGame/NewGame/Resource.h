@@ -1,20 +1,30 @@
 /**
  * Project:      NewGame
- * File Name:    Resource.h
+ * File Name:    Global.h
  * Author:       Atlas Shen
- * Date:         2017/4/18
- * Purpose:      资源类头文件
+ * Date:         2017/4/17
+ * Purpose:      资源头文件
  */
 
 #pragma once
 
-#include "GameElement.h"
+#include <fstream>
+#include <Windows.h>
+#include "AEEngine.h"
+#include "System.h"
+#include "Input.h"
+#include "GameStateManager.h"
 
-// 资源类，继承了GameElement类，同样还是抽象类，不能用于生成对象
-// 用于派生具体资源类，成员函数使用虚函数来实现多态
-class Resource : public GameElement {
-public:
+// 必须为静态成员变量提供类外部的声明，否则链接时会出问题
 
-protected:
-	virtual ~Resource() {}
-};
+AESysInitInfo System::sys_init_info_;
+WNDCLASS System::win_class_;
+HINSTANCE System::h_instance_;
+std::ofstream System::log_file_;
+std::streambuf* System::streambuf_pointer_;
+std::ofstream System::console_out_;
+
+bool Input::pressed_key_[NUM_OF_KEY];
+
+GameState* GameStateManager::game_state_[NUM_OF_GAME_STATES];
+GameState** GameStateManager::game_state_pointer_;
