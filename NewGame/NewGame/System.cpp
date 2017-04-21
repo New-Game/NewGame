@@ -42,37 +42,29 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	win_class_.hInstance = sys_init_info_.mAppInstance;
 	win_class_.hIcon = LoadIcon(win_class_.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 	win_class_.hCursor = LoadCursor(nullptr, IDC_ARROW);
-	win_class_.hbrBackground = HBRUSH(GetStockObject(BLACK_BRUSH));
+	win_class_.hbrBackground = HBRUSH(GetStockObject(WHITE_BRUSH));
 	win_class_.lpszMenuName = nullptr;
 	win_class_.lpszClassName = "NewGame";
 
 	// 窗口注册
 	RegisterClass(&win_class_);
 
-	RECT rect;
-	rect.left = 0;
-	rect.top = 0;
-	rect.right = WINDOW_WIDTH;
-	rect.bottom = WINDOW_HEIGHT;
-	AdjustWindowRect(&rect, sys_init_info_.mWindowStyle, 0);
-
 	// 窗口创建
 	/**
 	 * hWnd = CreateWindow(wndClass.lpszClassName,
 	 * "WindowTitle",        窗口标题
 	 * WS_OVERLAPPEDWINDOW,  窗口风格
-	 * 200,                  窗口左上角X坐标，屏幕左上角是原点(0, 0)
-	 * 100,                  窗口左上角Y坐标
-	 * 640,                  窗口宽度
-	 * 480,                  窗口高度
+	 * 0,                    窗口左上角X坐标，屏幕左上角是原点(0, 0)
+	 * 0,                    窗口左上角Y坐标
+	 * WINDOW_WIDTH,         窗口宽度
+	 * WINDOW_HEIGHT,        窗口高度
 	 * NULL,                 父窗口的句柄（如果该窗口是子窗口）
 	 * NULL,                 菜单句柄
 	 * hInstance,            WinMain的第1个参数
 	 * NULL);                WM_Create消息传递用到的
 	 */
-	HWND win_handle = CreateWindow(win_class_.lpszClassName, "从零开始的迷宫大作战", WS_OVERLAPPEDWINDOW, 
-		                           0, 0, rect.right - rect.left, rect.bottom - rect.top, nullptr, nullptr,
-		                           hInstance, nullptr);
+	HWND win_handle = CreateWindow(win_class_.lpszClassName, "从零开始的迷宫大作战", WS_OVERLAPPEDWINDOW, 0, 0, 
+		                           WINDOW_WIDTH, WINDOW_HEIGHT, nullptr, nullptr, hInstance, nullptr);
 	ShowWindow(win_handle, nCmdShow);
 	UpdateWindow(win_handle);
 

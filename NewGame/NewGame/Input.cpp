@@ -14,9 +14,20 @@
 
 LRESULT CALLBACK Input::MainHandle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch (msg) {
-		// 窗口创建
-		case WM_CREATE:
+		// 窗口创建（把窗口放在正中央）
+		case WM_CREATE: {
+			RECT rect;
+			// 获得屏幕尺寸
+			auto screen_width = GetSystemMetrics(SM_CXSCREEN);
+			auto screen_height = GetSystemMetrics(SM_CYSCREEN);
+			// 获取窗体尺寸
+			GetWindowRect(hWnd, &rect);
+			rect.left = (screen_width - rect.right) / 2;
+			rect.top = (screen_height - rect.bottom) / 2;
+			// 设置窗体位置
+			SetWindowPos(hWnd, HWND_TOPMOST, rect.left, rect.top, rect.right, rect.bottom, SWP_SHOWWINDOW);
 			break;
+		}
 
 		// 按下了鼠标左键
 		case WM_LBUTTONDOWN:
@@ -36,7 +47,7 @@ LRESULT CALLBACK Input::MainHandle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 
 		// 窗口关闭
 		case WM_DESTROY:
-			DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_EXIT), hWnd, HandleForExit);
+			pressed_key_[KEY_ESC] = true;
 			break;
 
 		// 按下了键盘上的一个键
