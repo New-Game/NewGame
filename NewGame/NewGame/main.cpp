@@ -37,7 +37,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		else
 			continue;
 
-		if (GameStateManager::GetGameState()->GetIsReadyForGameEnding())
+		if (GameStateManager::GetGameState()->GetIsReadyForExit())
 			break;
 
 		if (GameStateManager::HasNextGameState())

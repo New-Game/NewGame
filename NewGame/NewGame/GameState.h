@@ -27,13 +27,13 @@ public:
 	GameState() : name_(nullptr),
 	              is_ready_for_next_game_state_(false),
 	              is_ready_for_restart_(false),
-	              is_ready_for_game_ending_(false) {}
+	              is_ready_for_exit_(false) {}
 
 	// 在GSM中创建游戏状态对象时使用的构造函数
 	GameState(string name) : name_(name),
 		                     is_ready_for_next_game_state_(false),
 		                     is_ready_for_restart_(false),
-		                     is_ready_for_game_ending_(false) {}
+		                     is_ready_for_exit_(false) {}
 
 	// 未写复制构造函数，因为没有这种需求
 
@@ -55,15 +55,15 @@ public:
 		return is_ready_for_restart_;
 	}
 
-	bool GetIsReadyForGameEnding() const {
-		return is_ready_for_game_ending_;
+	bool GetIsReadyForExit() const {
+		return is_ready_for_exit_;
 	}
 
 	void SetName(string name) {
 		name_ = name;
 	}
 
-	// 在非关卡状态时按下Enter键时调用，结束该状态，准备进入下一状态
+	// 在非关卡状态时按下Enter键时调用，结束该状态，进入下一状态
 	void SetIsReadyForNextGameState() {
 		is_ready_for_next_game_state_ = true;
 	}
@@ -78,9 +78,9 @@ public:
 		is_ready_for_restart_ = false;
 	}
 
-	// 在任何状态下按下ESC键时调用，准备进入GameEnding状态
-	void SetIsReadyForGameEnding() {
-		is_ready_for_game_ending_ = true;
+	// 在任何状态下按下ESC键时调用，准备退出游戏
+	void SetIsReadyForExit() {
+		is_ready_for_exit_ = true;
 	}
 
 protected:
@@ -90,5 +90,5 @@ protected:
 	// 用来控制游戏流程的flag
 	bool is_ready_for_next_game_state_;
 	bool is_ready_for_restart_;
-	bool is_ready_for_game_ending_;
+	bool is_ready_for_exit_;
 };

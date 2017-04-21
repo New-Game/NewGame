@@ -13,10 +13,10 @@ void Level::Process() {
 	if (System::GetAESysInitInfo().mCreateConsole) {
 		cout << name_ + ": Process." << endl;
 	}
-	while (!GetIsReadyForGameEnding() && !GetIsReadyForRestart()) {
+	while (!GetIsReadyForExit() && !GetIsReadyForRestart()) {
 		AESysFrameStart();
 		if (Input::GetPressedKey(KEY_ESC)) {
-			SetIsReadyForGameEnding();
+			SetIsReadyForExit();
 			Input::ResetPressedKey();
 		}
 		else if (Input::GetPressedKey(KEY_BACKSPACE)) {

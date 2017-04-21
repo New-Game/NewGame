@@ -13,10 +13,10 @@ void CharacterPick::Process() {
 	if (System::GetAESysInitInfo().mCreateConsole) {
 		cout << name_ + ": Process." << endl;
 	}
-	while (!GetIsReadyForGameEnding() && !GetIsReadyForNextGameState()) {
+	while (!GetIsReadyForExit() && !GetIsReadyForNextGameState()) {
 		AESysFrameStart();
 		if (Input::GetPressedKey(KEY_ESC)) {
-			SetIsReadyForGameEnding();
+			SetIsReadyForExit();
 			Input::ResetPressedKey();
 		}
 		else if (Input::GetPressedKey(KEY_ENTER)) {
