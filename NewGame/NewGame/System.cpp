@@ -36,7 +36,7 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 
 	// Window Class窗口创建信息设置
 	win_class_.style = sys_init_info_.mClassStyle;
-	win_class_.lpfnWndProc = Input::Handle;
+	win_class_.lpfnWndProc = Input::MainHandle;
 	win_class_.cbClsExtra = 0;
 	win_class_.cbWndExtra = 0;
 	win_class_.hInstance = sys_init_info_.mAppInstance;
@@ -101,6 +101,9 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 
 // 系统退出函数
 void System::Exit() {
+	if (sys_init_info_.mCreateConsole)
+		cout << "System: Exit." << endl;
+
 	// 如果选择开出AE系统控制台的话
 	if (sys_init_info_.mCreateConsole) {
 		// 恢复cout的流对象缓冲指针并关闭console_out_流
@@ -113,9 +116,6 @@ void System::Exit() {
 
 	// 窗口注销
 	UnregisterClass(win_class_.lpszClassName, h_instance_);
-
-	if (sys_init_info_.mCreateConsole)
-		cout << "System: Exit." << endl;
 
 	//// 关闭文件，结束对log记录文件的写入
 	//log_file_.close();

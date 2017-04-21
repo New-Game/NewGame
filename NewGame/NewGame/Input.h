@@ -13,7 +13,7 @@
 
 enum Key {
 	KEY_ENTER,
-	KEY_SPACE,
+//	KEY_SPACE,
 	KEY_BACKSPACE,
 	KEY_ESC,
 	KEY_A,
@@ -31,11 +31,14 @@ enum Key {
 class Input {
 public:
 	// 处理、响应输入的回调函数
-	static LRESULT CALLBACK Handle(HWND, UINT, WPARAM, LPARAM);
+	//
+	static LRESULT CALLBACK MainHandle(HWND, UINT, WPARAM, LPARAM);
 
 	static INT_PTR CALLBACK HandleForExit(HWND, UINT, WPARAM, LPARAM);
 
 	static INT_PTR CALLBACK HandleForResume(HWND, UINT, WPARAM, LPARAM);
+	
+	static INT_PTR CALLBACK HandleForRestart(HWND, UINT, WPARAM, LPARAM);
 
 	static bool GetPressedKey(enum Key key) {
 		return pressed_key_[key];

@@ -10,20 +10,23 @@
 #include "Input.h"
 #include "System.h"
 #include "resource.h"
+#include <winuser.h>
 
-LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+LRESULT CALLBACK Input::MainHandle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch (msg) {
 		// 窗口创建
 		case WM_CREATE:
 			break;
 
+		// 按下了鼠标左键
 		case WM_LBUTTONDOWN:
 			break;
 
+		// 鼠标移动了
 		case WM_MOUSEMOVE:
 			break;
 
-		// 重绘
+		// 窗口重绘
 		case WM_PAINT: {
 			PAINTSTRUCT ps; // 重绘结构
 			HDC dc = BeginPaint(hWnd, &ps);
@@ -36,15 +39,16 @@ LRESULT CALLBACK Input::Handle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_EXIT), hWnd, HandleForExit);
 			break;
 
+		// 按下了键盘上的一个键
 		case WM_KEYDOWN:
 			if (wParam == VK_RETURN)
 				pressed_key_[KEY_ENTER] = true;
 			else if (wParam == VK_SPACE)
-				pressed_key_[KEY_SPACE] = true;
-			else if (wParam == VK_ESCAPE) {
+				DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_RESUME), hWnd, HandleForResume);
+			else if (wParam == VK_BACK)
+				DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_RESTART), hWnd, HandleForRestart);
+			else if (wParam == VK_ESCAPE)
 				DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_EXIT), hWnd, HandleForExit);
-				break;
-			}
 			else {
 				if (wParam == 'A')
 					pressed_key_[KEY_A] = true;
@@ -98,7 +102,24 @@ INT_PTR Input::HandleForResume(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam
 			return INT_PTR(true);
 
 		case WM_COMMAND:
-			if (LOWORD(wParam) == ID_RESTART)
+			if (LOWORD(wParam) == IDNO)
+				pressed_key_[KEY_ESC] = true;
+			EndDialog(hDlg, LOWORD(wParam));
+			return INT_PTR(true);
+
+		default:
+			return INT_PTR(false);
+	}
+}
+
+INT_PTR Input::HandleForRestart(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
+	UNREFERENCED_PARAMETER(lParam);
+	switch(msg) {
+		case WM_INITDIALOG:
+			return INT_PTR(true);
+
+		case WM_COMMAND:
+			if (LOWORD(wParam) == IDYES)
 				pressed_key_[KEY_BACKSPACE] = true;
 			EndDialog(hDlg, LOWORD(wParam));
 			return INT_PTR(true);
@@ -107,3 +128,4 @@ INT_PTR Input::HandleForResume(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam
 			return INT_PTR(false);
 	}
 }
+
