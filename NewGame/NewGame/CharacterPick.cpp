@@ -11,7 +11,7 @@
 
 void CharacterPick::Process() {
 	if (System::GetAESysInitInfo().mCreateConsole) {
-		cout << "CharacterPick: Process." << endl;
+		cout << name_ + ": Process." << endl;
 	}
 	while (!GetIsReadyForGameEnding() && !GetIsReadyForNextGameState()) {
 		AESysFrameStart();

@@ -11,7 +11,7 @@
 
 void Interval::Process() {
 	if (System::GetAESysInitInfo().mCreateConsole) {
-		cout << "Interval: Process." << endl;
+		cout << name_ + ": Process." << endl;
 	}
 	while (!GetIsReadyForGameEnding() && !GetIsReadyForNextGameState()) {
 		AESysFrameStart();

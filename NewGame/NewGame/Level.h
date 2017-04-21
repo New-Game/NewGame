@@ -17,23 +17,27 @@ using namespace std;
 // 关卡类，多实例类，每个关卡都是它的一个对象
 class Level : public GameState {
 public:
+	Level() : GameState() {}
+
+	Level(string name) : GameState(name) {}
+
 	~Level() {}
 
 	void Load() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "Level: Load." << endl;
+			cout << name_ + ": Load." << endl;
 		}
 	}
 
 	void Initialize() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "Level: Initialize." << endl;
+			cout << name_ + ": Initialize." << endl;
 		}
 	}
 
 	void Draw() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "Level: Draw." << endl;
+			cout << name_ + ": Draw." << endl;
 		}
 	}
 
@@ -41,13 +45,13 @@ public:
 
 	void Free() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "Level: Free." << endl;
+			cout << name_ + ": Free." << endl;
 		}
 	}
 
 	void Unload() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "Level: Unload." << endl;
+			cout << name_ + ": Unload." << endl;
 		}
 	}
 

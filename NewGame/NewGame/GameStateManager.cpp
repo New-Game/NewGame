@@ -13,30 +13,30 @@
 #include "System.h"
 
 void GameStateManager::Initialize() {
-	game_state_[GAME_PREFACE] = new Interval();
-	game_state_[BACKGROUND_STORY] = new Interval();
-	game_state_[CHARACTER_PICK] = new CharacterPick();
-	game_state_[LEVEL1_PREFACE] = new Interval();
-	game_state_[LEVEL1] = new Level(); // level1 关卡1
-	game_state_[LEVEL1_ENDING] = new Interval();
-	game_state_[LEVEL2_PREFACE] = new Interval();
-	game_state_[LEVEL2] = new Level(); // level2 关卡2
-	game_state_[LEVEL2_ENDING] = new Interval();
-	game_state_[LEVEL3_PREFACE] = new Interval();
-	game_state_[LEVEL3] = new Level(); // level3 关卡3
-	game_state_[LEVEL3_ENDING] = new Interval();
-	game_state_[PRIZE] = new Interval();
-	game_state_[GAME_ENDING] = new Interval();
+	game_state_[GAME_PREFACE] = new Interval("Game Preface");
+	game_state_[BACKGROUND_STORY] = new Interval("Background Story");
+	game_state_[CHARACTER_PICK] = new CharacterPick("Character Pick");
+	game_state_[LEVEL1_PREFACE] = new Interval("Level1 Preface");
+	game_state_[LEVEL1] = new Level("Level1"); // level1  关卡1
+	game_state_[LEVEL1_ENDING] = new Interval("Level1 Ending");
+	game_state_[LEVEL2_PREFACE] = new Interval("Level2 Preface");
+	game_state_[LEVEL2] = new Level("Level2"); // level2 关卡2
+	game_state_[LEVEL2_ENDING] = new Interval("Level2 Ending");
+	game_state_[LEVEL3_PREFACE] = new Interval("Level3 Preface");
+	game_state_[LEVEL3] = new Level("Level3"); // level3 关卡3
+	game_state_[LEVEL3_ENDING] = new Interval("Level3 Ending");
+	game_state_[PRIZE] = new Interval("Prize");
+	game_state_[GAME_ENDING] = new Interval("Game Ending");
 	game_state_pointer_ = game_state_;
 
-	// 写log
-	System::GetLogFile() << "GameStateManager: Initialize." << endl;
+	if (System::GetAESysInitInfo().mCreateConsole)
+		cout << "GameStateManager: Initialize." << endl;
 }
 
 void GameStateManager::Exit() {
 	for (auto i = 0; i < NUM_OF_GAME_STATES; ++i)
 		delete game_state_[i];
 
-	// 写log
-	System::GetLogFile() << "GameStateManager: Exit." << endl;
+	if (System::GetAESysInitInfo().mCreateConsole)
+		cout << "GameStateManager: Exit." << endl;
 }

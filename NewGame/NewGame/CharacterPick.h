@@ -17,23 +17,27 @@ using namespace std;
 // 人物选择类，单实例类
 class CharacterPick : public GameState {
 public:
+	CharacterPick() : GameState() {}
+
+	CharacterPick(string name) : GameState(name) {}
+
 	~CharacterPick() {}
 
 	void Load() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "CharacterPick: Load." << endl;
+			cout << name_ + ": Load." << endl;
 		}
 	}
 
 	void Initialize() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "CharacterPick: Initialize." << endl;
+			cout << name_ + ": Initialize." << endl;
 		}
 	}
 
 	void Draw() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "CharacterPick: Draw." << endl;
+			cout << name_ + ": Draw." << endl;
 		}
 	}
 
@@ -41,13 +45,13 @@ public:
 
 	void Free() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "CharacterPick: Free." << endl;
+			cout << name_ + ": Free." << endl;
 		}
 	}
 
 	void Unload() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "CharacterPick: Unload." << endl;
+			cout << name_ + ": Unload." << endl;
 		}
 	}
 

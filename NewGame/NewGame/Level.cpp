@@ -13,7 +13,7 @@
 
 void Level::Process() {
 	if (System::GetAESysInitInfo().mCreateConsole) {
-		cout << "Level: Process." << endl;
+		cout << name_ + ": Process." << endl;
 	}
 	while (!GetIsReadyForGameEnding() && !GetIsReadyForRestart()) {
 		AESysFrameStart();

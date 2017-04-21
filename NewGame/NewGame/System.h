@@ -33,10 +33,10 @@ public:
 		return h_instance_;
 	}
 
-	// 返回用来写log的文件流对象
-	static std::ofstream& GetLogFile() {
-		return log_file_;
-	}
+	//// 返回用来写log的文件流对象
+	//static std::ofstream& GetLogFile() {
+	//	return log_file_;
+	//}
 
 private:
 	// AE系统初始化信息的结构体
@@ -48,8 +48,8 @@ private:
 	// 当前实例
 	static HINSTANCE h_instance_;
 
-	// 生成一个文件流对象，可以通过它打开文件,之后就可以向该文件中写log
-	static std::ofstream log_file_;
+	//// 生成一个文件流对象，可以通过它打开文件,之后就可以向该文件中写log
+	//static std::ofstream log_file_;
 
 	// 生成一个文件流对象，用来和AE控制台输出流相连
 	static std::ofstream console_out_;

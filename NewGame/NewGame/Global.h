@@ -24,7 +24,7 @@
 AESysInitInfo System::sys_init_info_;
 WNDCLASS System::win_class_;
 HINSTANCE System::h_instance_;
-std::ofstream System::log_file_;
+//std::ofstream System::log_file_;
 std::streambuf* System::streambuf_pointer_;
 std::ofstream System::console_out_;
 

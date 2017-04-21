@@ -18,23 +18,27 @@ using namespace std;
 // 游戏前序、背景故事、关卡1前序、关卡1后续、关卡2前序、关卡2后续、关卡3前序、关卡3后续、奖励环节、游戏后续 这些状态
 class Interval : public GameState {
 public:
+	Interval() : GameState() {}
+
+	Interval(string name) : GameState(name) {}
+
 	~Interval() {}
 
 	void Load() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "Interval: Load." << endl;
+			cout << name_ + ": Load." << endl;
 		}
 	}
 
 	void Initialize() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "Interval: Initialize." << endl;
+			cout << name_ + ": Initialize." << endl;
 		}
 	}
 
 	void Draw() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "Interval: Draw." << endl;
+			cout << name_ + ": Draw." << endl;
 		}
 	}
 
@@ -42,13 +46,13 @@ public:
 
 	void Free() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "Interval: Free." << endl;
+			cout << name_ + ": Free." << endl;
 		}
 	}
 
 	void Unload() override {
 		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << "Interval: Unload." << endl;
+			cout << name_ + ": Unload." << endl;
 		}
 	}
 

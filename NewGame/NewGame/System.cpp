@@ -15,6 +15,8 @@
 #include "resource.h"
 #include <winuser.h>
 
+using namespace std;
+
 // 系统初始化函数
 void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	// 将实例句柄存储在全局变量中
@@ -85,16 +87,16 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	if (sys_init_info_.mCreateConsole) {
 		AllocConsole();
 		console_out_.open("CONOUT$");
-		streambuf_pointer_ = std::cout.rdbuf(console_out_.rdbuf());
-		std::cout << "Console is ready for debug." << std::endl;
+		streambuf_pointer_ = cout.rdbuf(console_out_.rdbuf());
+		cout << "Console is ready for debug." << endl;
 	}
 	// 之后所有标准输出都会在AE系统的控制台上打印出来
 
-	// 打开文件用于之后写log，该文件成为一个输出的流
-	log_file_.open("log.txt", std::ios::out);
+	//// 打开文件用于之后写log，该文件成为一个输出的流
+	//log_file_.open("log.txt", std::ios::out);
 
-	// 写log
-	log_file_ << "System: Initialize." << std::endl;
+	if (sys_init_info_.mCreateConsole)
+		cout << "System: Initialize." << endl;
 }
 
 // 系统退出函数
@@ -102,7 +104,7 @@ void System::Exit() {
 	// 如果选择开出AE系统控制台的话
 	if (sys_init_info_.mCreateConsole) {
 		// 恢复cout的流对象缓冲指针并关闭console_out_流
-		std::cout.rdbuf(streambuf_pointer_);
+		cout.rdbuf(streambuf_pointer_);
 		console_out_.close();
 	}
 
@@ -112,9 +114,9 @@ void System::Exit() {
 	// 窗口注销
 	UnregisterClass(win_class_.lpszClassName, h_instance_);
 
-	// 写log
-	log_file_ << "System: Exit." << std::endl;
+	if (sys_init_info_.mCreateConsole)
+		cout << "System: Exit." << endl;
 
-	// 关闭文件，结束对log记录文件的写入
-	log_file_.close();
+	//// 关闭文件，结束对log记录文件的写入
+	//log_file_.close();
 }
