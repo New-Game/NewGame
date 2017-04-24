@@ -1,7 +1,7 @@
 /**
  * Project:      NewGame
  * File Name:    Resource.h
- * Author:       Atlas Shen
+ * Author:       Long
  * Date:         2017/4/18
  * Purpose:      物品类头文件
  */

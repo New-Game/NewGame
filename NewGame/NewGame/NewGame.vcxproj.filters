@@ -108,6 +108,9 @@
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GameElementManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
@@ -151,6 +154,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameElementManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

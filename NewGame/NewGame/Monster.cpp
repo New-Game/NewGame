@@ -1,7 +1,7 @@
 /**
  * Project:      NewGame
  * File Name:    Monster.cpp
- * Author:       Atlas Shen
+ * Author:       Long
  * Date:         2017/4/18
  * Purpose:      怪物类实现文件
  */

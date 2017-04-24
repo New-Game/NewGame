@@ -44,9 +44,7 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	win_class_.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	win_class_.hbrBackground = HBRUSH(GetStockObject(WHITE_BRUSH));
 	win_class_.lpszMenuName = nullptr;
-	win_class_.lpszClassName = "NewGame";
-
-	// 窗口注册
+	win_class_.lpszClassName = LPCSTR("NewGame");
 	RegisterClass(&win_class_);
 
 	// 窗口创建
@@ -63,8 +61,7 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	 * hInstance,            WinMain的第1个参数
 	 * NULL);                WM_Create消息传递用到的
 	 */
-	HWND win_handle = CreateWindow(win_class_.lpszClassName, "从零开始的迷宫大作战", WS_OVERLAPPEDWINDOW, 0, 0, 
-		                           WINDOW_WIDTH, WINDOW_HEIGHT, nullptr, nullptr, hInstance, nullptr);
+	HWND win_handle = CreateWindow(win_class_.lpszClassName, LPCSTR("从零开始的迷宫大作战"), WS_OVERLAPPEDWINDOW, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, nullptr, nullptr, hInstance, nullptr);
 	ShowWindow(win_handle, nCmdShow);
 	UpdateWindow(win_handle);
 

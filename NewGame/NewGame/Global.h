@@ -15,9 +15,9 @@
 #include "Input.h"
 #include "GameStateManager.h"
 
-// 宏（可以调整的一些参数）
-#define WINDOW_WIDTH   1200
-#define WINDOW_HEIGHT  600
+// 全局常量（可以调整的一些参数）
+const int WINDOW_WIDTH = 1200;
+const int WINDOW_HEIGHT = 600;
 
 // 必须为静态成员变量提供类外部的声明，否则链接时会出问题（不可被修改）
 //

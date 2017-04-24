@@ -63,15 +63,15 @@ LRESULT CALLBACK Input::MainHandle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 			else {
 				if (wParam == 'A')
 					pressed_key_[KEY_A] = true;
-				if (wParam == 'S')
+				else if (wParam == 'S')
 					pressed_key_[KEY_S] = true;
 				if (wParam == VK_UP)
 					pressed_key_[KEY_UP] = true;
-				if (wParam == VK_DOWN)
+				else if (wParam == VK_DOWN)
 					pressed_key_[KEY_DOWN] = true;
-				if (wParam == VK_LEFT)
+				else if (wParam == VK_LEFT)
 					pressed_key_[KEY_LEFT] = true;
-				if (wParam == VK_RIGHT)
+				else if (wParam == VK_RIGHT)
 					pressed_key_[KEY_RIGHT] = true;
 			}
 			break;

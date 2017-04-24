@@ -1,7 +1,7 @@
 /**
  * Project:      NewGame
  * File Name:    Wall.h
- * Author:       Atlas Shen
+ * Author:       Long
  * Date:         2017/4/18
  * Purpose:      墙体类头文件
  */

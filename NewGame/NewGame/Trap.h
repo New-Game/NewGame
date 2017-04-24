@@ -1,7 +1,7 @@
 /**
  * Project:      NewGame
  * File Name:    Trap.h
- * Author:       Atlas Shen
+ * Author:       Long
  * Date:         2017/4/18
  * Purpose:      陷阱类头文件
  */
