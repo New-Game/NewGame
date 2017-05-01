@@ -30,10 +30,10 @@ public:
 	              is_ready_for_exit_(false) {}
 
 	// 在GSM中创建游戏状态对象时使用的构造函数
-	GameState(string name) : name_(name),
-		                     is_ready_for_next_game_state_(false),
-		                     is_ready_for_restart_(false),
-		                     is_ready_for_exit_(false) {}
+	explicit GameState(string name) : name_(name),
+		                              is_ready_for_next_game_state_(false),
+		                              is_ready_for_restart_(false),
+		                              is_ready_for_exit_(false) {}
 
 	// 未写复制构造函数，因为没有这种需求
 

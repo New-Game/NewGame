@@ -18,44 +18,21 @@ using namespace std;
 // 游戏前序、背景故事、关卡1前序、关卡1后续、关卡2前序、关卡2后续、关卡3前序、关卡3后续、奖励环节、游戏后续 这些状态
 class Interval : public GameState {
 public:
-	Interval() : GameState() {}
-
-	Interval(string name) : GameState(name) {}
-
+	Interval() : GameState(), picture_file_name_(nullptr), mesh_(nullptr), texture_(nullptr) {}
+	Interval(string name, string picture_file_name) : GameState(name), 
+	                                                  picture_file_name_(picture_file_name), 
+	                                                  mesh_(nullptr),
+	                                                  texture_(nullptr) {}
 	~Interval() {}
-
-	void Load() override {
-		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Load." << endl;
-		}
-	}
-
-	void Initialize() override {
-		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Initialize." << endl;
-		}
-	}
-
-	void Draw() override {
-		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Draw." << endl;
-		}
-	}
-
+	void Load() override;
+	void Initialize() override;
+	void Draw() override;
 	void Process() override;
-
-	void Free() override {
-		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Free." << endl;
-		}
-	}
-
-	void Unload() override {
-		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Unload." << endl;
-		}
-	}
+	void Free() override;
+	void Unload() override;
 
 private:
-
+	string picture_file_name_; // 用来存纹理图片的文件名
+	AEGfxVertexList* mesh_;
+	AEGfxTexture* texture_;
 };

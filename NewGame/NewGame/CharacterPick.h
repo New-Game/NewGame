@@ -19,7 +19,7 @@ class CharacterPick : public GameState {
 public:
 	CharacterPick() : GameState() {}
 
-	CharacterPick(string name) : GameState(name) {}
+	explicit CharacterPick(string name) : GameState(name) {}
 
 	~CharacterPick() {}
 

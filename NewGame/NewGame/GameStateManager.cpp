@@ -13,20 +13,20 @@
 #include "System.h"
 
 void GameStateManager::Initialize() {
-	game_state_[GAME_PREFACE] = new Interval("Game Preface");
-	game_state_[BACKGROUND_STORY] = new Interval("Background Story");
+	game_state_[GAME_PREFACE] = new Interval("Game Preface", "test.png");
+	game_state_[BACKGROUND_STORY] = new Interval("Background Story", "test.png");
 	game_state_[CHARACTER_PICK] = new CharacterPick("Character Pick");
-	game_state_[LEVEL1_PREFACE] = new Interval("Level1 Preface");
+	game_state_[LEVEL1_PREFACE] = new Interval("Level1 Preface", "test.png");
 	game_state_[LEVEL1] = new Level("Level1"); // level1  ¹Ø¿¨1
-	game_state_[LEVEL1_ENDING] = new Interval("Level1 Ending");
-	game_state_[LEVEL2_PREFACE] = new Interval("Level2 Preface");
+	game_state_[LEVEL1_ENDING] = new Interval("Level1 Ending", "test.png");
+	game_state_[LEVEL2_PREFACE] = new Interval("Level2 Preface", "test.png");
 	game_state_[LEVEL2] = new Level("Level2"); // level2 ¹Ø¿¨2
-	game_state_[LEVEL2_ENDING] = new Interval("Level2 Ending");
-	game_state_[LEVEL3_PREFACE] = new Interval("Level3 Preface");
+	game_state_[LEVEL2_ENDING] = new Interval("Level2 Ending", "test.png");
+	game_state_[LEVEL3_PREFACE] = new Interval("Level3 Preface", "test.png");
 	game_state_[LEVEL3] = new Level("Level3"); // level3 ¹Ø¿¨3
-	game_state_[LEVEL3_ENDING] = new Interval("Level3 Ending");
-	game_state_[PRIZE] = new Interval("Prize");
-	game_state_[GAME_ENDING] = new Interval("Game Ending");
+	game_state_[LEVEL3_ENDING] = new Interval("Level3 Ending", "test.png");
+	game_state_[PRIZE] = new Interval("Prize", "test.png");
+	game_state_[GAME_ENDING] = new Interval("Game Ending", "test.png");
 	game_state_pointer_ = game_state_;
 
 	if (System::GetAESysInitInfo().mCreateConsole)

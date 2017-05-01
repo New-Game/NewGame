@@ -72,6 +72,9 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	AESysInit(&sys_init_info_);
 	AESysReset();
 
+	// 把世界坐标原点设为屏幕左上角
+	AEGfxSetWorldOriginMode(AE_WOM_TOP_LEFT);
+
 	// 分配控制台来帮助debug，把标准输出流重定向到AE系统的控制台
 	if (sys_init_info_.mCreateConsole) {
 		AllocConsole();

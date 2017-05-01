@@ -19,7 +19,7 @@ class Level : public GameState {
 public:
 	Level() : GameState() {}
 
-	Level(string name) : GameState(name) {}
+	explicit Level(string name) : GameState(name) {}
 
 	~Level() {}
 
