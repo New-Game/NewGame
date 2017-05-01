@@ -15,12 +15,10 @@
 #include "Input.h"
 #include "GameStateManager.h"
 
-// 全局常量（可以调整的一些参数）
-const int WINDOW_WIDTH = 1200;
-const int WINDOW_HEIGHT = 600;
-
 // 必须为静态成员变量提供类外部的声明，否则链接时会出问题（不可被修改）
 //
+const int System::window_width_;
+const int System::window_height_;
 AESysInitInfo System::sys_init_info_;
 WNDCLASS System::win_class_;
 HINSTANCE System::h_instance_;

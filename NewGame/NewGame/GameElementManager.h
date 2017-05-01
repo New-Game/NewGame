@@ -11,4 +11,4 @@
 #include <list>
 #include "GameElement.h"
 
-std::list<GameElement> game_element_list;
+//std::list<GameElement> game_element_list;

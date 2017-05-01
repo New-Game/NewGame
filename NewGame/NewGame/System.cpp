@@ -25,8 +25,8 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	// Alpha系统初始化信息设置
 	sys_init_info_.mAppInstance = hInstance;              // WinMain的第1个参数
 	sys_init_info_.mShow = nCmdShow;                      // WinMain的第4个参数
-	sys_init_info_.mWinWidth = WINDOW_WIDTH;              // 窗口宽度
-	sys_init_info_.mWinHeight = WINDOW_HEIGHT;            // 窗口高度
+	sys_init_info_.mWinWidth = window_width_;             // 窗口宽度
+	sys_init_info_.mWinHeight = window_height_;            // 窗口高度
 	sys_init_info_.mCreateConsole = 1;                    // 是否需要打开控制台，1表示是，0表示否
 	sys_init_info_.mCreateWindow = 0;                     // 是否需要创建窗口，1表示是，0表示否
 	sys_init_info_.mMaxFrameRate = 60;                    // 设置帧率（使用Alpha的帧率控制功能）
@@ -61,7 +61,7 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 	 * hInstance,            WinMain的第1个参数
 	 * NULL);                WM_Create消息传递用到的
 	 */
-	HWND win_handle = CreateWindow(win_class_.lpszClassName, LPCSTR("从零开始的迷宫大作战"), WS_OVERLAPPEDWINDOW, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, nullptr, nullptr, hInstance, nullptr);
+	HWND win_handle = CreateWindow(win_class_.lpszClassName, LPCSTR("从零开始的迷宫大作战"), WS_OVERLAPPEDWINDOW, 0, 0, window_width_, window_height_, nullptr, nullptr, hInstance, nullptr);
 	ShowWindow(win_handle, nCmdShow);
 	UpdateWindow(win_handle);
 

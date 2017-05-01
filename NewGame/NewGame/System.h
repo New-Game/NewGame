@@ -39,6 +39,12 @@ public:
 	//}
 
 private:
+	// 窗口宽度
+	static const int window_width_ = 1200;
+
+	// 窗口高度
+	static const int window_height_ = 600;
+	
 	// AE系统初始化信息的结构体
 	static AESysInitInfo sys_init_info_;
 
