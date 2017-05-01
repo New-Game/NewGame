@@ -28,7 +28,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			GameStateManager::GetGameState()->ResetIsReadyForRestart();
 
 		GameStateManager::GetGameState()->Initialize();
-		GameStateManager::GetGameState()->Draw();
 		GameStateManager::GetGameState()->Process();
 		GameStateManager::GetGameState()->Free();
 

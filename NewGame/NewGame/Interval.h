@@ -26,7 +26,6 @@ public:
 	~Interval() {}
 	void Load() override;
 	void Initialize() override;
-	void Draw() override;
 	void Process() override;
 	void Free() override;
 	void Unload() override;

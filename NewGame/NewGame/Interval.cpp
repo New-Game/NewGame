@@ -34,13 +34,6 @@ void Interval::Initialize() {
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);  // 设置混色模式
 }
 
-void Interval::Draw() {
-	if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Draw." << endl;
-	}
-	
-}
-
 void Interval::Process() {
 	if (System::GetAESysInitInfo().mCreateConsole) {
 		cout << name_ + ": Process." << endl;

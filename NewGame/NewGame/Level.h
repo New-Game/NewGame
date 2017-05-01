@@ -35,12 +35,6 @@ public:
 		}
 	}
 
-	void Draw() override {
-		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Draw." << endl;
-		}
-	}
-
 	void Process() override;
 
 	void Free() override {
