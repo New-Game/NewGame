@@ -91,4 +91,7 @@ protected:
 	bool is_ready_for_next_game_state_;
 	bool is_ready_for_restart_;
 	bool is_ready_for_exit_;
+
+	// 子类中必须重写当前状态的绘制函数，但此函数只能在类内部调用
+	virtual void Draw() = 0;
 };

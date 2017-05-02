@@ -9,10 +9,11 @@
 #include "Level.h"
 #include "Input.h"
 
+void Level::Load() {}
+
+void Level::Initialize() {}
+
 void Level::Process() {
-	if (System::GetAESysInitInfo().mCreateConsole) {
-		cout << name_ + ": Process." << endl;
-	}
 	while (!GetIsReadyForExit() && !GetIsReadyForRestart()) {
 		AESysFrameStart();
 		if (Input::GetPressedKey(KEY_ESC)) {
@@ -26,3 +27,9 @@ void Level::Process() {
 		AESysFrameEnd();
 	}
 }
+
+void Level::Free() {}
+
+void Level::Unload() {}
+
+void Level::Draw() {}

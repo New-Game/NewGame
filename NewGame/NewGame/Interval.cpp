@@ -10,9 +10,6 @@
 #include "Input.h"
 
 void Interval::Load() {
-	if (System::GetAESysInitInfo().mCreateConsole) {
-		cout << name_ + ": Load." << endl;
-	}
 	AEGfxMeshStart();
 	AEGfxTriAdd(
 		300.0f, 0.0f, 0xFFFF0000, 1.0f, 0.0f,
@@ -27,17 +24,11 @@ void Interval::Load() {
 }
 
 void Interval::Initialize() {
-	if (System::GetAESysInitInfo().mCreateConsole) {
-		cout << name_ + ": Initialize." << endl;
-	}
 	//AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);  // 设置混色模式
+	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);  // 设置混色模式
 }
 
 void Interval::Process() {
-	if (System::GetAESysInitInfo().mCreateConsole) {
-		cout << name_ + ": Process." << endl;
-	}
 	while (!GetIsReadyForExit() && !GetIsReadyForNextGameState()) {
 		AESysFrameStart();
 		if (Input::GetPressedKey(KEY_ESC)) {
@@ -48,25 +39,22 @@ void Interval::Process() {
 			SetIsReadyForNextGameState();
 			Input::ResetPressedKey();
 		}
-		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE); // 设置绘制模式
-		AEGfxSetPosition(0.0f, 0.0f); // 设置相对点坐标
-		AEGfxTextureSet(texture_, 0.0f, 0.0f);
-		AEGfxSetTransparency(1.0f);
-		AEGfxSetBlendColor(0.0f, 0.0f, 0.0, 0.0f);
-		AEGfxMeshDraw(mesh_, AE_GFX_MDM_TRIANGLES);
+		Draw();
 		AESysFrameEnd();
 	}
 }
 
-void Interval::Free() {
-	if (System::GetAESysInitInfo().mCreateConsole) {
-		cout << name_ + ": Free." << endl;
-	}
-}
+void Interval::Free() {}
 
 void Interval::Unload() {
-	if (System::GetAESysInitInfo().mCreateConsole) {
-		cout << name_ + ": Unload." << endl;
-	}
 	AEGfxMeshFree(mesh_);
+}
+
+void Interval::Draw() {
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE); // 设置绘制模式
+	AEGfxSetPosition(0.0f, 0.0f); // 设置相对点坐标
+	AEGfxTextureSet(texture_, 0.0f, 0.0f);
+	AEGfxSetTransparency(1.0f);
+	//AEGfxSetBlendColor(0.0f, 0.0f, 0.0, 0.0f);
+	AEGfxMeshDraw(mesh_, AE_GFX_MDM_TRIANGLES);
 }

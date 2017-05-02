@@ -23,32 +23,12 @@ public:
 
 	~CharacterPick() {}
 
-	void Load() override {
-		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Load." << endl;
-		}
-	}
-
-	void Initialize() override {
-		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Initialize." << endl;
-		}
-	}
-
+	void Load() override;
+	void Initialize() override;
 	void Process() override;
-
-	void Free() override {
-		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Free." << endl;
-		}
-	}
-
-	void Unload() override {
-		if (System::GetAESysInitInfo().mCreateConsole) {
-			cout << name_ + ": Unload." << endl;
-		}
-	}
+	void Free() override;
+	void Unload() override;
 
 private:
-
+	void Draw() override;
 };

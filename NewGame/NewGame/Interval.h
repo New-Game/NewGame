@@ -34,4 +34,5 @@ private:
 	string picture_file_name_; // 用来存纹理图片的文件名
 	AEGfxVertexList* mesh_;
 	AEGfxTexture* texture_;
+	void Draw() override;
 };

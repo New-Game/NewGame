@@ -9,10 +9,11 @@
 #include "CharacterPick.h"
 #include "Input.h"
 
+void CharacterPick::Load() {}
+
+void CharacterPick::Initialize() {}
+
 void CharacterPick::Process() {
-	if (System::GetAESysInitInfo().mCreateConsole) {
-		cout << name_ + ": Process." << endl;
-	}
 	while (!GetIsReadyForExit() && !GetIsReadyForNextGameState()) {
 		AESysFrameStart();
 		if (Input::GetPressedKey(KEY_ESC)) {
@@ -26,3 +27,9 @@ void CharacterPick::Process() {
 		AESysFrameEnd();
 	}
 }
+
+void CharacterPick::Free() {}
+
+void CharacterPick::Unload() {}
+
+void CharacterPick::Draw() {}
