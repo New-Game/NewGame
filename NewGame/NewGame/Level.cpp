@@ -9,9 +9,13 @@
 #include "Level.h"
 #include "Input.h"
 
-void Level::Load() {}
+void Level::Load() {
+	handle.Load();
+}
 
-void Level::Initialize() {}
+void Level::Initialize() {
+	handle.Initialize();
+}
 
 void Level::Process() {
 	while (!GetIsReadyForExit() && !GetIsReadyForRestart()) {
@@ -24,12 +28,16 @@ void Level::Process() {
 			SetIsReadyForRestart();
 			Input::ResetPressedKey();
 		}
+		handle.Update();
+		handle.Draw();
 		AESysFrameEnd();
 	}
 }
 
-void Level::Free() {}
+void Level::Free() {
+	handle.Free();
+}
 
-void Level::Unload() {}
-
-void Level::Draw() {}
+void Level::Unload() {
+	handle.Unload();
+}

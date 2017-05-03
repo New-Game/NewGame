@@ -24,16 +24,9 @@ using namespace std;
 class GameState : public State {
 public:
 	// 无参构造函数
-	GameState() : name_(nullptr),
-	              is_ready_for_next_game_state_(false),
+	GameState() : is_ready_for_next_game_state_(false),
 	              is_ready_for_restart_(false),
 	              is_ready_for_exit_(false) {}
-
-	// 在GSM中创建游戏状态对象时使用的构造函数
-	explicit GameState(string name) : name_(name),
-		                              is_ready_for_next_game_state_(false),
-		                              is_ready_for_restart_(false),
-		                              is_ready_for_exit_(false) {}
 
 	// 未写复制构造函数，因为没有这种需求
 
@@ -42,10 +35,6 @@ public:
 
 	// 用来给子类（派生类）重写的 纯虚函数，每个子类都必须重写这个函数来定义其游戏状态的运行方式
 	virtual void Process() = 0;
-
-	string GetName() const {
-		return name_;
-	}
 
 	bool GetIsReadyForNextGameState() const {
 		return is_ready_for_next_game_state_;
@@ -57,10 +46,6 @@ public:
 
 	bool GetIsReadyForExit() const {
 		return is_ready_for_exit_;
-	}
-
-	void SetName(string name) {
-		name_ = name;
 	}
 
 	// 在非关卡状态时按下Enter键时调用，结束该状态，进入下一状态
@@ -84,14 +69,8 @@ public:
 	}
 
 protected:
-	// 游戏状态的名称
-	string name_;
-
 	// 用来控制游戏流程的flag
 	bool is_ready_for_next_game_state_;
 	bool is_ready_for_restart_;
 	bool is_ready_for_exit_;
-
-	// 子类中必须重写当前状态的绘制函数，但此函数只能在类内部调用
-	virtual void Draw() = 0;
 };

@@ -31,5 +31,3 @@ void CharacterPick::Process() {
 void CharacterPick::Free() {}
 
 void CharacterPick::Unload() {}
-
-void CharacterPick::Draw() {}

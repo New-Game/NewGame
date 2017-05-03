@@ -17,10 +17,7 @@ using namespace std;
 // 人物选择类，单实例类
 class CharacterPick : public GameState {
 public:
-	CharacterPick() : GameState() {}
-
-	explicit CharacterPick(string name) : GameState(name) {}
-
+	CharacterPick() {}
 	~CharacterPick() {}
 
 	void Load() override;
@@ -30,5 +27,4 @@ public:
 	void Unload() override;
 
 private:
-	void Draw() override;
 };

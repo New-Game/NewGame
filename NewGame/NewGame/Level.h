@@ -9,20 +9,17 @@
 #pragma once
 
 #include <iostream>
-#include <list>
 #include "GameState.h"
 #include "System.h"
-#include "GameElement.h"
+#include "GameElementManager.h"
 
 using namespace std;
 
 // 关卡类，多实例类，每个关卡都是它的一个对象
 class Level : public GameState {
 public:
-	Level() : GameState() {}
-
-	explicit Level(string name) : GameState(name) {}
-
+	Level() : handle() {}
+	Level(string config_file_name) : handle(config_file_name) {}
 	~Level() {}
 
 	void Load() override;
@@ -32,5 +29,5 @@ public:
 	void Unload() override;
 
 private:
-	void Draw() override;
+	GameElementManager handle;
 };

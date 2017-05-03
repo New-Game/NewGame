@@ -39,7 +39,14 @@ void Interval::Process() {
 			SetIsReadyForNextGameState();
 			Input::ResetPressedKey();
 		}
-		Draw();
+
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE); // 设置绘制模式
+		AEGfxSetPosition(0.0f, 0.0f); // 设置相对点坐标
+		AEGfxTextureSet(texture_, 0.0f, 0.0f);
+		AEGfxSetTransparency(1.0f);
+		//AEGfxSetBlendColor(0.0f, 0.0f, 0.0, 0.0f);
+		AEGfxMeshDraw(mesh_, AE_GFX_MDM_TRIANGLES);
+
 		AESysFrameEnd();
 	}
 }
@@ -48,13 +55,4 @@ void Interval::Free() {}
 
 void Interval::Unload() {
 	AEGfxMeshFree(mesh_);
-}
-
-void Interval::Draw() {
-	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE); // 设置绘制模式
-	AEGfxSetPosition(0.0f, 0.0f); // 设置相对点坐标
-	AEGfxTextureSet(texture_, 0.0f, 0.0f);
-	AEGfxSetTransparency(1.0f);
-	//AEGfxSetBlendColor(0.0f, 0.0f, 0.0, 0.0f);
-	AEGfxMeshDraw(mesh_, AE_GFX_MDM_TRIANGLES);
 }
