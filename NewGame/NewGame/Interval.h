@@ -19,7 +19,9 @@ using namespace std;
 class Interval : public GameState {
 public:
 	Interval() : picture_file_name_(nullptr), mesh_(nullptr), texture_(nullptr) {}
-	Interval(string picture_file_name) : picture_file_name_(picture_file_name), mesh_(nullptr), texture_(nullptr) {}
+	Interval(string picture_file_name) : picture_file_name_(picture_file_name), 
+	                                     mesh_(nullptr), 
+	                                     texture_(nullptr) {}
 	~Interval() {}
 	void Load() override;
 	void Initialize() override;

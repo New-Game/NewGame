@@ -12,7 +12,7 @@ class Position {
 public:
 	Position() : x_(0), y_(0) {}
 	Position(float x, float y) : x_(x), y_(y) {}
-	Position(Position& position) : x_(position.GetX()), y_(position.GetY()) {}
+	Position(const Position& position) : x_(position.GetX()), y_(position.GetY()) {}
 	~Position() {}
 
 	void SetPosition(float x, float y) {
@@ -20,7 +20,7 @@ public:
 		y_ = y;
 	}
 
-	void SetPosition(Position& position) {
+	void SetPosition(const Position& position) {
 		x_ = position.GetX();
 		y_ = position.GetY();
 	}

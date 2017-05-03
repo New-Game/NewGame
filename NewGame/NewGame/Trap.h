@@ -14,6 +14,15 @@
 // 用于派生具体陷阱类，成员函数使用虚函数来实现多态
 class Trap : public GameElement {
 public:
+	Trap() {}
 	virtual ~Trap() {}
+
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
+
 protected:
 };

@@ -7,3 +7,27 @@
  */
 
 #include "Wall.h"
+
+void Wall::Load() {
+	
+}
+
+void Wall::Initialize() {
+	
+}
+
+void Wall::Update() {
+	
+}
+
+void Wall::Draw() {
+	
+}
+
+void Wall::Free() {
+	
+}
+
+void Wall::Unload() {
+	
+}

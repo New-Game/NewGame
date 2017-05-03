@@ -8,15 +8,18 @@
 
 #pragma once
 
+#include <fstream>
 #include <unordered_map>
+#include <vector>
 #include "GameElement.h"
 #include "Position.h"
 
 enum GameElementType {
-	CHARACTER,
-	MONSTER,
+	ROAD,
 	WALL,
 	TRAP,
+	CHARACTER,
+	MONSTER,
 	NUM_OF_GAME_ELEMENT_TYPE
 };
 
@@ -31,9 +34,11 @@ namespace std {
 
 class GameElementManager : public State {
 public:
-	GameElementManager() {}
-	GameElementManager(string config_file_name) : config_file_name_(config_file_name) {}
-	~GameElementManager() {}
+	GameElementManager() : config_file_() {}
+	GameElementManager(string config_file_name) : config_file_(config_file_name, ios::in) {}
+	~GameElementManager() {
+		config_file_.close();
+	}
 
 	void Load() override;
 	void Initialize() override;
@@ -43,6 +48,10 @@ public:
 	void Unload() override;
 
 private:
-	string config_file_name_;
-	unordered_map<Position, GameElement*> game_element_map_;
+	const int num_of_map_width_grid_ = 30;
+	const int num_of_map_height_grid_ = 20;
+	const float grid_size_ = 30;
+	const int character_status_bar_width_ = 100;
+	ifstream config_file_;
+	unordered_map<Position, GameElement*> game_element_;
 };

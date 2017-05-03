@@ -13,7 +13,16 @@
 // 墙体类，可直接生成对象
 class Wall : public GameElement {
 public:
+	Wall() {}
+	Wall(int size, const Position position) : GameElement(size, position) {}
 	~Wall() {}
+
+	void Load() override;
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Free() override;
+	void Unload() override;
 private:
 
 };

@@ -40,7 +40,7 @@ public:
 
 private:
 	// 窗口宽度
-	static const int window_width_ = 1200;
+	static const int window_width_ = 1000;
 
 	// 窗口高度
 	static const int window_height_ = 600;
