@@ -17,13 +17,13 @@ void GameStateManager::Initialize() {
 	game_state_[BACKGROUND_STORY] = new Interval("test.png");
 	game_state_[CHARACTER_PICK] = new CharacterPick();
 	game_state_[LEVEL1_PREFACE] = new Interval("test.png");
-	game_state_[LEVEL1] = new Level("level1"); // level1  关卡1
+	game_state_[LEVEL1] = new Level("level1.txt"); // level1  关卡1
 	game_state_[LEVEL1_ENDING] = new Interval("test.png");
 	game_state_[LEVEL2_PREFACE] = new Interval("test.png");
-	game_state_[LEVEL2] = new Level("level2"); // level2 关卡2
+	game_state_[LEVEL2] = new Level("level2.txt"); // level2 关卡2
 	game_state_[LEVEL2_ENDING] = new Interval("test.png");
 	game_state_[LEVEL3_PREFACE] = new Interval("test.png");
-	game_state_[LEVEL3] = new Level("level3"); // level3 关卡3
+	game_state_[LEVEL3] = new Level("level3.txt"); // level3 关卡3
 	game_state_[LEVEL3_ENDING] = new Interval("test.png");
 	game_state_[PRIZE] = new Interval("test.png");
 	game_state_[GAME_ENDING] = new Interval("test.png");

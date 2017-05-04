@@ -42,8 +42,8 @@ private:
 	// 窗口宽度
 	static const int window_width_ = 1000;
 
-	// 窗口高度
-	static const int window_height_ = 600;
+	// 窗口高度（要把标题栏的高度考虑进去）
+	static const int window_height_ = 640;
 	
 	// AE系统初始化信息的结构体
 	static AESysInitInfo sys_init_info_;

@@ -20,11 +20,12 @@ using namespace std;
 class GameElement : public State {
 public:
 	GameElement() : size_(0), position_(), picture_file_name_(nullptr), mesh_(nullptr), texture_(nullptr) {}
-	GameElement(int size, const Position position) : size_(size), 
-	                                                 position_(position), 
-	                                                 picture_file_name_(nullptr), 
-	                                                 mesh_(nullptr), 
-	                                                 texture_(nullptr) {}
+	GameElement(int size, const Position position, string picture_file_name) : 
+	            size_(size), 
+	            position_(position), 
+	            picture_file_name_(picture_file_name), 
+	            mesh_(nullptr), 
+	            texture_(nullptr) {}
 	virtual ~GameElement() {}
 
 	virtual void Update() = 0;

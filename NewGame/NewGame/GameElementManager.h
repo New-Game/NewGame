@@ -10,7 +10,6 @@
 
 #include <fstream>
 #include <unordered_map>
-#include <vector>
 #include "GameElement.h"
 #include "Position.h"
 
