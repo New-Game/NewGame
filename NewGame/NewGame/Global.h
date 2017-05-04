@@ -26,7 +26,7 @@ HINSTANCE System::h_instance_;
 std::streambuf* System::streambuf_pointer_;
 std::ofstream System::console_out_;
 
-bool Input::pressed_key_[NUM_OF_KEY];
+KeyStatus Input::pressed_key_[NUM_OF_KEY];
 
 GameState* GameStateManager::game_state_[NUM_OF_GAME_STATES];
 GameState** GameStateManager::game_state_pointer_;

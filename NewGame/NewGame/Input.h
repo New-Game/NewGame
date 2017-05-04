@@ -13,7 +13,7 @@
 
 enum Key {
 	KEY_ENTER,
-//	KEY_SPACE,
+	KEY_SPACE,
 	KEY_BACKSPACE,
 	KEY_ESC,
 	KEY_A,
@@ -23,6 +23,34 @@ enum Key {
 	KEY_LEFT,
 	KEY_RIGHT,
 	NUM_OF_KEY
+};
+
+class KeyStatus {
+public:
+	KeyStatus() : is_valid_(false), is_pressed_(false) {}
+	KeyStatus(const KeyStatus& key_status) : 
+	          is_valid_(key_status.GetIsValid()), is_pressed_(key_status.GetIsPressed()) {}
+	~KeyStatus() {}
+
+	bool GetIsValid() const {
+		return is_valid_;
+	}
+
+	bool GetIsPressed() const {
+		return is_pressed_;
+	}
+
+	void SetIsValid(bool boolean_value) {
+		is_valid_ = boolean_value;
+	}
+
+	void SetIsPressed(bool boolean_value) {
+		is_pressed_ = boolean_value;
+	}
+
+private:
+	bool is_valid_;
+	bool is_pressed_;
 };
 
 // Input类的实现完全只是为了封装与它相关的状态量（成员变量）和行为（成员函数）
@@ -40,16 +68,16 @@ public:
 	
 	static INT_PTR CALLBACK HandleForRestart(HWND, UINT, WPARAM, LPARAM);
 
-	static bool GetPressedKey(enum Key key) {
+	static KeyStatus& GetPressedKey(enum Key key) {
 		return pressed_key_[key];
 	}
 
-	// 用于重置key_pressed[]数组
+	// 用于在每个状态退出时重置pressed_key_数组
 	static void ResetPressedKey() {
-		memset(pressed_key_, false, NUM_OF_KEY);
+		for (auto& i : pressed_key_)
+			i.SetIsValid(false);
 	}
 
 private:
-	// 由于是全局变量，声明后自动全为false，因此不用特地初始化
-	static bool pressed_key_[NUM_OF_KEY];
+	static KeyStatus pressed_key_[NUM_OF_KEY];
 };

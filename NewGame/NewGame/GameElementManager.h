@@ -49,7 +49,7 @@ public:
 private:
 	const int num_of_map_width_grid_ = 30;
 	const int num_of_map_height_grid_ = 20;
-	const float grid_size_ = 30;
+	const float grid_size_ = 30.0f;
 	const int character_status_bar_width_ = 100;
 	ifstream config_file_;
 	unordered_map<Position, GameElement*> game_element_;

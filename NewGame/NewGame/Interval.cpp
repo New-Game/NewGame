@@ -10,15 +10,20 @@
 #include "Input.h"
 
 void Interval::Load() {
+	// 先设置本状态哪些键位是有效的
+	Input::GetPressedKey(KEY_ENTER).SetIsValid(true);
+	Input::GetPressedKey(KEY_SPACE).SetIsValid(true);
+	Input::GetPressedKey(KEY_ESC).SetIsValid(true);
+
 	AEGfxMeshStart();
 	AEGfxTriAdd(
-		300.0f, 0.0f, 0xFFFF0000, 1.0f, 0.0f,
+		1000.0f, 0.0f, 0xFFFF0000, 1.0f, 0.0f,
 		0.0f, 0.0f, 0xFFFF0000, 0.0f, 0.0f,
-		0.0f, 300.0f, 0xFFFF0000, 0.0f, 1.0f);
+		0.0f, 250.0f, 0xFFFF0000, 0.0f, 1.0f);
 	AEGfxTriAdd(
-		300.0f, 0.0f, 0xFFFF0000, 1.0f, 0.0f,
-		300.0f, 300.0f, 0xFFFF0000, 1.0f, 1.0f,
-		0.0f, 300.0f, 0xFFFF0000, 0.0f, 1.0f);
+		1000.0f, 0.0f, 0xFFFF0000, 1.0f, 0.0f,
+		1000.0f, 250.0f, 0xFFFF0000, 1.0f, 1.0f,
+		0.0f, 250.0f, 0xFFFF0000, 0.0f, 1.0f);
 	mesh_ = AEGfxMeshEnd();
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
 }
@@ -31,13 +36,13 @@ void Interval::Initialize() {
 void Interval::Process() {
 	while (!GetIsReadyForExit() && !GetIsReadyForNextGameState()) {
 		AESysFrameStart();
-		if (Input::GetPressedKey(KEY_ESC)) {
+		if (Input::GetPressedKey(KEY_ESC).GetIsPressed()) {
 			SetIsReadyForExit();
-			Input::ResetPressedKey();
+			Input::GetPressedKey(KEY_ESC).SetIsPressed(false);
 		}
-		else if (Input::GetPressedKey(KEY_ENTER)) {
+		else if (Input::GetPressedKey(KEY_ENTER).GetIsPressed()) {
 			SetIsReadyForNextGameState();
-			Input::ResetPressedKey();
+			Input::GetPressedKey(KEY_ENTER).SetIsPressed(false);
 		}
 
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE); // 设置绘制模式
@@ -56,4 +61,6 @@ void Interval::Free() {}
 
 void Interval::Unload() {
 	AEGfxMeshFree(mesh_);
+	// 重置有效按键
+	Input::ResetPressedKey();
 }

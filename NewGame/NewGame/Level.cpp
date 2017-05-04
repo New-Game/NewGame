@@ -10,6 +10,17 @@
 #include "Input.h"
 
 void Level::Load() {
+	// 先设置本状态哪些键位是有效的
+	Input::GetPressedKey(KEY_SPACE).SetIsValid(true);
+	Input::GetPressedKey(KEY_BACKSPACE).SetIsValid(true);
+	Input::GetPressedKey(KEY_ESC).SetIsValid(true);
+	Input::GetPressedKey(KEY_A).SetIsValid(true);
+	Input::GetPressedKey(KEY_S).SetIsValid(true);
+	Input::GetPressedKey(KEY_UP).SetIsValid(true);
+	Input::GetPressedKey(KEY_DOWN).SetIsValid(true);
+	Input::GetPressedKey(KEY_LEFT).SetIsValid(true);
+	Input::GetPressedKey(KEY_RIGHT).SetIsValid(true);
+
 	handle.Load();
 }
 
@@ -20,13 +31,13 @@ void Level::Initialize() {
 void Level::Process() {
 	while (!GetIsReadyForExit() && !GetIsReadyForRestart()) {
 		AESysFrameStart();
-		if (Input::GetPressedKey(KEY_ESC)) {
+		if (Input::GetPressedKey(KEY_ESC).GetIsPressed()) {
 			SetIsReadyForExit();
-			Input::ResetPressedKey();
+			Input::GetPressedKey(KEY_ESC).SetIsPressed(false);
 		}
-		else if (Input::GetPressedKey(KEY_BACKSPACE)) {
+		else if (Input::GetPressedKey(KEY_BACKSPACE).GetIsPressed()) {
 			SetIsReadyForRestart();
-			Input::ResetPressedKey();
+			Input::GetPressedKey(KEY_BACKSPACE).SetIsPressed(false);
 		}
 		handle.Update();
 		handle.Draw();
@@ -40,4 +51,6 @@ void Level::Free() {
 
 void Level::Unload() {
 	handle.Unload();
+	// 重置有效按键
+	Input::ResetPressedKey();
 }

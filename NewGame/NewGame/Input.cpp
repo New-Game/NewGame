@@ -47,32 +47,53 @@ LRESULT CALLBACK Input::MainHandle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 
 		// 窗口关闭
 		case WM_DESTROY:
-			pressed_key_[KEY_ESC] = true;
+			pressed_key_[KEY_ESC].SetIsValid(true);
+			pressed_key_[KEY_ESC].SetIsPressed(true);
 			break;
 
 		// 按下了键盘上的一个键
 		case WM_KEYDOWN:
-			if (wParam == VK_RETURN)
-				pressed_key_[KEY_ENTER] = true;
-			else if (wParam == VK_SPACE)
-				DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_RESUME), hWnd, HandleForResume);
-			else if (wParam == VK_BACK)
-				DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_RESTART), hWnd, HandleForRestart);
-			else if (wParam == VK_ESCAPE)
-				DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_EXIT), hWnd, HandleForExit);
+			if (wParam == VK_RETURN) {
+				if (pressed_key_[KEY_ENTER].GetIsValid())
+					pressed_key_[KEY_ENTER].SetIsPressed(true);
+			}
+			else if (wParam == VK_SPACE) {
+				if (pressed_key_[KEY_SPACE].GetIsValid())
+					DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_RESUME), hWnd, HandleForResume);
+			}
+			else if (wParam == VK_BACK) {
+				if (pressed_key_[KEY_BACKSPACE].GetIsValid())
+					DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_RESTART), hWnd, HandleForRestart);
+			}
+			else if (wParam == VK_ESCAPE) {
+				if (pressed_key_[KEY_ESC].GetIsValid())
+					DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_EXIT), hWnd, HandleForExit);
+			}
 			else {
-				if (wParam == 'A')
-					pressed_key_[KEY_A] = true;
-				else if (wParam == 'S')
-					pressed_key_[KEY_S] = true;
-				if (wParam == VK_UP)
-					pressed_key_[KEY_UP] = true;
-				else if (wParam == VK_DOWN)
-					pressed_key_[KEY_DOWN] = true;
-				else if (wParam == VK_LEFT)
-					pressed_key_[KEY_LEFT] = true;
-				else if (wParam == VK_RIGHT)
-					pressed_key_[KEY_RIGHT] = true;
+				if (wParam == 'A') {
+					if (pressed_key_[KEY_A].GetIsValid())
+						pressed_key_[KEY_A].SetIsPressed(true);
+				}
+				else if (wParam == 'S') {
+					if (pressed_key_[KEY_S].GetIsValid())
+						pressed_key_[KEY_S].SetIsPressed(true);
+				}
+				if (wParam == VK_UP) {
+					if (pressed_key_[KEY_UP].GetIsValid())
+						pressed_key_[KEY_UP].SetIsPressed(true);
+				}
+				else if (wParam == VK_DOWN) {
+					if (pressed_key_[KEY_DOWN].GetIsValid())
+						pressed_key_[KEY_DOWN].SetIsPressed(true);
+				}
+				else if (wParam == VK_LEFT) {
+					if (pressed_key_[KEY_LEFT].GetIsValid())
+						pressed_key_[KEY_LEFT].SetIsPressed(true);
+				}
+				else if (wParam == VK_RIGHT) {
+					if (pressed_key_[KEY_RIGHT].GetIsValid())
+						pressed_key_[KEY_RIGHT].SetIsPressed(true);
+				}
 			}
 			break;
 
@@ -97,7 +118,7 @@ INT_PTR CALLBACK Input::HandleForExit(HWND hDlg, UINT msg, WPARAM wParam, LPARAM
 
 		case WM_COMMAND:
 			if (LOWORD(wParam) == IDYES)
-				pressed_key_[KEY_ESC] = true;
+				pressed_key_[KEY_ESC].SetIsPressed(true);
 			EndDialog(hDlg, LOWORD(wParam));
 			return INT_PTR(true);
 			
@@ -114,7 +135,7 @@ INT_PTR Input::HandleForResume(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam
 
 		case WM_COMMAND:
 			if (LOWORD(wParam) == IDNO)
-				pressed_key_[KEY_ESC] = true;
+				pressed_key_[KEY_ESC].SetIsPressed(true);
 			EndDialog(hDlg, LOWORD(wParam));
 			return INT_PTR(true);
 
@@ -131,7 +152,7 @@ INT_PTR Input::HandleForRestart(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
 
 		case WM_COMMAND:
 			if (LOWORD(wParam) == IDYES)
-				pressed_key_[KEY_BACKSPACE] = true;
+				pressed_key_[KEY_BACKSPACE].SetIsPressed(true);
 			EndDialog(hDlg, LOWORD(wParam));
 			return INT_PTR(true);
 
