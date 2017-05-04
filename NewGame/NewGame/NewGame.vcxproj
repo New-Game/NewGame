@@ -199,7 +199,7 @@
     <ResourceCompile Include="NewGame.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon\icon.ico" />
+    <Image Include="picture\icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

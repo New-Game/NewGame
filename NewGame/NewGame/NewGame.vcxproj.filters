@@ -169,7 +169,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon\icon.ico">
+    <Image Include="picture\icon.ico">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

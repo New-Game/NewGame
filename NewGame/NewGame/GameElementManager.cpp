@@ -20,7 +20,7 @@ void GameElementManager::Load() {
 					// do nothing
 					break;
 				case WALL:
-					game_element_[temp_position] = new Wall(grid_size_, temp_position, "test2.png");
+					game_element_[temp_position] = new Wall(grid_size_, temp_position, "picture\\test2.png");
 					game_element_[temp_position]->Load();
 					break;
 				case TRAP:
