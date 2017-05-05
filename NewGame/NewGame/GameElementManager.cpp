@@ -20,8 +20,8 @@ void GameElementManager::Load() {
 					// do nothing
 					break;
 				case WALL:
-					game_element_[temp_position] = new Wall(grid_size_, temp_position, "picture\\wall.png");
-					game_element_[temp_position]->Load();
+					game_element_[WALL].push_back(new Wall(grid_size_, temp_position, "picture\\wall.png"));
+					game_element_[WALL].back()->Load();
 					break;
 				case TRAP:
 					break;
@@ -38,29 +38,34 @@ void GameElementManager::Load() {
 
 // 设置人物、怪物、物品的初始状态
 void GameElementManager::Initialize() {
-	for (auto& i : game_element_)
-		i.second->Initialize();
+	for (auto& list : game_element_)
+		for (auto& i : list)
+			i->Initialize();
 }
 
 void GameElementManager::Update() {
-	for (auto& i : game_element_)
-		i.second->Update();
+	for (auto& list : game_element_)
+		for (auto& i : list)
+			i->Update();
 }
 
 void GameElementManager::Draw() {
-	for (auto& i : game_element_)
-		i.second->Draw();
+	for (auto& list : game_element_)
+		for (auto& i : list)
+			i->Draw();
 }
 
 // 释放游戏中途生成的对象（不释放在Load()中生成的对象）
 void GameElementManager::Free() {
-	for (auto& i : game_element_)
-		i.second->Free();
+	for (auto& list : game_element_)
+		for (auto& i : list)
+			i->Free();
 }
 
 void GameElementManager::Unload() {
-	for (auto& i : game_element_) {
-		i.second->Unload();
-		delete i.second;
-	}
+	for (auto& list : game_element_)
+		for (auto& i : list) {
+			i->Unload();
+			delete i;
+		}
 }
