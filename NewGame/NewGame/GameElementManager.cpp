@@ -14,13 +14,14 @@ void GameElementManager::Load() {
 		for (auto j = 0; j < num_of_map_width_grid_; ++j) {
 			int map_grid_info;
 			config_file_ >> map_grid_info;
-			Position temp_position(j * grid_size_ + grid_size_ / 2, i * grid_size_ + grid_size_ / 2);
+			auto temp_x = j * grid_size_ + grid_size_ / 2;
+			auto temp_y = i * grid_size_ + grid_size_ / 2;
 			switch(map_grid_info) {
 				case ROAD:
 					// do nothing
 					break;
 				case WALL:
-					game_element_[WALL].push_back(new Wall(grid_size_, temp_position, "picture\\wall.png"));
+					game_element_[WALL].push_back(new Wall(grid_size_, temp_x, temp_y, "picture\\wall.png"));
 					game_element_[WALL].back()->Load();
 					break;
 				case TRAP:
