@@ -34,10 +34,10 @@ enum GameStates {
 class GameStateManager {
 public:
 	// 初始化游戏状态管理器
-	static void Initialize();
+	static void Start();
 
 	// 退出游戏状态管理器
-	static void Exit();
+	static void End();
 
 	// 返回指向当前游戏状态的指针
 	static GameState* GetGameState() {

@@ -15,6 +15,13 @@
 
 using namespace std;
 
+enum Direction {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
+
 // 游戏元素类，继承了State类，同样还是抽象类，不能用于生成对象
 // 用于派生具体游戏元素类，成员函数使用虚函数来实现多态
 class GameElement : public State {
@@ -23,6 +30,11 @@ public:
                 rect_(size, x, y),
 	            picture_file_name_(picture_file_name), 
 	            mesh_(nullptr), 
+	            texture_(nullptr) {}
+	GameElement(Rect rect, string picture_file_name) : 
+	            rect_(rect), 
+	            picture_file_name_(picture_file_name),
+	            mesh_(nullptr),
 	            texture_(nullptr) {}
 	GameElement() : GameElement(0.0, 0.0, 0.0, nullptr) {}
 	virtual ~GameElement() {}

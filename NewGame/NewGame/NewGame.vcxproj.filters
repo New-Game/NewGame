@@ -114,6 +114,12 @@
     <ClInclude Include="Rect.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Aimiliya.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
@@ -148,6 +154,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GameElementManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Aimiliya.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

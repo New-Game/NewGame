@@ -8,12 +8,15 @@
 
 #include "GameElementManager.h"
 #include "Wall.h"
+#include "Aimiliya.h"
 
+// 只生成墙体、陷阱，把其它对象信息加入数组保存
 void GameElementManager::Load() {
 	for (auto i = 0; i < num_of_map_height_grid_; ++i) {
 		for (auto j = 0; j < num_of_map_width_grid_; ++j) {
 			int map_grid_info;
 			config_file_ >> map_grid_info;
+			collision_data_[i][j] = map_grid_info;
 			auto temp_x = j * grid_size_ + grid_size_ / 2;
 			auto temp_y = i * grid_size_ + grid_size_ / 2;
 			switch(map_grid_info) {
@@ -21,13 +24,16 @@ void GameElementManager::Load() {
 					// do nothing
 					break;
 				case WALL:
-					game_element_[WALL].push_back(new Wall(grid_size_, temp_x, temp_y, "picture\\wall.png"));
-					game_element_[WALL].back()->Load();
+					game_element_list_[WALL].push_back(new Wall(grid_size_, temp_x, temp_y, "picture\\wall.png"));
+					game_element_list_[WALL].back()->Load();
 					break;
 				case TRAP:
 					break;
-				case CHARACTER:
+				case CHARACTER: {
+					Rect temp_rect(grid_size_, temp_x, temp_y);
+					position_list_[CHARACTER].push_back(temp_rect);
 					break;
+				}
 				case MONSTER:
 					break;
 				default:
@@ -39,32 +45,37 @@ void GameElementManager::Load() {
 
 // 设置人物、怪物、物品的初始状态
 void GameElementManager::Initialize() {
-	for (auto& list : game_element_)
+	for (auto& i : position_list_[CHARACTER]) {
+		game_element_list_[CHARACTER].push_back(new Aimiliya(i, "picture\\wall.png"));
+		game_element_list_[CHARACTER].back()->Load();
+	}
+
+	for (auto& list : game_element_list_)
 		for (auto& i : list)
 			i->Initialize();
 }
 
 void GameElementManager::Update() {
-	for (auto& list : game_element_)
+	for (auto& list : game_element_list_)
 		for (auto& i : list)
 			i->Update();
 }
 
 void GameElementManager::Draw() {
-	for (auto& list : game_element_)
+	for (auto& list : game_element_list_)
 		for (auto& i : list)
 			i->Draw();
 }
 
 // 释放游戏中途生成的对象（不释放在Load()中生成的对象）
 void GameElementManager::Free() {
-	for (auto& list : game_element_)
+	for (auto& list : game_element_list_)
 		for (auto& i : list)
 			i->Free();
 }
 
 void GameElementManager::Unload() {
-	for (auto& list : game_element_)
+	for (auto& list : game_element_list_)
 		for (auto& i : list) {
 			i->Unload();
 			delete i;

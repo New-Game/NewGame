@@ -18,7 +18,7 @@
 using namespace std;
 
 // 系统初始化函数
-void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
+void System::Start(HINSTANCE hInstance, int nCmdShow) {
 	// 将实例句柄存储在全局变量中
 	h_instance_ = hInstance;
 
@@ -92,7 +92,7 @@ void System::Initialize(HINSTANCE hInstance, int nCmdShow) {
 }
 
 // 系统退出函数
-void System::Exit() {
+void System::End() {
 	if (sys_init_info_.mCreateConsole)
 		cout << "System: Exit." << endl;
 

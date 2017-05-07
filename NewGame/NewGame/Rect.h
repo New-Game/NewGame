@@ -11,7 +11,7 @@
 class Rect {
 public:
 	Rect(float size, float x, float y) : size_(size), x_(x), y_(y) {
-		Update(size_, x_, y_);
+		Update(x_, y_);
 	}
 	Rect() : Rect(0.0, 0.0, 0.0) {}
 	Rect(const Rect& rect) : Rect(rect.size_, rect.x_, rect.y_) {}
@@ -19,6 +19,52 @@ public:
 
 	bool IsCollision(Rect rect) const {
 		return right_ > rect.left_ || left_ < rect.right_ || top_ > rect.bottom_ || bottom_ < rect.top_;
+	}
+
+	void MoveLeft(float distance) {
+		x_ -= distance;
+		Update(x_, y_);
+	}
+	
+	void MoveRight(float distance) {
+		x_ += distance;
+		Update(x_, y_);
+	}
+
+	void MoveUp(float distance) {
+		y_ -= distance;
+		Update(x_, y_);
+	}
+
+	void MoveDown(float distance) {
+		y_ += distance;
+		Update(x_, y_);
+	}
+
+	int GetRawI() const {
+		int temp = x_ / size_ - .5f;
+		if (x_ / size_ - .5f - float(temp) > .5f)
+			return temp + 1;
+		return temp;
+	}
+
+	int GetRawJ() const {
+		int temp =  y_ / size_ - .5f;
+		if (y_ / size_ - .5f - float(temp) > .5f)
+			return temp + 1;
+		return temp;
+	}
+
+	float GetSize() const {
+		return size_;
+	}
+
+	float GetX() const {
+		return x_;
+	}
+
+	float GetY() const {
+		return y_;
 	}
 
 	float GetLeft() const {
@@ -46,10 +92,10 @@ private:
 	float top_;
 	float bottom_;
 
-	void Update(float size, float x, float y) {
-		left_ = x - size / 2;
-		right_ = x + size / 2;
-		top_ = y - size / 2;
-		bottom_ = y + size / 2;
+	void Update(float x, float y) {
+		left_ = x - size_ / 2;
+		right_ = x + size_ / 2;
+		top_ = y - size_ / 2;
+		bottom_ = y + size_ / 2;
 	}
 };

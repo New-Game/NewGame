@@ -17,8 +17,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
-	System::Initialize(hInstance, nCmdShow);
-	GameStateManager::Initialize();
+	System::Start(hInstance, nCmdShow);
+	GameStateManager::Start();
 
 	// Game Flow
 	while (true) {
@@ -45,8 +45,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			break;
 	}
 
-	GameStateManager::Exit();
-	System::Exit();
+	GameStateManager::End();
+	System::End();
 
 	return 0;
 }

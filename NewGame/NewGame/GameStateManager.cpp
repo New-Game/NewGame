@@ -12,7 +12,7 @@
 #include "Level.h"
 #include "System.h"
 
-void GameStateManager::Initialize() {
+void GameStateManager::Start() {
 	game_state_[GAME_PREFACE] = new Interval("picture\\game_preface.png");
 	game_state_[BACKGROUND_STORY] = new Interval("picture\\background_story.png");
 	game_state_[CHARACTER_PICK] = new CharacterPick("picture\\character_pick.png");
@@ -33,7 +33,7 @@ void GameStateManager::Initialize() {
 		cout << "GameStateManager: Initialize." << endl;
 }
 
-void GameStateManager::Exit() {
+void GameStateManager::End() {
 	//for (auto i = 0; i < NUM_OF_GAME_STATES; ++i)
 		//delete game_state_[i];
 	for (auto& i : game_state_)
