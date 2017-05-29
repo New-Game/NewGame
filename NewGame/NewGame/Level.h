@@ -21,7 +21,6 @@ class Level : public GameState {
 public:
 	Level(string config_file_name) : num_of_map_width_grid_(30),
 	                                 num_of_map_height_grid_(20),
-	                                 grid_size_(30.0f),
 	                                 character_status_bar_width_(100),
 	                                 map_config_file_(config_file_name) {
 		static_collision_data_ = new int*[num_of_map_height_grid_];
@@ -35,19 +34,20 @@ public:
 	void Process() override;
 	void Unload() override;
 
+	// 用来存所有指向游戏元素对象的指针
+	static list<GameElement*> game_element_list_[NUM_OF_GAME_ELEMENT_TYPE];
+
 	// 静态碰撞检测矩阵
 	static int **static_collision_data_;
+	
+	static const float grid_size_;
 
 private:
 	const int num_of_map_width_grid_;
 	const int num_of_map_height_grid_;
-	const float grid_size_;
 	const int character_status_bar_width_;
 
 	ifstream map_config_file_;
 
-	// 用来存所有指向游戏元素对象的指针
-	list<GameElement*> game_element_list_[NUM_OF_GAME_ELEMENT_TYPE];
-
-	bool IsReachEnd();
+	bool IsReachEnd() const;
 };

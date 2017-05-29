@@ -14,13 +14,25 @@
 // 用于派生具体人物类，成员函数使用虚函数来实现多态
 class Character : public GameElement {
 public:
-	Character() : front_(DOWN), lives_(3), damage_(100), speed_(1), skill_cold_down_(0.0) {}
+	Character() : front_(DOWN), lives_(3), damage_(100), speed_(1), skill_cold_down_(0) {}
 	Character(Rect rect, string picture_file_name) : GameElement(rect, picture_file_name),
-	          front_(DOWN), lives_(3), damage_(100), speed_(1), skill_cold_down_(0.0) {}
+	          front_(DOWN), lives_(3), damage_(100), speed_(1), skill_cold_down_(0) {}
 	virtual ~Character() {}
 
 	void SetLives(int lives) {
 		lives_ = lives;
+	}
+
+	void SetDamage(int operation) {
+		operation == 0 ? damage_ >>= 1 : damage_ <<= 1;
+	}
+
+	void SetSpeed(int operation) {
+		operation == 0 ? speed_ >>= 1 : speed_ <<= 1;
+	}
+
+	void SetSkillColdDown(int operation) {
+		operation == 0 ? skill_cold_down_ >>= 1 : skill_cold_down_ <<= 1;
 	}
 
 protected:
@@ -28,10 +40,10 @@ protected:
 	int lives_; // 生命数
 	int damage_;
 	int speed_;
-	float skill_cold_down_;
+	int skill_cold_down_;
 
 	void Move();
-	void Attack();
+	void Attack() const;
 	void UseSkill();
 	void GetBuff();
 };

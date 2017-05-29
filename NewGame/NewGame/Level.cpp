@@ -94,11 +94,14 @@ void Level::Unload() {
 			delete i;
 		}
 
+	for (auto& list : game_element_list_)
+		list.empty();
+
 	// 重置有效按键
 	Input::ResetPressedKey();
 }
 
-bool Level::IsReachEnd() {
+bool Level::IsReachEnd() const {
 	//x = 855
 	//y = 45
 	auto pointer_to_character = game_element_list_[CHARACTER].back();

@@ -117,6 +117,9 @@
     <ClInclude Include="Position.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
@@ -154,6 +157,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Aimiliya.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
