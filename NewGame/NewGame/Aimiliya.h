@@ -15,10 +15,9 @@ public:
 	Aimiliya() {}
 	Aimiliya(Rect rect, string picture_file_name) : Character(rect, picture_file_name) {}
 	void Load() override;
-	void Initialize() override;
+	void Reset() override;
 	void Update() override;
 	void Draw() override;
-	void Free() override;
 	void Unload() override;
 private:
 };

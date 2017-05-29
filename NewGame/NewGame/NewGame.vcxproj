@@ -158,7 +158,6 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterPick.h" />
     <ClInclude Include="GameElement.h" />
-    <ClInclude Include="GameElementManager.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="Global.h" />
@@ -186,7 +185,6 @@
     <ClCompile Include="Aimiliya.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterPick.cpp" />
-    <ClCompile Include="GameElementManager.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Interval.cpp" />

@@ -22,8 +22,8 @@ void Aimiliya::Load() {
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
 }
 
-void Aimiliya::Initialize() {
-	
+void Aimiliya::Reset() {
+	rect_ = original_rect_;
 }
 
 void Aimiliya::Update() {
@@ -36,10 +36,6 @@ void Aimiliya::Draw() {
 	AEGfxSetTextureMode(AE_GFX_TM_AVERAGE);
 	AEGfxTextureSet(texture_, 0.0f, 0.0f);
 	AEGfxMeshDraw(mesh_, AE_GFX_MDM_TRIANGLES);
-}
-
-void Aimiliya::Free() {
-	
 }
 
 void Aimiliya::Unload() {

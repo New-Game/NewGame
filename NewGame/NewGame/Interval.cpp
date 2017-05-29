@@ -28,10 +28,12 @@ void Interval::Load() {
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
 }
 
-void Interval::Initialize() {
+//void Interval::Initialize() {
 	//AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);  // 设置混色模式
-}
+//}
+
+void Interval::Reset() {}
 
 void Interval::Process() {
 	while (!GetIsReadyForExit() && !GetIsReadyForNextGameState()) {
@@ -56,8 +58,6 @@ void Interval::Process() {
 		AESysFrameEnd();
 	}
 }
-
-void Interval::Free() {}
 
 void Interval::Unload() {
 	AEGfxMeshFree(mesh_);

@@ -14,7 +14,7 @@
 #include "System.h"
 #include "Input.h"
 #include "GameStateManager.h"
-#include "GameElementManager.h"
+#include "Level.h"
 
 // 必须为静态成员变量提供类外部的声明，否则链接时会出问题（不可被修改）
 //
@@ -32,4 +32,4 @@ KeyStatus Input::pressed_key_[NUM_OF_KEY];
 GameState* GameStateManager::game_state_[NUM_OF_GAME_STATES];
 GameState** GameStateManager::game_state_pointer_;
 
-int** GameElementManager::collision_data_;
+int** Level::static_collision_data_;

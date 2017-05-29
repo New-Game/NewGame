@@ -14,15 +14,14 @@
 class Wall : public GameElement {
 public:
 	Wall() {}
-	Wall(float size, float x, float y, string picture_file_name) : 
-	     GameElement(size, x, y, picture_file_name) {}
+	Wall(Rect rect, string picture_file_name) : 
+	     GameElement(rect, picture_file_name) {}
 	~Wall() {}
 
 	void Load() override;
-	void Initialize() override;
+	void Reset() override;
 	void Update() override;
 	void Draw() override;
-	void Free() override;
 	void Unload() override;
 private:
 

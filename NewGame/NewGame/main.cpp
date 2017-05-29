@@ -24,12 +24,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while (true) {
 		if (!GameStateManager::GetGameState()->GetIsReadyForRestart())
 			GameStateManager::GetGameState()->Load();
-		else
+		else {
+			GameStateManager::GetGameState()->Reset();
 			GameStateManager::GetGameState()->ResetIsReadyForRestart();
+		}
 
-		GameStateManager::GetGameState()->Initialize();
 		GameStateManager::GetGameState()->Process();
-		GameStateManager::GetGameState()->Free();
 
 		if (!GameStateManager::GetGameState()->GetIsReadyForRestart())
 			GameStateManager::GetGameState()->Unload();

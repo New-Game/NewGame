@@ -108,9 +108,6 @@
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="GameElementManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Rect.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -151,9 +148,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GameElementManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">

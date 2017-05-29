@@ -24,9 +24,8 @@ public:
 	                                     texture_(nullptr) {}
 	~Interval() {}
 	void Load() override;
-	void Initialize() override;
+	void Reset() override;
 	void Process() override;
-	void Free() override;
 	void Unload() override;
 
 private:

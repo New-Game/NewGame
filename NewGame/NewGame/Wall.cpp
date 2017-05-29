@@ -22,7 +22,7 @@ void Wall::Load() {
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
 }
 
-void Wall::Initialize() {}
+void Wall::Reset() {}
 
 void Wall::Update() {}
 
@@ -33,8 +33,6 @@ void Wall::Draw() {
 	AEGfxTextureSet(texture_, 0.0f, 0.0f);
 	AEGfxMeshDraw(mesh_, AE_GFX_MDM_TRIANGLES);
 }
-
-void Wall::Free() {}
 
 void Wall::Unload() {
 	AEGfxTextureUnload(texture_);

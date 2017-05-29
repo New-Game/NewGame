@@ -13,8 +13,7 @@
 class State {
 public:
 	virtual void Load() = 0;
-	virtual void Initialize() = 0;
-	virtual void Free() = 0;
+	virtual void Reset() = 0;
 	virtual void Unload() = 0;
 protected:
 	virtual ~State() {}

@@ -28,7 +28,7 @@ void CharacterPick::Load() {
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
 }
 
-void CharacterPick::Initialize() {}
+void CharacterPick::Reset() {}
 
 void CharacterPick::Process() {
 	while (!GetIsReadyForExit() && !GetIsReadyForNextGameState()) {
@@ -53,8 +53,6 @@ void CharacterPick::Process() {
 		AESysFrameEnd();
 	}
 }
-
-void CharacterPick::Free() {}
 
 void CharacterPick::Unload() {
 	AEGfxMeshFree(mesh_);
