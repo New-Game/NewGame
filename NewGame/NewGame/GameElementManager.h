@@ -54,6 +54,8 @@ public:
 	void Free() override;
 	void Unload() override;
 
+	bool Check() const;
+
 	const int num_of_map_width_grid_;
 	const int num_of_map_height_grid_;
 	const float grid_size_;

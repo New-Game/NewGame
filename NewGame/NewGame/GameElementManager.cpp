@@ -24,7 +24,7 @@ void GameElementManager::Load() {
 					// do nothing
 					break;
 				case WALL:
-					game_element_list_[WALL].push_back(new Wall(grid_size_, temp_x, temp_y, "picture\\wall.png"));
+					game_element_list_[WALL].push_back(new Wall(grid_size_, temp_x, temp_y, "picture\\ice.png"));
 					game_element_list_[WALL].back()->Load();
 					break;
 				case TRAP:
@@ -46,7 +46,7 @@ void GameElementManager::Load() {
 // 设置人物、怪物、物品的初始状态
 void GameElementManager::Initialize() {
 	for (auto& i : position_list_[CHARACTER]) {
-		game_element_list_[CHARACTER].push_back(new Aimiliya(i, "picture\\wall.png"));
+		game_element_list_[CHARACTER].push_back(new Aimiliya(i, "picture\\aimiliya.png"));
 		game_element_list_[CHARACTER].back()->Load();
 	}
 
@@ -80,4 +80,14 @@ void GameElementManager::Unload() {
 			i->Unload();
 			delete i;
 		}
+}
+
+bool GameElementManager::Check() const {
+	//x = 855
+	//y = 45
+	for (auto& i : game_element_list_[CHARACTER]) {
+		if (abs(i->GetRect().GetX() - 255.0f) < 5.0f && abs(i->GetRect().GetY() - 45.0f) < 5.0f)
+			return true;
+	}
+	return false;
 }

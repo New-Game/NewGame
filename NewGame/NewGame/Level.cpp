@@ -29,7 +29,7 @@ void Level::Initialize() {
 }
 
 void Level::Process() {
-	while (!GetIsReadyForExit() && !GetIsReadyForRestart()) {
+	while (!GetIsReadyForExit() && !GetIsReadyForRestart() && !GetIsReadyForNextGameState()) {
 		AESysFrameStart();
 		if (Input::GetPressedKey(KEY_ESC).GetIsPressed()) {
 			SetIsReadyForExit();
@@ -41,6 +41,8 @@ void Level::Process() {
 		}
 		handle.Update();
 		handle.Draw();
+		if (handle.Check())
+			SetIsReadyForNextGameState();
 		AESysFrameEnd();
 	}
 }

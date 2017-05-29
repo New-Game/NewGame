@@ -15,30 +15,45 @@ void Character::Move() {
 	if (Input::GetPressedKey(KEY_UP).GetIsPressed()) {
 		rect_.MoveUp(speed_ * 2.0f);
 		Input::GetPressedKey(KEY_UP).SetIsPressed(false);
-		if (GameElementManager::collision_data_[rect_.GetRawI()-1][(rect_.GetRawJ())] == 1)
-			rect_.MoveDown(speed_ * 2.0f);
+		int temp = rect_.GetY(); if (rect_.GetY() - temp > 0.5) temp++;
+		if (temp % 30<=15) {
+			if (GameElementManager::collision_data_[rect_.GetRawI() - 1][(rect_.GetRawJ())] == 1)
+				rect_.MoveDown(speed_ * 2.0f);
+		}
 	}
 	else if (Input::GetPressedKey(KEY_DOWN).GetIsPressed()) {
 		rect_.MoveDown(speed_ * 2.0f);
 		Input::GetPressedKey(KEY_DOWN).SetIsPressed(false);
+		int temp = rect_.GetY(); if (rect_.GetY() - temp > 0.5) temp++;
+		if(temp%30>=15)
 		if (GameElementManager::collision_data_[rect_.GetRawI()+1][rect_.GetRawJ()] == 1)
 			rect_.MoveUp(speed_ * 2.0f);
 	}
 	else if (Input::GetPressedKey(KEY_LEFT).GetIsPressed()) {
 		rect_.MoveLeft(speed_ * 2.0f);
+		
 		Input::GetPressedKey(KEY_LEFT).SetIsPressed(false);
-		if (GameElementManager::collision_data_[rect_.GetRawI()][rect_.GetRawJ()-1] == 1)
-			rect_.MoveRight(speed_ * 2.0f);
+		int temp = rect_.GetX(); if (rect_.GetX() - temp > 0.5) temp++;
+		if (temp % 30 <= 15) {
+			if (GameElementManager::collision_data_[rect_.GetRawI()][rect_.GetRawJ()-1] == 1)
+				rect_.MoveRight(speed_ * 2.0f);
+		}
 	}
 	else if (Input::GetPressedKey(KEY_RIGHT).GetIsPressed()) {
 		rect_.MoveRight(speed_ * 2.0f);
 		Input::GetPressedKey(KEY_RIGHT).SetIsPressed(false);
+		int temp = rect_.GetX(); if (rect_.GetX() - temp > 0.5) temp++;
+		if(temp%30>=15)
 		if (GameElementManager::collision_data_[rect_.GetRawI()][rect_.GetRawJ()+1] == 1)
 			rect_.MoveLeft(speed_ * 2.0f);
 	}
 }
 
-void Character::Attack() {}
+void Character::Attack() {
+	if (Input::GetPressedKey(KEY_A).GetIsPressed()) {
+		
+	}
+}
 
 void Character::UseSkill() {}
 

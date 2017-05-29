@@ -39,6 +39,10 @@ public:
 	GameElement() : GameElement(0.0, 0.0, 0.0, nullptr) {}
 	virtual ~GameElement() {}
 
+	Rect GetRect() const {
+		return rect_;
+	}
+
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 

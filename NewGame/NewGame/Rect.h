@@ -42,16 +42,17 @@ public:
 	}
 
 	int GetRawI() const {
-		int temp = x_ / size_ - .5f;
-		if (x_ / size_ - .5f - float(temp) > .5f)
-			return temp + 1;
+		int temp = y_ / size_ -0.5;
+		if (y_ / size_ - float(temp) > 1)
+			return temp+1;
 		return temp;
 	}
 
 	int GetRawJ() const {
-		int temp =  y_ / size_ - .5f;
-		if (y_ / size_ - .5f - float(temp) > .5f)
-			return temp + 1;
+		int temp =  x_ / size_-0.5;
+		
+		if (x_ / size_ - temp > 1)
+			return temp+1;
 		return temp;
 	}
 
