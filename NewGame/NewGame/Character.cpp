@@ -14,41 +14,55 @@
 void Character::Move() {
 	if (Input::GetPressedKey(KEY_UP).GetIsPressed()) {
 		rect_.MoveUp(speed_ * 2.0f);
-		front_  = UP;
+		front_ = UP;
 		Input::GetPressedKey(KEY_UP).SetIsPressed(false);
-		int temp = rect_.GetY(); if (rect_.GetY() - temp > 0.5) temp++;
-		if (temp % 30<=15) {
-			if (Level::static_collision_data_[rect_.GetRawI() - 1][(rect_.GetRawJ())] == 1)
+		// ÏòÉÏÒÆ¶¯µÄ¾²Ì¬Åö×²¼ì²â
+		auto temp_j = int(rect_.GetX()) / int(rect_.GetSize());
+		auto temp_i = int(rect_.GetY()) / int(rect_.GetSize());
+		if (int(rect_.GetX()) % int(rect_.GetSize()) > int(rect_.GetSize() / 2))
+			++temp_j;
+		if (int(floor(rect_.GetY())) % int(rect_.GetSize()) < int(rect_.GetSize() / 2))
+			if (Level::static_collision_data_[temp_i - 1][temp_j] == 1)
 				rect_.MoveDown(speed_ * 2.0f);
-		}
 	}
 	else if (Input::GetPressedKey(KEY_DOWN).GetIsPressed()) {
 		rect_.MoveDown(speed_ * 2.0f);
 		front_ = DOWN;
 		Input::GetPressedKey(KEY_DOWN).SetIsPressed(false);
-		int temp = rect_.GetY(); if (rect_.GetY() - temp > 0.5) temp++;
-		if(temp%30>=15)
-		if (Level::static_collision_data_[rect_.GetRawI() + 1][rect_.GetRawJ()] == 1)
-			rect_.MoveUp(speed_ * 2.0f);
+		// ÏòÏÂÒÆ¶¯µÄ¾²Ì¬Åö×²¼ì²â
+		auto temp_j = int(rect_.GetX()) / int(rect_.GetSize());
+		auto temp_i = int(rect_.GetY()) / int(rect_.GetSize());
+		if (int(rect_.GetX()) % int(rect_.GetSize()) > int(rect_.GetSize() / 2))
+			++temp_j;
+		if (int(ceil(rect_.GetY())) % int(rect_.GetSize()) > int(rect_.GetSize() / 2))
+			if (Level::static_collision_data_[temp_i + 1][temp_j] == 1)
+				rect_.MoveUp(speed_ * 2.0f);
 	}
 	else if (Input::GetPressedKey(KEY_LEFT).GetIsPressed()) {
 		rect_.MoveLeft(speed_ * 2.0f);
 		front_ = LEFT;
 		Input::GetPressedKey(KEY_LEFT).SetIsPressed(false);
-		int temp = rect_.GetX(); if (rect_.GetX() - temp > 0.5) temp++;
-		if (temp % 30 <= 15) {
-			if (Level::static_collision_data_[rect_.GetRawI()][rect_.GetRawJ() - 1] == 1)
+		// Ïò×óÒÆ¶¯µÄ¾²Ì¬Åö×²¼ì²â
+		auto temp_j = int(rect_.GetX()) / int(rect_.GetSize());
+		auto temp_i = int(rect_.GetY()) / int(rect_.GetSize());
+		if (int(rect_.GetY()) % int(rect_.GetSize()) > int(rect_.GetSize() / 2))
+			++temp_i;
+		if (int(floor(rect_.GetX())) % int(rect_.GetSize()) < int(rect_.GetSize() / 2))
+			if (Level::static_collision_data_[temp_i][temp_j - 1] == 1)
 				rect_.MoveRight(speed_ * 2.0f);
-		}
 	}
 	else if (Input::GetPressedKey(KEY_RIGHT).GetIsPressed()) {
 		rect_.MoveRight(speed_ * 2.0f);
 		front_ = RIGHT;
 		Input::GetPressedKey(KEY_RIGHT).SetIsPressed(false);
-		int temp = rect_.GetX(); if (rect_.GetX() - temp > 0.5) temp++;
-		if(temp%30>=15)
-		if (Level::static_collision_data_[rect_.GetRawI()][rect_.GetRawJ() + 1] == 1)
-			rect_.MoveLeft(speed_ * 2.0f);
+		// ÏòÓÒÒÆ¶¯µÄ¾²Ì¬Åö×²¼ì²â
+		auto temp_j = int(rect_.GetX()) / int(rect_.GetSize());
+		auto temp_i = int(rect_.GetY()) / int(rect_.GetSize());
+		if (int(rect_.GetY()) % int(rect_.GetSize()) > int(rect_.GetSize() / 2))
+			++temp_i;
+		if (int(ceil(rect_.GetX())) % int(rect_.GetSize()) > int(rect_.GetSize() / 2))
+			if (Level::static_collision_data_[temp_i][temp_j + 1] == 1)
+				rect_.MoveLeft(speed_ * 2.0f);
 	}
 }
 

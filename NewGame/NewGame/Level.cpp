@@ -80,8 +80,8 @@ void Level::Process() {
 		for (auto& list : game_element_list_)
 			for (auto& i : list)
 				i->Draw();
-		if (IsReachEnd())
-			SetIsReadyForNextGameState();
+		//if (IsReachEnd())
+		//	SetIsReadyForNextGameState();
 		AESysFrameEnd();
 	}
 }

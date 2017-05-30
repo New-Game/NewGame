@@ -41,21 +41,6 @@ public:
 		Update(x_, y_);
 	}
 
-	int GetRawI() const {
-		int temp = y_ / size_ -0.5;
-		if (y_ / size_ - float(temp) > 1)
-			return temp+1;
-		return temp;
-	}
-
-	int GetRawJ() const {
-		int temp =  x_ / size_-0.5;
-		
-		if (x_ / size_ - temp > 1)
-			return temp+1;
-		return temp;
-	}
-
 	float GetSize() const {
 		return size_;
 	}
