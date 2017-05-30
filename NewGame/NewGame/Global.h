@@ -33,5 +33,5 @@ GameState* GameStateManager::game_state_[NUM_OF_GAME_STATES];
 GameState** GameStateManager::game_state_pointer_;
 
 list<GameElement*> Level::game_element_list_[NUM_OF_GAME_ELEMENT_TYPE];
-unordered_map<Position, Wall> Level::wall_list_;
+unordered_map<Rect, Wall> Level::wall_list_;
 const int Level::grid_size_;

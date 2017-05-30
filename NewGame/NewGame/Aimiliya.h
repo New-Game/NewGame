@@ -13,8 +13,7 @@
 class Aimiliya : public Character {
 public:
 	Aimiliya() {}
-	Aimiliya(int size, Position position, string picture_file_name) : 
-	         Character(size, position, picture_file_name) {}
+	Aimiliya(Rect rect, string picture_file_name) : Character(rect, picture_file_name) {}
 	void Load() override;
 	void Reset() override;
 	void Update() override;

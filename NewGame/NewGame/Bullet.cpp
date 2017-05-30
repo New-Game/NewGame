@@ -11,13 +11,13 @@
 void Bullet::Load() {
 	AEGfxMeshStart();
 	AEGfxTriAdd(
-		float(size_), 0.0f, 0xFFFF0000, 1.0f, 0.0f,
+		float(rect_.GetSize()), 0.0f, 0xFFFF0000, 1.0f, 0.0f,
 		0.0f, 0.0f, 0xFFFF0000, 0.0f, 0.0f,
-		0.0f, float(size_), 0xFFFF0000, 0.0f, 1.0f);
+		0.0f, float(rect_.GetSize()), 0xFFFF0000, 0.0f, 1.0f);
 	AEGfxTriAdd(
-		float(size_), 0.0f, 0xFFFF0000, 1.0f, 0.0f,
-		float(size_), float(size_), 0xFFFF0000, 1.0f, 1.0f,
-		0.0f, float(size_), 0xFFFF0000, 0.0f, 1.0f);
+		float(rect_.GetSize()), 0.0f, 0xFFFF0000, 1.0f, 0.0f,
+		float(rect_.GetSize()), float(rect_.GetSize()), 0xFFFF0000, 1.0f, 1.0f,
+		0.0f, float(rect_.GetSize()), 0xFFFF0000, 0.0f, 1.0f);
 	mesh_ = AEGfxMeshEnd();
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
 }
@@ -27,16 +27,16 @@ void Bullet::Reset() {}
 void Bullet::Update() {
 	switch (front_) {
 		case UP:
-			position_.MoveUp(speed_ * 3);
+			rect_.MoveUp(speed_);
 			break;
 		case DOWN:
-			position_.MoveDown(speed_ * 3);
+			rect_.MoveDown(speed_);
 			break;
 		case LEFT:
-			position_.MoveLeft(speed_ * 3);
+			rect_.MoveLeft(speed_);
 			break;
 		case RIGHT:
-			position_.MoveRight(speed_ * 3);
+			rect_.MoveRight(speed_);
 			break;
 		default:
 			break;
@@ -45,7 +45,7 @@ void Bullet::Update() {
 
 void Bullet::Draw() {
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	AEGfxSetPosition(float(position_.GetX()), float(position_.GetY()));
+	AEGfxSetPosition(float(rect_.GetX()), float(rect_.GetY()));
 	AEGfxSetTextureMode(AE_GFX_TM_AVERAGE);
 	AEGfxTextureSet(texture_, 0.0f, 0.0f);
 	AEGfxMeshDraw(mesh_, AE_GFX_MDM_TRIANGLES);

@@ -17,10 +17,10 @@
 
 namespace std {
 	template<>
-	struct hash<Position> : public _Bitwise_hash<Position> {}; // hash functor for Position
+	struct hash<Rect> : public _Bitwise_hash<Rect> {}; // hash functor for Position
 
-	inline bool operator == (const Position& position1, const Position& position2) _NOEXCEPT {
-		return position1.GetX() == position2.GetX() && position1.GetY() == position2.GetY();
+	inline bool operator == (const Rect& rect1, const Rect& rect2) _NOEXCEPT {
+		return rect1.GetX() == rect2.GetX() && rect1.GetY() == rect2.GetY();
 	}
 }
 
@@ -46,7 +46,7 @@ public:
 	static list<GameElement*> game_element_list_[NUM_OF_GAME_ELEMENT_TYPE];
 
 	// 用来存所有指向墙体对象的指针
-	static unordered_map<Position, Wall> wall_list_;
+	static unordered_map<Rect, Wall> wall_list_;
 	
 	static const int grid_size_ = 30;
 

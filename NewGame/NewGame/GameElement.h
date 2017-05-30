@@ -11,7 +11,7 @@
 #include <string>
 #include "State.h"
 #include "AEEngine.h"
-#include "Position.h"
+#include "Rect.h"
 
 using namespace std;
 
@@ -39,37 +39,30 @@ enum GameElements {
 class GameElement : public State {
 public:
 	GameElement(int size, int x, int y, string picture_file_name) :
-		        size_(size),
-	            position_(x, y),
-                original_position_(position_),
+			    rect_(size, x, y),
+                original_rect_(rect_),
 	            picture_file_name_(picture_file_name), 
 	            mesh_(nullptr), 
 	            texture_(nullptr) {}
-	GameElement(int size, Position position, string picture_file_name) :
-		        size_(size),
-	            position_(position),
-	            original_position_(position_),
+	GameElement(Rect rect, string picture_file_name) :
+	            rect_(rect),
+	            original_rect_(rect_),
 	            picture_file_name_(picture_file_name),
 	            mesh_(nullptr),
 	            texture_(nullptr) {}
 	GameElement() : GameElement(0, 0, 0, nullptr) {}
 	virtual ~GameElement() {}
 
-	int GetSize() const {
-		return size_;
-	}
-
-	Position GetPosition() const {
-		return position_;
+	Rect GetRect() const {
+		return rect_;
 	}
 
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
 protected:
-	int size_;
-	Position position_;
-	const Position original_position_;
+	Rect rect_;
+	const Rect original_rect_;
 	string picture_file_name_;
 	AEGfxVertexList* mesh_;
 	AEGfxTexture* texture_;

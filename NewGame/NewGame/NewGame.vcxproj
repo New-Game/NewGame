@@ -167,7 +167,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Monster.h" />
-    <ClInclude Include="Position.h" />
+    <ClInclude Include="Rect.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="System.h" />

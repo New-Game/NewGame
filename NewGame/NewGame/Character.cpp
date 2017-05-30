@@ -13,75 +13,79 @@
 
 void Character::Move() {
 	if (Input::GetPressedKey(KEY_UP).GetIsPressed()) {
-		position_.MoveUp(speed_ * 2);
+		rect_.MoveUp(speed_);
 		front_ = UP;
 		Input::GetPressedKey(KEY_UP).SetIsPressed(false);
 		// ÏòÉÏÒÆ¶¯µÄ¾²Ì¬Åö×²¼ì²â
-		auto temp_j = int(position_.GetX() / size_);
-		auto temp_i = int(position_.GetY() / size_);
-		auto wall1 = Level::wall_list_.find(Position(temp_j * size_, temp_i * size_));
-		auto wall2 = Level::wall_list_.find(Position((temp_j + 1) * size_, temp_i * size_));
+		auto size = rect_.GetSize();
+		auto temp_j = rect_.GetX() / size;
+		auto temp_i = rect_.GetY() / size;
+		auto wall1 = Level::wall_list_.find(Rect(size, temp_j * size, temp_i * size));
+		auto wall2 = Level::wall_list_.find(Rect(size, (temp_j + 1) * size, temp_i * size));
 		if (wall1 != Level::wall_list_.end()) {
-			if (position_.IsCollision(size_, wall1->second.GetPosition(), size_))
-				position_.MoveDown(speed_ * 2);
+			if (rect_.IsCollision(wall1->second.GetRect()))
+				rect_.MoveDown(speed_);
 		}
 		else if (wall2 != Level::wall_list_.end()) {
-			if (position_.IsCollision(size_, wall2->second.GetPosition(), size_))
-				position_.MoveDown(speed_ * 2);
+			if (rect_.IsCollision(wall2->second.GetRect()))
+				rect_.MoveDown(speed_);
 		}
 	}
 	else if (Input::GetPressedKey(KEY_DOWN).GetIsPressed()) {
-		position_.MoveDown(speed_ * 2);
+		rect_.MoveDown(speed_);
 		front_ = DOWN;
 		Input::GetPressedKey(KEY_DOWN).SetIsPressed(false);
 		// ÏòÏÂÒÆ¶¯µÄ¾²Ì¬Åö×²¼ì²â
-		auto temp_j = int(position_.GetX() / size_);
-		auto temp_i = int(position_.GetY() / size_);
-		auto wall1 = Level::wall_list_.find(Position(temp_j * size_, (temp_i + 1) * size_));
-		auto wall2 = Level::wall_list_.find(Position((temp_j + 1) * size_, (temp_i + 1) * size_));
+		auto size = rect_.GetSize();
+		auto temp_j = rect_.GetX() / size;
+		auto temp_i = rect_.GetY() / size;
+		auto wall1 = Level::wall_list_.find(Rect(size, temp_j * size, (temp_i + 1) * size));
+		auto wall2 = Level::wall_list_.find(Rect(size, (temp_j + 1) * size, (temp_i + 1) * size));
 		if (wall1 != Level::wall_list_.end()) {
-			if (position_.IsCollision(size_, wall1->second.GetPosition(), size_))
-				position_.MoveUp(speed_ * 2);
+			if (rect_.IsCollision(wall1->second.GetRect()))
+				rect_.MoveUp(speed_);
 		}
 		else if (wall2 != Level::wall_list_.end()) {
-			if (position_.IsCollision(size_, wall2->second.GetPosition(), size_))
-				position_.MoveUp(speed_ * 2);
+			if (rect_.IsCollision(wall2->second.GetRect()))
+				rect_.MoveUp(speed_);
 		}
 	}
 	else if (Input::GetPressedKey(KEY_LEFT).GetIsPressed()) {
-		position_.MoveLeft(speed_ * 2);
+		rect_.MoveLeft(speed_);
 		front_ = LEFT;
 		Input::GetPressedKey(KEY_LEFT).SetIsPressed(false);
 		// Ïò×óÒÆ¶¯µÄ¾²Ì¬Åö×²¼ì²â
-		auto temp_j = int(position_.GetX() / size_);
-		auto temp_i = int(position_.GetY() / size_);
-		auto wall1 = Level::wall_list_.find(Position(temp_j * size_, temp_i * size_));
-		auto wall2 = Level::wall_list_.find(Position(temp_j * size_, (temp_i + 1) * size_));
+		auto size = rect_.GetSize();
+		auto temp_j = rect_.GetX() / size;
+		auto temp_i = rect_.GetY() / size;
+		auto wall1 = Level::wall_list_.find(Rect(size, temp_j * size, temp_i * size));
+		auto wall2 = Level::wall_list_.find(Rect(size, temp_j * size, (temp_i + 1) * size));
 		if (wall1 != Level::wall_list_.end()) {
-			if (position_.IsCollision(size_, wall1->second.GetPosition(), size_))
-				position_.MoveRight(speed_ * 2);
+			if (rect_.IsCollision(wall1->second.GetRect()))
+				rect_.MoveRight(speed_);
 		}
 		else if (wall2 != Level::wall_list_.end()) {
-			if (position_.IsCollision(size_, wall2->second.GetPosition(), size_))
-				position_.MoveRight(speed_ * 2);
+			if (rect_.IsCollision(wall2->second.GetRect()))
+				rect_.MoveRight(speed_);
 		}
 	}
 	else if (Input::GetPressedKey(KEY_RIGHT).GetIsPressed()) {
-		position_.MoveRight(speed_ * 2);
+		rect_.MoveRight(speed_);
 		front_ = RIGHT;
 		Input::GetPressedKey(KEY_RIGHT).SetIsPressed(false);
 		// ÏòÓÒÒÆ¶¯µÄ¾²Ì¬Åö×²¼ì²â
-		auto temp_j = int(position_.GetX() / size_);
-		auto temp_i = int(position_.GetY() / size_);
-		auto wall1 = Level::wall_list_.find(Position((temp_j + 1) * size_, temp_i * size_));
-		auto wall2 = Level::wall_list_.find(Position((temp_j + 1) * size_, (temp_i + 1) * size_));
+		auto size = rect_.GetSize();
+		auto temp_j = rect_.GetX() / size;
+		auto temp_i = rect_.GetY() / size;
+		auto wall1 = Level::wall_list_.find(Rect(size, (temp_j + 1) * size, temp_i * size));
+		auto wall2 = Level::wall_list_.find(Rect(size, (temp_j + 1) * size, (temp_i + 1) * size));
 		if (wall1 != Level::wall_list_.end()) {
-			if (position_.IsCollision(size_, wall1->second.GetPosition(), size_))
-				position_.MoveLeft(speed_ * 2);
+			if (rect_.IsCollision(wall1->second.GetRect()))
+				rect_.MoveLeft(speed_);
 		}
 		else if (wall2 != Level::wall_list_.end()) {
-			if (position_.IsCollision(size_, wall2->second.GetPosition(), size_))
-				position_.MoveLeft(speed_ * 2);
+			if (rect_.IsCollision(wall2->second.GetRect()))
+				rect_.MoveLeft(speed_);
 		}
 	}
 }
@@ -91,30 +95,26 @@ void Character::Attack() const {
 		auto temp_size = 6;
 		switch (front_) {
 			case UP: {
-				Position temp_position(position_.GetX() + size_ / 2, position_.GetY() - temp_size / 2);
-				Level::game_element_list_[BULLET].push_back(new Bullet(temp_size, temp_position,
-					                                        "picture\\bullet.png", UP));
+				Rect temp_rect(temp_size, rect_.GetX() + rect_.GetSize() / 2, rect_.GetY() - temp_size / 2);
+				Level::game_element_list_[BULLET].push_back(new Bullet(temp_rect, "picture\\bullet.png", UP));
 				Level::game_element_list_[BULLET].back()->Load();
 				break;
 			}
 			case DOWN: {
-				Position temp_position(position_.GetX() + size_ / 2, position_.GetY() + size_ + temp_size / 2);
-				Level::game_element_list_[BULLET].push_back(new Bullet(temp_size, temp_position,
-					                                        "picture\\bullet.png", DOWN));
+				Rect temp_rect(temp_size, rect_.GetX() + rect_.GetSize() / 2, rect_.GetY() + rect_.GetSize() + temp_size / 2);
+				Level::game_element_list_[BULLET].push_back(new Bullet(temp_rect, "picture\\bullet.png", DOWN));
 				Level::game_element_list_[BULLET].back()->Load();
 				break;
 			}
 			case LEFT: {
-				Position temp_position(position_.GetX() - temp_size / 2, position_.GetY() + size_ / 2);
-				Level::game_element_list_[BULLET].push_back(new Bullet(temp_size, temp_position,
-					                                        "picture\\bullet.png", LEFT));
+				Rect temp_rect(temp_size, rect_.GetX() - temp_size / 2, rect_.GetY() + rect_.GetSize() / 2);
+				Level::game_element_list_[BULLET].push_back(new Bullet(temp_rect, "picture\\bullet.png", LEFT));
 				Level::game_element_list_[BULLET].back()->Load();
 				break;
 			}
 			case RIGHT: {
-				Position temp_position(position_.GetX() + size_ + temp_size / 2, position_.GetY() + size_ / 2);
-				Level::game_element_list_[BULLET].push_back(new Bullet(temp_size, temp_position,
-					                                        "picture\\bullet.png", RIGHT));
+				Rect temp_rect(temp_size, rect_.GetX() + rect_.GetSize() + temp_size / 2, rect_.GetY() + rect_.GetSize() / 2);
+				Level::game_element_list_[BULLET].push_back(new Bullet(temp_rect, "picture\\bullet.png", RIGHT));
 				Level::game_element_list_[BULLET].back()->Load();
 				break;
 			}

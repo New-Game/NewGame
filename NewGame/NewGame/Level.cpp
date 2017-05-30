@@ -28,19 +28,19 @@ void Level::Load() {
 		for (auto j = 0; j < num_of_map_width_grid_; ++j) {
 			int map_grid_info;
 			map_config_file_ >> map_grid_info;
-			Position temp_position(j * grid_size_, i * grid_size_);
+			Rect temp_rect(grid_size_, j * grid_size_, i * grid_size_);
 			switch (map_grid_info) {
 				case ROAD:
 					// do nothing
 					break;
 				case WALL:
-					wall_list_.insert(make_pair(temp_position, Wall(grid_size_, temp_position, "picture\\ice.png")));
-					wall_list_[temp_position].Load();
+					wall_list_.insert(make_pair(temp_rect, Wall(temp_rect, "picture\\ice.png")));
+					wall_list_[temp_rect].Load();
 					break;
 				case TRAP:
 					break;
 				case CHARACTER:
-					game_element_list_[CHARACTER].push_back(new Aimiliya(grid_size_, temp_position, "picture\\aimiliya.png"));
+					game_element_list_[CHARACTER].push_back(new Aimiliya(temp_rect, "picture\\aimiliya.png"));
 					game_element_list_[CHARACTER].back()->Load();
 				case MONSTER:
 					break;
