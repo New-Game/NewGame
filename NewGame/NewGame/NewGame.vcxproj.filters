@@ -108,9 +108,6 @@
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Rect.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Aimiliya.h">
       <Filter>头文件</Filter>
     </ClInclude>

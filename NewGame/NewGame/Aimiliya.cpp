@@ -11,19 +11,19 @@
 void Aimiliya::Load() {
 	AEGfxMeshStart();
 	AEGfxTriAdd(
-		rect_.GetSize(), 0.0f, 0xFFFF0000, 1.0f, 0.0f,
+		float(size_), 0.0f, 0xFFFF0000, 1.0f, 0.0f,
 		0.0f, 0.0f, 0xFFFF0000, 0.0f, 0.0f,
-		0.0f, rect_.GetSize(), 0xFFFF0000, 0.0f, 1.0f);
+		0.0f, float(size_), 0xFFFF0000, 0.0f, 1.0f);
 	AEGfxTriAdd(
-		rect_.GetSize(), 0.0f, 0xFFFF0000, 1.0f, 0.0f,
-		rect_.GetSize(), rect_.GetSize(), 0xFFFF0000, 1.0f, 1.0f,
-		0.0f, rect_.GetSize(), 0xFFFF0000, 0.0f, 1.0f);
+		float(size_), 0.0f, 0xFFFF0000, 1.0f, 0.0f,
+		float(size_), float(size_), 0xFFFF0000, 1.0f, 1.0f,
+		0.0f, float(size_), 0xFFFF0000, 0.0f, 1.0f);
 	mesh_ = AEGfxMeshEnd();
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
 }
 
 void Aimiliya::Reset() {
-	rect_ = original_rect_;
+	position_ = original_position_;
 }
 
 void Aimiliya::Update() {
@@ -33,7 +33,7 @@ void Aimiliya::Update() {
 
 void Aimiliya::Draw() {
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	AEGfxSetPosition(rect_.GetX() - rect_.GetSize() /2, rect_.GetY() - rect_.GetSize() / 2);
+	AEGfxSetPosition(float(position_.GetX()), float(position_.GetY()));
 	AEGfxSetTextureMode(AE_GFX_TM_AVERAGE);
 	AEGfxTextureSet(texture_, 0.0f, 0.0f);
 	AEGfxMeshDraw(mesh_, AE_GFX_MDM_TRIANGLES);

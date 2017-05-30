@@ -14,8 +14,8 @@
 class Wall : public GameElement {
 public:
 	Wall() {}
-	Wall(Rect rect, string picture_file_name) : 
-	     GameElement(rect, picture_file_name) {}
+	Wall(int size, Position position, string picture_file_name) : 
+	     GameElement(size, position, picture_file_name) {}
 	~Wall() {}
 
 	void Load() override;

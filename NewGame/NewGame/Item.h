@@ -14,7 +14,8 @@
 // 用于派生具体游戏物品类，成员函数使用虚函数来实现多态
 class Item : public GameElement {
 public:
-	Item(Rect rect, string picture_file_name) : GameElement(rect, picture_file_name) {}
+	Item(int size, Position position, string picture_file_name) : 
+	     GameElement(size, position, picture_file_name) {}
 	Item() {}
 	virtual ~Item() {}
 protected:

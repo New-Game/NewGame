@@ -28,22 +28,19 @@ void Level::Load() {
 		for (auto j = 0; j < num_of_map_width_grid_; ++j) {
 			int map_grid_info;
 			map_config_file_ >> map_grid_info;
-			static_collision_data_[i][j] = map_grid_info;
-			auto temp_x = j * grid_size_ + grid_size_ / 2;
-			auto temp_y = i * grid_size_ + grid_size_ / 2;
-			Rect temp_rect(grid_size_, temp_x, temp_y);
+			Position temp_position(j * grid_size_, i * grid_size_);
 			switch (map_grid_info) {
 				case ROAD:
 					// do nothing
 					break;
 				case WALL:
-					game_element_list_[WALL].push_back(new Wall(temp_rect, "picture\\ice.png"));
-					game_element_list_[WALL].back()->Load();
+					wall_list_.insert(make_pair(temp_position, Wall(grid_size_, temp_position, "picture\\ice.png")));
+					wall_list_[temp_position].Load();
 					break;
 				case TRAP:
 					break;
 				case CHARACTER:
-					game_element_list_[CHARACTER].push_back(new Aimiliya(temp_rect, "picture\\aimiliya.png"));
+					game_element_list_[CHARACTER].push_back(new Aimiliya(grid_size_, temp_position, "picture\\aimiliya.png"));
 					game_element_list_[CHARACTER].back()->Load();
 				case MONSTER:
 					break;
@@ -80,6 +77,8 @@ void Level::Process() {
 		for (auto& list : game_element_list_)
 			for (auto& i : list)
 				i->Draw();
+		for (auto& i : wall_list_)
+			i.second.Draw();
 		//if (IsReachEnd())
 		//	SetIsReadyForNextGameState();
 		AESysFrameEnd();
@@ -96,17 +95,12 @@ void Level::Unload() {
 
 	for (auto& list : game_element_list_)
 		list.empty();
+	wall_list_.empty();
 
 	// 重置有效按键
 	Input::ResetPressedKey();
 }
 
 bool Level::IsReachEnd() const {
-	//x = 855
-	//y = 45
-	auto pointer_to_character = game_element_list_[CHARACTER].back();
-	if (abs(pointer_to_character->GetRect().GetX() - 255.0f) < 5.0f 
-		&& abs(pointer_to_character->GetRect().GetY() - 45.0f) < 5.0f)
-			return true;
 	return false;
 }

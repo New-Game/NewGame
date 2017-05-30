@@ -15,8 +15,13 @@
 class Character : public GameElement {
 public:
 	Character() : front_(DOWN), lives_(3), damage_(100), speed_(1), skill_cold_down_(0) {}
-	Character(Rect rect, string picture_file_name) : GameElement(rect, picture_file_name),
-	          front_(DOWN), lives_(3), damage_(100), speed_(1), skill_cold_down_(0) {}
+	Character(int size, Position position, string picture_file_name) : 
+	          GameElement(size, position, picture_file_name),
+	          front_(DOWN), 
+	          lives_(3), 
+	          damage_(100), 
+	          speed_(1), 
+	          skill_cold_down_(0) {}
 	virtual ~Character() {}
 
 	void SetLives(int lives) {

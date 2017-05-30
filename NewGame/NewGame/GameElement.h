@@ -11,7 +11,7 @@
 #include <string>
 #include "State.h"
 #include "AEEngine.h"
-#include "Rect.h"
+#include "Position.h"
 
 using namespace std;
 
@@ -38,31 +38,38 @@ enum GameElements {
 // 用于派生具体游戏元素类，成员函数使用虚函数来实现多态
 class GameElement : public State {
 public:
-	GameElement(float size, float x, float y, string picture_file_name) :
-		        rect_(size, x, y),
-		        original_rect_(rect_),
+	GameElement(int size, int x, int y, string picture_file_name) :
+		        size_(size),
+	            position_(x, y),
+                original_position_(position_),
 	            picture_file_name_(picture_file_name), 
 	            mesh_(nullptr), 
 	            texture_(nullptr) {}
-	GameElement(Rect rect, string picture_file_name) : 
-	            rect_(rect), 
-		        original_rect_(rect_),
+	GameElement(int size, Position position, string picture_file_name) :
+		        size_(size),
+	            position_(position),
+	            original_position_(position_),
 	            picture_file_name_(picture_file_name),
 	            mesh_(nullptr),
 	            texture_(nullptr) {}
-	GameElement() : GameElement(0.0, 0.0, 0.0, nullptr) {}
+	GameElement() : GameElement(0, 0, 0, nullptr) {}
 	virtual ~GameElement() {}
 
-	Rect GetRect() const {
-		return rect_;
+	int GetSize() const {
+		return size_;
+	}
+
+	Position GetPosition() const {
+		return position_;
 	}
 
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
 protected:
-	Rect rect_;
-	const Rect original_rect_;
+	int size_;
+	Position position_;
+	const Position original_position_;
 	string picture_file_name_;
 	AEGfxVertexList* mesh_;
 	AEGfxTexture* texture_;

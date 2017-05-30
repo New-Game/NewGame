@@ -32,6 +32,6 @@ KeyStatus Input::pressed_key_[NUM_OF_KEY];
 GameState* GameStateManager::game_state_[NUM_OF_GAME_STATES];
 GameState** GameStateManager::game_state_pointer_;
 
-int** Level::static_collision_data_;
 list<GameElement*> Level::game_element_list_[NUM_OF_GAME_ELEMENT_TYPE];
-const float Level::grid_size_ = 30.0f;
+unordered_map<Position, Wall> Level::wall_list_;
+const int Level::grid_size_;

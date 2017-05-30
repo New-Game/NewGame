@@ -12,9 +12,10 @@
 
 class Bullet : public Item {
 public:
-	Bullet(Rect rect, string picture_file_name, enum Direction front) : Item(rect, picture_file_name), 
-	                                                                    front_(front), 
-	                                                                    speed_(1) {}
+	Bullet(int size, Position position, string picture_file_name, enum Direction front) : 
+	       Item(size, position, picture_file_name), 
+	       front_(front), 
+	       speed_(1) {}
 	Bullet() : front_(DOWN), speed_(1) {}
 	~Bullet() {}
 
