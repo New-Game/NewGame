@@ -1,7 +1,7 @@
 /**
  * Project:      NewGame
  * File Name:    Rect.h
- * Author:       Atlas Shen
+ * Author:       Atlas Shen/Long
  * Date:         2017/5/07
  * Purpose:      位置矩形类头文件
  */
