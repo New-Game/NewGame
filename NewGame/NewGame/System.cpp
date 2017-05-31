@@ -29,7 +29,7 @@ void System::Start(HINSTANCE hInstance, int nCmdShow) {
 	sys_init_info_.mWinHeight = window_height_;            // 窗口高度
 	sys_init_info_.mCreateConsole = 0;                    // 是否需要打开控制台，1表示是，0表示否
 	sys_init_info_.mCreateWindow = 0;                     // 是否需要创建窗口，1表示是，0表示否
-	sys_init_info_.mMaxFrameRate = 60;                    // 设置帧率（使用Alpha的帧率控制功能）
+	sys_init_info_.mMaxFrameRate = 120;                    // 设置帧率（使用Alpha的帧率控制功能）
 	sys_init_info_.mpWinCallBack = nullptr;               // 因为没用Alpha创建窗口，所以设置为NULL
 	sys_init_info_.mClassStyle = CS_HREDRAW | CS_VREDRAW; // 窗口类定义的重绘方式，水平重绘和垂直重绘
 	sys_init_info_.mWindowStyle = WS_OVERLAPPEDWINDOW;    // 窗口风格

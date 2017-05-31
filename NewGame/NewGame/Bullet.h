@@ -12,11 +12,8 @@
 
 class Bullet : public Item {
 public:
-	Bullet(Rect rect, string picture_file_name, enum Direction front) : 
-	       Item(rect, picture_file_name), 
-	       front_(front), 
-	       speed_(6) {}
-	Bullet() : front_(DOWN), speed_(0) {}
+	Bullet(Rect rect, string picture_file_name) : Item(rect, picture_file_name), speed_(6) {}
+	Bullet() : speed_(0) {}
 	~Bullet() {}
 
 	void Load() override;
@@ -26,6 +23,5 @@ public:
 	void Unload() override;
 
 private:
-	enum Direction front_;
 	int speed_;
 };

@@ -8,11 +8,19 @@
 
 #pragma once
 
+enum Direction {
+	NONE,
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
+
 class Rect {
 public:
-	Rect(int size, int x, int y) : size_(size), x_(x), y_(y) {}
-	Rect(const Rect& rect) : size_(rect.size_), x_(rect.x_), y_(rect.y_) {}
-	Rect() : size_(0), x_(0), y_(0) {}
+	Rect(int size, int x, int y, enum Direction front) : size_(size), x_(x), y_(y), front_(front) {}
+	Rect(const Rect& rect) : size_(rect.size_), x_(rect.x_), y_(rect.y_), front_(rect.front_) {}
+	Rect() : size_(0), x_(0), y_(0), front_(NONE) {}
 	~Rect() {}
 
 	bool IsCollision(Rect rect) const {
@@ -36,6 +44,10 @@ public:
 		y_ += distance;
 	}
 
+	void SetFront(enum Direction front) {
+		front_ = front;
+	}
+
 	int GetSize() const {
 		return size_;
 	}
@@ -48,8 +60,13 @@ public:
 		return y_;
 	}
 
+	enum Direction GetFront() const {
+		return front_;
+	}
+
 private:
-	int size_; // 正方形边长
-	int x_;    // 正方形左上角定点横坐标
-	int y_;    // 正方形左上角定点纵坐标
+	int size_;             // 正方形边长
+	int x_;                // 正方形左上角定点横坐标
+	int y_;                // 正方形左上角定点纵坐标
+	enum Direction front_; // 面向方向
 };

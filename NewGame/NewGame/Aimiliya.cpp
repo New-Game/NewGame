@@ -7,6 +7,7 @@
  */
 
 #include "Aimiliya.h"
+#include "Input.h"
 
 void Aimiliya::Load() {
 	AEGfxMeshStart();
@@ -28,7 +29,15 @@ void Aimiliya::Reset() {
 
 void Aimiliya::Update() {
 	Move();
-	Attack();
+	BulletCollisionCheck();
+	if (Input::GetPressedKey(KEY_A).GetIsPressed()) {
+		Attack();
+		Input::GetPressedKey(KEY_A).SetIsPressed(false);
+	}
+	else if (Input::GetPressedKey(KEY_S).GetIsPressed()) {
+		UseSkill();
+		Input::GetPressedKey(KEY_S).SetIsPressed(false);
+	}
 }
 
 void Aimiliya::Draw() {
