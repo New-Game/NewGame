@@ -128,73 +128,18 @@ void Character::GetBuff() {}
 
 void Character::BulletCollisionCheck() const {
 	for (auto i = Level::game_element_list_[BULLET].begin(); i != Level::game_element_list_[BULLET].end();) {
-		switch ((*i)->GetRect().GetFront()) {
-			case UP: {
-				auto size = rect_.GetSize();
-				auto temp_j = (*i)->GetRect().GetX() / size;
-				auto temp_i = (*i)->GetRect().GetY() / size;
-				auto wall = Level::wall_list_.find(Rect(size, temp_j * size, temp_i * size, NONE));
-				if (wall != Level::wall_list_.end()) {
-					if ((*i)->GetRect().IsCollision(wall->second.GetRect())) {
-						(*i)->Unload();
-						delete *i;
-						i = Level::game_element_list_[BULLET].erase(i);
-					}
-				}
-				else
-					++i;
-				break;
+		auto size = rect_.GetSize();
+		auto temp_j = (*i)->GetRect().GetX() / size;
+		auto temp_i = (*i)->GetRect().GetY() / size;
+		auto wall = Level::wall_list_.find(Rect(size, temp_j * size, temp_i * size, NONE));
+		if (wall != Level::wall_list_.end()) {
+			if ((*i)->GetRect().IsCollision(wall->second.GetRect())) {
+				(*i)->Unload();
+				delete *i;
+				i = Level::game_element_list_[BULLET].erase(i);
 			}
-			case DOWN: {
-				auto size = rect_.GetSize();
-				auto temp_j = (*i)->GetRect().GetX() / size;
-				auto temp_i = (*i)->GetRect().GetY() / size;
-				auto wall = Level::wall_list_.find(Rect(size, temp_j * size, temp_i * size, NONE));
-				if (wall != Level::wall_list_.end()) {
-					if ((*i)->GetRect().IsCollision(wall->second.GetRect())) {
-						(*i)->Unload();
-						delete *i;
-						i = Level::game_element_list_[BULLET].erase(i);
-					}
-				}
-				else
-					++i;
-				break;
-			}
-			case LEFT: {
-				auto size = rect_.GetSize();
-				auto temp_j = (*i)->GetRect().GetX() / size;
-				auto temp_i = (*i)->GetRect().GetY() / size;
-				auto wall = Level::wall_list_.find(Rect(size, temp_j * size, temp_i * size, NONE));
-				if (wall != Level::wall_list_.end()) {
-					if ((*i)->GetRect().IsCollision(wall->second.GetRect())) {
-						(*i)->Unload();
-						delete *i;
-						i = Level::game_element_list_[BULLET].erase(i);
-					}
-				}
-				else
-					++i;
-				break;
-			}
-			case RIGHT: {
-				auto size = rect_.GetSize();
-				auto temp_j = (*i)->GetRect().GetX() / size;
-				auto temp_i = (*i)->GetRect().GetY() / size;
-				auto wall = Level::wall_list_.find(Rect(size, temp_j * size, temp_i * size, NONE));
-				if (wall != Level::wall_list_.end()) {
-					if ((*i)->GetRect().IsCollision(wall->second.GetRect())) {
-						(*i)->Unload();
-						delete *i;
-						i = Level::game_element_list_[BULLET].erase(i);
-					}
-				}
-				else
-					++i;
-				break;
-			}
-			default:
-				break;
 		}
+		else
+			++i;
 	}
 }

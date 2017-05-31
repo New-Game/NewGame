@@ -59,11 +59,11 @@ void Level::Load() {
 // 重置人物、怪兽、物品的初始状态
 void Level::Reset() {
 	game_element_list_[CHARACTER].back()->Reset();
-	//for (auto& i : game_element_list_[BULLET]) {
-	//	i->Unload();
-	//	delete i;
-	//}
-	//game_element_list_[BULLET].clear();
+	for (auto& i : game_element_list_[BULLET]) {
+		i->Unload();
+		delete i;
+	}
+	game_element_list_[BULLET].clear();
 	//for (auto& i : game_element_list_[MONSTER])
 	//	i->Reset();
 	//game_element_list_[BUFF].back()->Reset();
@@ -82,10 +82,10 @@ void Level::Process() {
 		}
 		for (auto& list : game_element_list_)
 			for (auto& i : list)
-					i->Update();
+				i->Update();
 		for (auto& list : game_element_list_)
 			for (auto& i : list)
-					i->Draw();
+				i->Draw();
 		for (auto& i : wall_list_)
 			i.second.Draw();
 		//if (IsReachEnd())
