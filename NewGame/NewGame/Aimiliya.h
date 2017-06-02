@@ -12,8 +12,10 @@
 
 class Aimiliya : public Character {
 public:
-	Aimiliya() {}
 	Aimiliya(Rect rect, string picture_file_name) : Character(rect, picture_file_name) {}
+	Aimiliya() {}
+	~Aimiliya() {}
+
 	void Load() override;
 	void Reset() override;
 	void Update() override;

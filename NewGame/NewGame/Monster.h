@@ -1,7 +1,7 @@
 /**
  * Project:      NewGame
  * File Name:    Monster.h
- * Author:       Long
+ * Author:       Atlas/Long
  * Date:         2017/4/18
  * Purpose:      怪物类头文件
  */
@@ -14,6 +14,13 @@
 // 用于派生具体怪物类，成员函数使用虚函数来实现多态
 class Monster : public GameElement {
 public:
+	Monster(Rect rect, string picture_file_name) : GameElement(rect, picture_file_name), speed_(2) {}
+	Monster() : speed_(2) {}
 	virtual ~Monster() {}
+
 protected:
+	int speed_;
+
+	void Move();
+	void DropBuff();
 };

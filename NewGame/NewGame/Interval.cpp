@@ -12,7 +12,6 @@
 void Interval::Load() {
 	// 先设置本状态哪些键位是有效的
 	Input::GetPressedKey(KEY_ENTER).SetIsValid(true);
-	Input::GetPressedKey(KEY_SPACE).SetIsValid(true);
 	Input::GetPressedKey(KEY_ESC).SetIsValid(true);
 
 	AEGfxMeshStart();

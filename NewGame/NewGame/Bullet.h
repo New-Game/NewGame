@@ -8,11 +8,11 @@
 
 #pragma once
 
-#include "Item.h"
+#include "GameElement.h"
 
-class Bullet : public Item {
+class Bullet : public GameElement {
 public:
-	Bullet(Rect rect, string picture_file_name) : Item(rect, picture_file_name), speed_(6) {}
+	Bullet(Rect rect, string picture_file_name) : GameElement(rect, picture_file_name), speed_(6) {}
 	Bullet() : speed_(0) {}
 	~Bullet() {}
 
