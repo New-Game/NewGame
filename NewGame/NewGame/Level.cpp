@@ -11,6 +11,7 @@
 #include "Wall.h"
 #include "Aimiliya.h"
 #include "Monster.h"
+#include "Minion.h"
 
 void Level::Load() {
 	// 先设置本状态哪些键位是有效的
@@ -29,25 +30,24 @@ void Level::Load() {
 		for (auto j = 0; j < num_of_map_width_grid_; ++j) {
 			int map_grid_info;
 			map_config_file_ >> map_grid_info;
+			Rect temp_rect(grid_size_, j * grid_size_, i * grid_size_);
 			switch (map_grid_info) {
 				case ROAD:
 					// do nothing
 					break;
-				case WALL: {
-					Rect temp_rect(grid_size_, j * grid_size_, i * grid_size_);
+				case WALL:
 					wall_list_.insert(make_pair(temp_rect, Wall(temp_rect, "picture\\ice.png")));
 					wall_list_[temp_rect].Load();
 					break;
-				}
 				case TRAP:
 					break;
-				case CHARACTER: {
-					Rect temp_rect(grid_size_, j * grid_size_, i * grid_size_);
+				case CHARACTER:
 					game_element_list_[CHARACTER].push_back(new Aimiliya(temp_rect, "picture\\aimiliya.png"));
 					game_element_list_[CHARACTER].back()->Load();
 					break;
-				}
 				case MONSTER:
+					game_element_list_[MONSTER].push_back(new Minion(temp_rect, "picture\\minion.png"));
+					game_element_list_[MONSTER].back()->Load();
 					break;
 				default:
 					break;
@@ -79,8 +79,8 @@ void Level::Reset() {
 	game_element_list_[BULLET].clear();
 
 	// 重置怪物初始状态
-	//for (auto& i : game_element_list_[MONSTER])
-	//	i->Reset();
+	for (auto& i : game_element_list_[MONSTER])
+		i->Reset();
 
 	// 重置buff初始状态
 	//game_element_list_[BUFF].back()->Reset();

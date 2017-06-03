@@ -13,8 +13,18 @@
 class Minion : public Monster {
 public:
 	Minion(Rect rect, string picture_file_name) : Monster(rect, picture_file_name) {}
+
+	explicit Minion(Rect rect) {
+		rect_ = rect;
+	}
+
 	Minion() {}
 	~Minion() {}
 
+	void Load() override;
+	void Reset() override;
+	void Update() override;
+	void Draw() override;
+	void Unload() override;
 private:
 };

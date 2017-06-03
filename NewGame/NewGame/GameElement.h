@@ -40,17 +40,15 @@ class GameElement : public State {
 public:
 	GameElement(int size, int x, int y, string picture_file_name) :
 			    rect_(size, x, y),
-                original_rect_(rect_),
 	            picture_file_name_(picture_file_name), 
 	            mesh_(nullptr), 
 	            texture_(nullptr) {}
 	GameElement(Rect rect, string picture_file_name) :
 	            rect_(rect),
-	            original_rect_(rect_),
 	            picture_file_name_(picture_file_name),
 	            mesh_(nullptr),
 	            texture_(nullptr) {}
-	GameElement() : GameElement(0, 0, 0, nullptr) {}
+	GameElement() : GameElement(0, 0, 0, "") {}
 	virtual ~GameElement() {}
 
 	Rect GetRect() const {
@@ -62,7 +60,6 @@ public:
 
 protected:
 	Rect rect_;
-	const Rect original_rect_;
 	string picture_file_name_;
 	AEGfxVertexList* mesh_;
 	AEGfxTexture* texture_;

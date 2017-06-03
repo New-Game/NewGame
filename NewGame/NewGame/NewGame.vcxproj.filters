@@ -117,22 +117,13 @@
     <ClInclude Include="Buff.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TimeBuff.h">
+    <ClInclude Include="Minion.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreBuff.h">
+    <ClInclude Include="Deathless.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CDBuff.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeedBuff.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageBuff.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="InvincibleBuff.h">
+    <ClInclude Include="Boss.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -177,25 +168,19 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TimeBuff.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreBuff.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="CDBuff.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="SpeedBuff.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageBuff.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="InvincibleBuff.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Buff.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Deathless.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Minion.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
