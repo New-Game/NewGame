@@ -21,7 +21,7 @@ void Aimiliya::Load() {
 		0.0f, float(rect_.GetSize()), 0xFFFF0000, 0.0f, 1.0f);
 	mesh_ = AEGfxMeshEnd();
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
-	original_ = new Aimiliya(rect_);
+	original_ = new Aimiliya(this);
 }
 
 void Aimiliya::Reset() {

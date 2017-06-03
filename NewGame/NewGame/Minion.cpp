@@ -20,7 +20,7 @@ void Minion::Load() {
 		0.0f, float(rect_.GetSize()), 0xFFFF0000, 0.0f, 1.0f);
 	mesh_ = AEGfxMeshEnd();
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
-	original_ = new Minion(rect_);
+	original_ = new Minion(this);
 }
 
 void Minion::Reset() {
@@ -49,4 +49,5 @@ void Minion::Draw() {
 void Minion::Unload() {
 	AEGfxTextureUnload(texture_);
 	AEGfxMeshFree(mesh_);
+	delete original_;
 }

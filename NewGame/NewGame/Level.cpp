@@ -47,7 +47,6 @@ void Level::Load() {
 					break;
 				case MONSTER:
 					game_element_list_[MONSTER].push_back(new Minion(temp_rect, "picture\\minion.png"));
-					game_element_list_[MONSTER].back()->Load();
 					break;
 				default:
 					break;
@@ -62,6 +61,7 @@ void Level::Load() {
 		dynamic_cast<Monster*>(i)->SetXRange(j_min, j_max);
 		dynamic_cast<Monster*>(i)->SetYRange(i_min, i_max);
 		dynamic_cast<Monster*>(i)->SetFront(static_cast<Directions>(front));
+		i->Load();
 	}
 }
 

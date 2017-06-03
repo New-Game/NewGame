@@ -14,8 +14,13 @@ class Aimiliya : public Character {
 public:
 	Aimiliya(Rect rect, string picture_file_name) : Character(rect, picture_file_name) {}
 
-	explicit Aimiliya(Rect rect) {
-		rect_ = rect;
+	explicit Aimiliya(const Aimiliya* aimiliya) {
+		rect_ = aimiliya->rect_;
+		front_ = aimiliya->front_;
+		lives_ = aimiliya->lives_;
+		damage_ = aimiliya->damage_;
+		speed_ = aimiliya->speed_;
+		skill_cold_down_ = aimiliya->skill_cold_down_;
 	}
 
 	Aimiliya() {}
