@@ -27,12 +27,19 @@ enum GameElements {
 	NUM_OF_GAME_ELEMENT_TYPE
 };
 
+enum Directions {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
+
 // 游戏元素类，继承了State类，同样还是抽象类，不能用于生成对象
 // 用于派生具体游戏元素类，成员函数使用虚函数来实现多态
 class GameElement : public State {
 public:
-	GameElement(int size, int x, int y, enum Direction front, string picture_file_name) :
-			    rect_(size, x, y, front),
+	GameElement(int size, int x, int y, string picture_file_name) :
+			    rect_(size, x, y),
                 original_rect_(rect_),
 	            picture_file_name_(picture_file_name), 
 	            mesh_(nullptr), 
@@ -43,7 +50,7 @@ public:
 	            picture_file_name_(picture_file_name),
 	            mesh_(nullptr),
 	            texture_(nullptr) {}
-	GameElement() : GameElement(0, 0, 0, NONE, nullptr) {}
+	GameElement() : GameElement(0, 0, 0, nullptr) {}
 	virtual ~GameElement() {}
 
 	Rect GetRect() const {

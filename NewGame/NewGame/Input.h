@@ -11,7 +11,7 @@
 #include <Windows.h>
 #include "System.h"
 
-enum Key {
+enum Keys {
 	KEY_ENTER,
 	KEY_SPACE,
 	KEY_BACKSPACE,
@@ -68,8 +68,8 @@ public:
 	
 	static INT_PTR CALLBACK HandleForRestart(HWND, UINT, WPARAM, LPARAM);
 
-	static KeyStatus& GetPressedKey(enum Key key) {
-		return pressed_key_[key];
+	static KeyStatus& GetPressedKey(Keys keys) {
+		return pressed_key_[keys];
 	}
 
 	// 用于在每个状态退出时重置pressed_key_数组

@@ -99,9 +99,6 @@
     <ClInclude Include="Level.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Global.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -115,6 +112,27 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Rect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Buff.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeBuff.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreBuff.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CDBuff.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeedBuff.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageBuff.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InvincibleBuff.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -157,6 +175,27 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeBuff.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreBuff.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CDBuff.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeedBuff.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageBuff.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InvincibleBuff.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

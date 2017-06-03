@@ -12,8 +12,10 @@
 
 class Bullet : public GameElement {
 public:
-	Bullet(Rect rect, string picture_file_name) : GameElement(rect, picture_file_name), speed_(6) {}
-	Bullet() : speed_(0) {}
+	Bullet(Directions front, Rect rect, string picture_file_name) : GameElement(rect, picture_file_name), 
+		                                                                front_(front),
+	                                                                    speed_(6) {}
+	Bullet() : front_(DOWN), speed_(0) {}
 	~Bullet() {}
 
 	void Load() override;
@@ -23,5 +25,6 @@ public:
 	void Unload() override;
 
 private:
+	Directions front_;
 	int speed_;
 };

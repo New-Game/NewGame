@@ -25,7 +25,7 @@ void Bullet::Load() {
 void Bullet::Reset() {}
 
 void Bullet::Update() {
-	switch (rect_.GetFront()) {
+	switch (front_) {
 		case UP:
 			rect_.MoveUp(speed_);
 			break;
