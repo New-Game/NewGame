@@ -20,6 +20,10 @@ public:
 			&& x_ + size_ > rect.x_ && x_ < rect.x_ + rect.size_;
 	}
 
+	bool operator ==(const Rect& rect) const {
+		return size_ == rect.size_ && x_ == rect.x_ && y_ == rect.y_;
+	}
+
 	void MoveLeft(int distance) {
 		x_ -= distance;
 	}

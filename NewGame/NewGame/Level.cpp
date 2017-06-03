@@ -48,6 +48,9 @@ void Level::Load() {
 				case MONSTER:
 					game_element_list_[MONSTER].push_back(new Minion(temp_rect, "picture\\minion.png"));
 					break;
+				case Ending:
+					ending_ = temp_rect;
+					break;
 				default:
 					break;
 			}
@@ -108,6 +111,11 @@ void Level::Process() {
 			for (auto& i : list)
 				i->Update();
 
+		// 碰撞检测（人物和墙体的碰撞检测不在下列）
+		BulletWallCollisionCheck();
+		BulletMonsterCollisionCheck();
+		CharacterMonsterCollisionCheck();
+
 		// 画出更新后的游戏元素
 		for (auto& list : game_element_list_)
 			for (auto& i : list)
@@ -139,5 +147,55 @@ void Level::Unload() {
 }
 
 bool Level::IsReachEnd() const {
-	return false;
+	return game_element_list_[CHARACTER].back()->GetRect() == ending_;
+}
+
+void Level::BulletWallCollisionCheck() const {
+	for (auto i = game_element_list_[BULLET].begin(); i != game_element_list_[BULLET].end();) {
+		auto temp_j = (*i)->GetRect().GetX() / grid_size_;
+		auto temp_i = (*i)->GetRect().GetY() / grid_size_;
+		auto wall = wall_list_.find(Rect(grid_size_, temp_j * grid_size_, temp_i * grid_size_));
+		if (wall != wall_list_.end()) {
+			if ((*i)->GetRect().IsCollision(wall->second.GetRect())) {
+				(*i)->Unload();
+				delete *i;
+				i = game_element_list_[BULLET].erase(i);
+			}
+		}
+		else
+			++i;
+	}
+}
+
+void Level::BulletMonsterCollisionCheck() const {
+	bool i_should_increase = true;
+	for (auto i = game_element_list_[BULLET].begin(); i != game_element_list_[BULLET].end();) {
+		for (auto j = game_element_list_[MONSTER].begin(); j != game_element_list_[MONSTER].end();) {
+			if (i != game_element_list_[BULLET].end()) {
+				if ((*i)->GetRect().IsCollision((*j)->GetRect())) {
+					(*i)->Unload();
+					delete *i;
+					i = game_element_list_[BULLET].erase(i);
+					i_should_increase = false;
+					(*j)->Unload();
+					delete *j;
+					j = game_element_list_[MONSTER].erase(j);
+				}
+				else
+					++j;
+			}
+			else
+				goto END;
+		}
+		if (i_should_increase)
+			++i;
+	}
+END:;
+}
+
+void Level::CharacterMonsterCollisionCheck() {
+	for (auto& i : game_element_list_[MONSTER]) {
+		if (game_element_list_[CHARACTER].back()->GetRect().IsCollision(i->GetRect()))
+			Reset();
+	}
 }

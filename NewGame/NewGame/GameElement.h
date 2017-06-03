@@ -24,7 +24,8 @@ enum GameElements {
 	BULLET,
 	TREASURE,
 	BUFF,
-	NUM_OF_GAME_ELEMENT_TYPE
+	NUM_OF_GAME_ELEMENT_TYPE,
+	Ending
 };
 
 enum Directions {

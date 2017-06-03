@@ -36,7 +36,6 @@ void Aimiliya::Reset() {
 
 void Aimiliya::Update() {
 	Move();
-	BulletCollisionCheck();
 	if (Input::GetPressedKey(KEY_A).GetIsPressed()) {
 		Attack();
 		Input::GetPressedKey(KEY_A).SetIsPressed(false);

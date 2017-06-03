@@ -53,5 +53,4 @@ protected:
 	void Attack() const;
 	void UseSkill();
 	void GetBuff();
-	void BulletCollisionCheck() const;
 };

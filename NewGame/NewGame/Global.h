@@ -23,9 +23,9 @@ const int System::window_height_;
 AESysInitInfo System::sys_init_info_;
 WNDCLASS System::win_class_;
 HINSTANCE System::h_instance_;
-//std::ofstream System::log_file_;
-std::streambuf* System::streambuf_pointer_;
-std::ofstream System::console_out_;
+//ofstream System::log_file_;
+streambuf* System::streambuf_pointer_;
+ofstream System::console_out_;
 
 KeyStatus Input::pressed_key_[NUM_OF_KEY];
 
@@ -34,4 +34,3 @@ GameState** GameStateManager::game_state_pointer_;
 
 list<GameElement*> Level::game_element_list_[NUM_OF_GAME_ELEMENT_TYPE];
 unordered_map<Rect, Wall> Level::wall_list_;
-const int Level::grid_size_;

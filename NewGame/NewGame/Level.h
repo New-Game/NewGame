@@ -17,23 +17,21 @@
 
 namespace std {
 	template<>
-	struct hash<Rect> : public _Bitwise_hash<Rect> {}; // hash functor for Position
-
-	inline bool operator == (const Rect& rect1, const Rect& rect2) _NOEXCEPT {
-		return rect1.GetX() == rect2.GetX() && rect1.GetY() == rect2.GetY();
-	}
+	struct hash<Rect> : _Bitwise_hash<Rect> {}; // hash functor for Rect
 }
 
 // 关卡类，多实例类，每个关卡都是它的一个对象
 class Level : public GameState {
 public:
-	Level(string config_file_name) : num_of_map_width_grid_(30),
+	Level(string config_file_name) : grid_size_(30),
+	                                 num_of_map_width_grid_(30),
 	                                 num_of_map_height_grid_(20),
 	                                 character_status_bar_width_(100),
 	                                 map_config_file_(config_file_name) {}
-	Level() : num_of_map_width_grid_(0),
-	          num_of_map_height_grid_(0),
-		      character_status_bar_width_(0),
+	Level() : grid_size_(30),
+	          num_of_map_width_grid_(30),
+	          num_of_map_height_grid_(20),
+		      character_status_bar_width_(100),
 	          map_config_file_() {}
 	~Level() {}
 
@@ -48,14 +46,19 @@ public:
 	// 用来存所有指向墙体对象的指针
 	static unordered_map<Rect, Wall> wall_list_;
 	
-	static const int grid_size_ = 30;
 
 private:
+	const int grid_size_;
 	const int num_of_map_width_grid_;
 	const int num_of_map_height_grid_;
 	const int character_status_bar_width_;
 
 	ifstream map_config_file_;
+	Rect ending_;
 
 	bool IsReachEnd() const;
+	void BulletWallCollisionCheck() const;
+	void BulletMonsterCollisionCheck() const;
+	void CharacterMonsterCollisionCheck();
+
 };
