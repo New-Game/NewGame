@@ -13,12 +13,24 @@
 class Minion : public Monster {
 public:
 	Minion(Rect rect, string picture_file_name) : Monster(rect, picture_file_name) {}
+
+	Minion(const Minion& minion) : Monster(minion) {}
+
 	Minion() {}
+
 	~Minion() {}
 
+	Minion* GetClassType() override {
+		return this;
+	}
+
 	void Load() override;
+
 	void Update() override;
+
 	void Draw() override;
+
 	void Unload() override;
+
 private:
 };

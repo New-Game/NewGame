@@ -22,14 +22,24 @@ public:
 			x_max_(0), 
 			y_min_(0), 
 			y_max_(0) {}
-	Monster() : 
-			front_(DOWN), 
-			speed_(1), 
-			x_min_(0), 
-			x_max_(0), 
-			y_min_(0), 
-			y_max_(0) {}
+
+	// 怪物类复制构造函数不会复制mesh_和texture_的信息，而人物类的会
+	Monster(const Monster& monster) : 
+			GameElement(monster.rect_, monster.picture_file_name_), 
+			front_(monster.front_), 
+			speed_(monster.speed_), 
+			x_min_(monster.x_min_),
+			x_max_(monster.x_max_),
+			y_min_(monster.y_min_),
+			y_max_(monster.y_max_) {}
+
+	Monster() : front_(DOWN), speed_(1), x_min_(0), x_max_(0), y_min_(0), y_max_(0) {}
+
 	virtual ~Monster() {}
+
+	Monster* GetClassType() override {
+		return this;
+	}
 
 	void SetFront(Directions front) {
 		front_ = front;
@@ -54,5 +64,7 @@ protected:
 	int y_max_;
 
 	void Move();
+
 	void DropBuff();
+
 };

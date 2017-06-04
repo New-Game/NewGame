@@ -15,11 +15,15 @@
 class Trap : public GameElement {
 public:
 	Trap() {}
+
 	virtual ~Trap() {}
 
 	void Load() override;
+
 	void Update() override;
+
 	void Draw() override;
+
 	void Unload() override;
 
 protected:

@@ -29,12 +29,17 @@ public:
 			existing_time_(15), 
 			lasting_time_(15), 
 			status_(false) {}
+
 	Buff() : type_(NONE), existing_time_(15), lasting_time_(15), status_(false) {}
+
 	~Buff() {}
 
 	void Load() override;
+
 	void Update() override;
+
 	void Draw() override;
+
 	void Unload() override;
 
 	void Affect(Character* p_character);

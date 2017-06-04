@@ -11,8 +11,11 @@
 class Rect {
 public:
 	Rect(int size, int x, int y) : size_(size), x_(x), y_(y) {}
+
 	Rect(const Rect& rect) : size_(rect.size_), x_(rect.x_), y_(rect.y_) {}
+
 	Rect() : size_(0), x_(0), y_(0) {}
+
 	~Rect() {}
 
 	bool IsCollision(Rect rect) const {
@@ -20,7 +23,7 @@ public:
 			&& x_ + size_ > rect.x_ && x_ < rect.x_ + rect.size_;
 	}
 
-	bool operator ==(const Rect& rect) const {
+	bool operator==(const Rect& rect) const {
 		return size_ == rect.size_ && x_ == rect.x_ && y_ == rect.y_;
 	}
 

@@ -21,15 +21,23 @@ public:
 			damage_(100), 
 			speed_(3), 
 			skill_cold_down_(0) {}
+
+	// 人物类的复制构造函数会复制所有信息（包括mesh_和texture_的信息)，而怪物类的不会
 	Character(const Character& character) :
-			GameElement(character.rect_, character.picture_file_name_), 
+			GameElement(character), 
 			front_(character.front_), 
 			lives_(character.lives_), 
 			damage_(character.damage_), 
 			speed_(character.speed_), 
 			skill_cold_down_(character.skill_cold_down_) {}
+
 	Character() : front_(DOWN), lives_(3), damage_(100), speed_(3), skill_cold_down_(0) {}
+
 	virtual ~Character() {}
+
+	Character* GetClassType() override {
+		return this;
+	}
 
 	void SetLives(int lives) {
 		lives_ = lives;

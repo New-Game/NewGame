@@ -7,3 +7,19 @@
  */
 
 #include "Deathless.h"
+
+void Deathless::Load() {
+	
+}
+
+void Deathless::Update() {
+	
+}
+
+void Deathless::Draw() {
+	
+}
+
+void Deathless::Unload() {
+	
+}

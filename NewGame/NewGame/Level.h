@@ -43,7 +43,9 @@ enum MapElements {
 	ENDING_POINT,
 	MINION,
 	DEATHLESS,
-	BOSS 
+	BOSS,
+	SLOW_DOWN, // TRAP
+	TIME // BUFF
 };
 
 // 关卡类，多实例类，每个关卡都是它的一个对象
@@ -58,6 +60,7 @@ public:
 			starting_rect_(), 
 			ending_rect_(), 
 			original_character_info_(nullptr) {}
+
 	Level() : 
 			grid_size_(30), 
 			num_of_map_width_grid_(30), 
@@ -67,11 +70,15 @@ public:
 			starting_rect_(), 
 			ending_rect_(), 
 			original_character_info_(nullptr) {}
+
 	~Level() {}
 
 	void Load() override;
+
 	void Reset() override;
+
 	void Process() override;
+
 	void Unload() override;
 
 	// 用来存所有指向游戏元素对象的指针
@@ -94,8 +101,11 @@ private:
 	list<Monster*> original_monster_info_;
 
 	bool IsReachEnd() const;
+	
 	void BulletWallCollisionCheck() const;
+	
 	void BulletMonsterCollisionCheck() const;
+
 	void CharacterMonsterCollisionCheck();
 
 };

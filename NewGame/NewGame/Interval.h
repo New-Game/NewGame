@@ -18,16 +18,21 @@ using namespace std;
 // 游戏前序、背景故事、关卡1前序、关卡1后续、关卡2前序、关卡2后续、关卡3前序、关卡3后续、奖励环节、游戏后续 这些状态
 class Interval : public GameState {
 public:
-	Interval() : picture_file_name_(nullptr), mesh_(nullptr), texture_(nullptr) {}
 	Interval(string picture_file_name) : 
 			picture_file_name_(picture_file_name), 
 			mesh_(nullptr), 
 			texture_(nullptr) {}
+
+	Interval() : picture_file_name_(nullptr), mesh_(nullptr), texture_(nullptr) {}
+
 	~Interval() {}
 	
 	void Load() override;
+
 	void Reset() override;
+
 	void Process() override;
+
 	void Unload() override;
 
 private:

@@ -16,12 +16,17 @@ public:
 			GameElement(rect, picture_file_name), 
 			front_(front), 
 			speed_(6) {}
+
 	Bullet() : front_(DOWN), speed_(0) {}
+
 	~Bullet() {}
 
 	void Load() override;
+
 	void Update() override;
+
 	void Draw() override;
+
 	void Unload() override;
 
 private:

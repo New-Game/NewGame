@@ -12,6 +12,8 @@
 #include "Aimiliya.h"
 #include "Monster.h"
 #include "Minion.h"
+#include "Deathless.h"
+#include "Boss.h"
 
 void Level::Load() {
 	// 先设置本状态哪些键位是有效的
@@ -43,6 +45,7 @@ void Level::Load() {
 					starting_rect_ = temp_rect;
 					game_element_list_[CHARACTER].push_back(new Aimiliya(temp_rect, "picture\\aimiliya.png"));
 					game_element_list_[CHARACTER].back()->Load();
+					original_character_info_ = new Aimiliya(*dynamic_cast<Aimiliya*>(game_element_list_[CHARACTER].back()));
 					break;
 				case ENDING_POINT:
 					ending_rect_ = temp_rect;
@@ -54,6 +57,10 @@ void Level::Load() {
 				case DEATHLESS:
 					break;
 				case BOSS:
+					break;
+				case SLOW_DOWN:
+					break;
+				case TIME:
 					break;
 				default:
 					break;
@@ -68,13 +75,19 @@ void Level::Load() {
 		dynamic_cast<Monster*>(i)->SetXRange(j_min, j_max);
 		dynamic_cast<Monster*>(i)->SetYRange(i_min, i_max);
 		dynamic_cast<Monster*>(i)->SetFront(static_cast<Directions>(front));
+		if (typeid(*(i->GetClassType())) == typeid(Minion))
+			original_monster_info_.push_back(new Minion(*dynamic_cast<Minion*>(i)));
+		else if (typeid(*(i->GetClassType())) == typeid(Deathless))
+			original_monster_info_.push_back(new Deathless(*dynamic_cast<Deathless*>(i)));
+		else if (typeid(*(i->GetClassType())) == typeid(Boss))
+			original_monster_info_.push_back(new Boss(*dynamic_cast<Boss*>(i)));
 	}
 }
 
 // 重置人物、怪兽、物品的初始状态
 void Level::Reset() {
-	// 重置人物初始状态
-	game_element_list_[CHARACTER].back()->Reset();
+	// 重置人物初始状态并完成初始化
+	*dynamic_cast<Character*>(game_element_list_[CHARACTER].back()) = *original_character_info_;
 
 	// 释放掉当前已生成的子弹
 	for (auto& i : game_element_list_[BULLET]) {
@@ -85,8 +98,27 @@ void Level::Reset() {
 	game_element_list_[BULLET].clear();
 
 	// 重置怪物初始状态
-	for (auto& i : game_element_list_[MONSTER])
-		i->Reset();
+	// 先释放掉剩下的怪物
+	for (auto& i : game_element_list_[MONSTER]) {
+		i->Unload();
+		delete i;
+	}
+	game_element_list_[MONSTER].clear();
+	//再重新向链表中插入怪物对象并完成初始化
+	for (auto i : original_monster_info_) {
+		if (typeid(*(i->GetClassType())) == typeid(Minion)) {
+			game_element_list_[MONSTER].push_back(new Minion(*dynamic_cast<Minion*>(i)));
+			game_element_list_[MONSTER].back()->Load();
+		}
+		else if (typeid(*(i->GetClassType())) == typeid(Deathless)) {
+			game_element_list_[MONSTER].push_back(new Deathless(*dynamic_cast<Deathless*>(i)));
+			game_element_list_[MONSTER].back()->Load();
+		}
+		else if (typeid(*(i->GetClassType())) == typeid(Boss)) {
+			game_element_list_[MONSTER].push_back(new Boss(*dynamic_cast<Boss*>(i)));
+			game_element_list_[MONSTER].back()->Load();
+		}
+	}
 
 	// 重置buff初始状态
 	//game_element_list_[BUFF].back()->Reset();

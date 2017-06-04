@@ -31,26 +31,37 @@ public:
 			picture_file_name_(picture_file_name), 
 			mesh_(nullptr), 
 			texture_(nullptr) {}
+
 	GameElement(Rect rect, string picture_file_name) : 
 			rect_(rect), 
 			picture_file_name_(picture_file_name), 
 			mesh_(nullptr), 
 			texture_(nullptr) {}
-	explicit GameElement(Rect rect) : 
-			rect_(rect), 
-			picture_file_name_(""), 
-			mesh_(nullptr), 
-			texture_(nullptr) {}
+
+	GameElement(const GameElement& game_element) : 
+			rect_(game_element.rect_), 
+			picture_file_name_(game_element.picture_file_name_), 
+			mesh_(game_element.mesh_), 
+			texture_(game_element.texture_) {}
+
 	GameElement() : GameElement(0, 0, 0, "") {}
+
 	virtual ~GameElement() {}
+
+	virtual GameElement* GetClassType() {
+		return this;
+	}
 
 	Rect GetRect() const {
 		return rect_;
 	}
 
 	virtual void Load() = 0;
+
 	virtual void Update() = 0;
+
 	virtual void Draw() = 0;
+
 	virtual void Unload() = 0;
 
 protected:

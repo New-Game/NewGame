@@ -7,3 +7,19 @@
  */
 
 #include "Boss.h"
+
+void Boss::Load() {
+	
+}
+
+void Boss::Update() {
+	
+}
+
+void Boss::Draw() {
+	
+}
+
+void Boss::Unload() {
+	
+}

@@ -13,14 +13,20 @@
 // 墙体类，可直接生成对象
 class Wall : public GameElement {
 public:
-	Wall() {}
 	Wall(Rect rect, string picture_file_name) : GameElement(rect, picture_file_name) {}
+
+	Wall() {}
+
 	~Wall() {}
 
 	void Load() override;
+
 	void Update() override;
+
 	void Draw() override;
+
 	void Unload() override;
+
 private:
 
 };

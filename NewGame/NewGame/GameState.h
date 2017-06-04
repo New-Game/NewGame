@@ -34,9 +34,13 @@ public:
 	virtual ~GameState() {}
 
 	// 用来给子类（派生类）重写的 纯虚函数，每个子类都必须重写这个函数来定义其游戏状态的运行方式
+
 	virtual void Load() = 0;
+
 	virtual void Reset() = 0;
+
 	virtual void Process() = 0;
+
 	virtual void Unload() = 0;
 
 	bool GetIsReadyForNextGameState() const {

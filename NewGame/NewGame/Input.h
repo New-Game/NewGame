@@ -28,8 +28,10 @@ enum Keys {
 class KeyStatus {
 public:
 	KeyStatus() : is_valid_(false), is_pressed_(false) {}
+
 	KeyStatus(const KeyStatus& key_status) : 
 	          is_valid_(key_status.GetIsValid()), is_pressed_(key_status.GetIsPressed()) {}
+
 	~KeyStatus() {}
 
 	bool GetIsValid() const {
