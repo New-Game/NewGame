@@ -22,8 +22,6 @@ void Bullet::Load() {
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
 }
 
-void Bullet::Reset() {}
-
 void Bullet::Update() {
 	switch (front_) {
 		case UP:

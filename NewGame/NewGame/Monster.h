@@ -14,13 +14,21 @@
 // 用于派生具体怪物类，成员函数使用虚函数来实现多态
 class Monster : public GameElement {
 public:
-	Monster(Rect rect, string picture_file_name) : GameElement(rect, picture_file_name),
-		                                           front_(DOWN),
-	                                               speed_(1),
-	                                               x_min_(0), x_max_(0),
-	                                               y_min_(0), y_max_(0),
-	                                               original_(nullptr) {}
-	Monster() : front_(DOWN), speed_(1), x_min_(0), x_max_(0), y_min_(0), y_max_(0), original_(nullptr) {}
+	Monster(Rect rect, string picture_file_name) : 
+			GameElement(rect, picture_file_name), 
+			front_(DOWN), 
+			speed_(1), 
+			x_min_(0), 
+			x_max_(0), 
+			y_min_(0), 
+			y_max_(0) {}
+	Monster() : 
+			front_(DOWN), 
+			speed_(1), 
+			x_min_(0), 
+			x_max_(0), 
+			y_min_(0), 
+			y_max_(0) {}
 	virtual ~Monster() {}
 
 	void SetFront(Directions front) {
@@ -44,7 +52,6 @@ protected:
 	int x_max_;
 	int y_min_;
 	int y_max_;
-	Monster* original_;
 
 	void Move();
 	void DropBuff();

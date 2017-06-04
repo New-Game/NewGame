@@ -172,7 +172,6 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="State.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Trap.h" />
     <ClInclude Include="Wall.h" />

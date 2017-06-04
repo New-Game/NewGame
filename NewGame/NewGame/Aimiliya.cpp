@@ -21,17 +21,6 @@ void Aimiliya::Load() {
 		0.0f, float(rect_.GetSize()), 0xFFFF0000, 0.0f, 1.0f);
 	mesh_ = AEGfxMeshEnd();
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
-	original_ = new Aimiliya(this);
-}
-
-void Aimiliya::Reset() {
-	// ÷ÿ÷√rect, front, lives, damage, speed, skill_cold_down
-	rect_ = dynamic_cast<Aimiliya*>(original_)->rect_;
-	front_ = dynamic_cast<Aimiliya*>(original_)->front_;
-	lives_ = dynamic_cast<Aimiliya*>(original_)->lives_;
-	damage_ = dynamic_cast<Aimiliya*>(original_)->damage_;
-	speed_ = dynamic_cast<Aimiliya*>(original_)->speed_;
-	skill_cold_down_ = dynamic_cast<Aimiliya*>(original_)->skill_cold_down_;
 }
 
 void Aimiliya::Update() {

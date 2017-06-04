@@ -12,14 +12,14 @@
 
 class Bullet : public GameElement {
 public:
-	Bullet(Directions front, Rect rect, string picture_file_name) : GameElement(rect, picture_file_name), 
-		                                                                front_(front),
-	                                                                    speed_(6) {}
+	Bullet(Directions front, Rect rect, string picture_file_name) : 
+			GameElement(rect, picture_file_name), 
+			front_(front), 
+			speed_(6) {}
 	Bullet() : front_(DOWN), speed_(0) {}
 	~Bullet() {}
 
 	void Load() override;
-	void Reset() override;
 	void Update() override;
 	void Draw() override;
 	void Unload() override;

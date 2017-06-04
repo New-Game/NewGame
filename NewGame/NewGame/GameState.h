@@ -9,7 +9,6 @@
 #pragma once
 
 #include <string>
-#include "State.h"
 
 using namespace std;
 
@@ -21,12 +20,13 @@ using namespace std;
 // 第二种是在状态中显示相关信息，按Enter可以进入下一状态的
 // 第三种就是关卡状态，每个关卡都是关卡类的一个对象
 
-class GameState : public State {
+class GameState {
 public:
 	// 无参构造函数
-	GameState() : is_ready_for_next_game_state_(false),
-	              is_ready_for_restart_(false),
-	              is_ready_for_exit_(false) {}
+	GameState() : 
+			is_ready_for_next_game_state_(false), 
+			is_ready_for_restart_(false), 
+			is_ready_for_exit_(false) {}
 
 	// 未写复制构造函数，因为没有这种需求
 
@@ -34,7 +34,10 @@ public:
 	virtual ~GameState() {}
 
 	// 用来给子类（派生类）重写的 纯虚函数，每个子类都必须重写这个函数来定义其游戏状态的运行方式
+	virtual void Load() = 0;
+	virtual void Reset() = 0;
 	virtual void Process() = 0;
+	virtual void Unload() = 0;
 
 	bool GetIsReadyForNextGameState() const {
 		return is_ready_for_next_game_state_;

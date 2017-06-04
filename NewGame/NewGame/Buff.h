@@ -23,16 +23,16 @@ enum Buffs {
 
 class Buff : public GameElement {
 public:
-	Buff(Buffs type, Rect rect, string picture_file_name) : GameElement(rect, picture_file_name),
-		                                                         type_(type),
-	                                                             existing_time_(15), 
-	                                                             lasting_time_(15),
-	                                                             status_(false) {}
+	Buff(Buffs type, Rect rect, string picture_file_name) : 
+			GameElement(rect, picture_file_name), 
+			type_(type), 
+			existing_time_(15), 
+			lasting_time_(15), 
+			status_(false) {}
 	Buff() : type_(NONE), existing_time_(15), lasting_time_(15), status_(false) {}
 	~Buff() {}
 
 	void Load() override;
-	void Reset() override;
 	void Update() override;
 	void Draw() override;
 	void Unload() override;

@@ -20,18 +20,6 @@ void Minion::Load() {
 		0.0f, float(rect_.GetSize()), 0xFFFF0000, 0.0f, 1.0f);
 	mesh_ = AEGfxMeshEnd();
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
-	original_ = new Minion(this);
-}
-
-void Minion::Reset() {
-	// ÷ÿ÷√rect, front, speed, x_min, x_max, y_min, y_max
-	rect_ = dynamic_cast<Minion*>(original_)->rect_;
-	front_ = dynamic_cast<Minion*>(original_)->front_;
-	speed_ = dynamic_cast<Minion*>(original_)->speed_;
-	x_min_ = dynamic_cast<Minion*>(original_)->x_min_;
-	x_max_ = dynamic_cast<Minion*>(original_)->x_max_;
-	y_min_ = dynamic_cast<Minion*>(original_)->y_min_;
-	y_max_ = dynamic_cast<Minion*>(original_)->y_max_;
 }
 
 void Minion::Update() {

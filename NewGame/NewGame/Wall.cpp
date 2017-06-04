@@ -22,8 +22,6 @@ void Wall::Load() {
 	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
 }
 
-void Wall::Reset() {}
-
 void Wall::Update() {}
 
 void Wall::Draw() {

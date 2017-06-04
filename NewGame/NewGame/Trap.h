@@ -18,7 +18,6 @@ public:
 	virtual ~Trap() {}
 
 	void Load() override;
-	void Reset() override;
 	void Update() override;
 	void Draw() override;
 	void Unload() override;

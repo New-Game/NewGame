@@ -14,6 +14,8 @@
 #include "System.h"
 #include "GameElement.h"
 #include "Wall.h"
+#include "Character.h"
+#include "Monster.h"
 
 namespace std {
 	template<>
@@ -23,16 +25,22 @@ namespace std {
 // 关卡类，多实例类，每个关卡都是它的一个对象
 class Level : public GameState {
 public:
-	Level(string config_file_name) : grid_size_(30),
-	                                 num_of_map_width_grid_(30),
-	                                 num_of_map_height_grid_(20),
-	                                 character_status_bar_width_(100),
-	                                 map_config_file_(config_file_name) {}
-	Level() : grid_size_(30),
-	          num_of_map_width_grid_(30),
-	          num_of_map_height_grid_(20),
-		      character_status_bar_width_(100),
-	          map_config_file_() {}
+	Level(string config_file_name) : 
+			grid_size_(30), 
+			num_of_map_width_grid_(30), 
+			num_of_map_height_grid_(20), 
+			character_status_bar_width_(100), 
+			map_config_file_(config_file_name), 
+			ending_(), 
+			original_character_info_(nullptr) {}
+	Level() : 
+			grid_size_(30), 
+			num_of_map_width_grid_(30), 
+			num_of_map_height_grid_(20), 
+			character_status_bar_width_(100), 
+			map_config_file_(), 
+			ending_(), 
+			original_character_info_(nullptr) {}
 	~Level() {}
 
 	void Load() override;
@@ -55,6 +63,8 @@ private:
 
 	ifstream map_config_file_;
 	Rect ending_;
+	Character* original_character_info_;
+	list<Monster*> original_monster_info_;
 
 	bool IsReachEnd() const;
 	void BulletWallCollisionCheck() const;

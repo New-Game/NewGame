@@ -12,10 +12,6 @@ void Buff::Load() {
 	
 }
 
-void Buff::Reset() {
-	
-}
-
 void Buff::Update() {
 	
 }

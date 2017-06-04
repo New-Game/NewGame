@@ -72,9 +72,6 @@
     <ClInclude Include="GameStateManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="GameElement.h">
       <Filter>头文件</Filter>
     </ClInclude>
