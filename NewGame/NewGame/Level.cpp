@@ -168,9 +168,10 @@ void Level::BulletWallCollisionCheck() const {
 }
 
 void Level::BulletMonsterCollisionCheck() const {
-	bool i_should_increase = true;
-	for (auto i = game_element_list_[BULLET].begin(); i != game_element_list_[BULLET].end();) {
-		for (auto j = game_element_list_[MONSTER].begin(); j != game_element_list_[MONSTER].end();) {
+	bool flag = true;
+	for (auto i = game_element_list_[BULLET].begin(); flag && i != game_element_list_[BULLET].end();) {
+		bool i_should_increase = true;
+		for (auto j = game_element_list_[MONSTER].begin(); flag && j != game_element_list_[MONSTER].end();) {
 			if (i != game_element_list_[BULLET].end()) {
 				if ((*i)->GetRect().IsCollision((*j)->GetRect())) {
 					(*i)->Unload();
@@ -185,12 +186,11 @@ void Level::BulletMonsterCollisionCheck() const {
 					++j;
 			}
 			else
-				goto END;
+				flag = false;
 		}
 		if (i_should_increase)
 			++i;
 	}
-END:;
 }
 
 void Level::CharacterMonsterCollisionCheck() {
