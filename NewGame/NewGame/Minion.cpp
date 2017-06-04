@@ -37,5 +37,4 @@ void Minion::Draw() {
 void Minion::Unload() {
 	AEGfxTextureUnload(texture_);
 	AEGfxMeshFree(mesh_);
-	delete original_;
 }

@@ -39,18 +39,21 @@ void Level::Load() {
 					wall_list_.insert(make_pair(temp_rect, Wall(temp_rect, "picture\\ice.png")));
 					wall_list_[temp_rect].Load();
 					break;
-				case TRAP:
-					break;
-				case CHARACTER:
+				case STARTING_POINT:
+					starting_rect_ = temp_rect;
 					game_element_list_[CHARACTER].push_back(new Aimiliya(temp_rect, "picture\\aimiliya.png"));
 					game_element_list_[CHARACTER].back()->Load();
 					break;
-				case MONSTER:
+				case ENDING_POINT:
+					ending_rect_ = temp_rect;
+					break;
+				case MINION:
 					game_element_list_[MONSTER].push_back(new Minion(temp_rect, "picture\\minion.png"));
 					game_element_list_[MONSTER].back()->Load();
 					break;
-				case Ending:
-					ending_ = temp_rect;
+				case DEATHLESS:
+					break;
+				case BOSS:
 					break;
 				default:
 					break;
@@ -147,7 +150,7 @@ void Level::Unload() {
 }
 
 bool Level::IsReachEnd() const {
-	return game_element_list_[CHARACTER].back()->GetRect() == ending_;
+	return game_element_list_[CHARACTER].back()->GetRect() == ending_rect_;
 }
 
 void Level::BulletWallCollisionCheck() const {

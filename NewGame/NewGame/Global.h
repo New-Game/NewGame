@@ -29,7 +29,7 @@ ofstream System::console_out_;
 
 KeyStatus Input::pressed_key_[NUM_OF_KEY];
 
-GameState* GameStateManager::game_state_[NUM_OF_GAME_STATES];
+GameState* GameStateManager::game_state_list_[NUM_OF_GAME_STATES];
 GameState** GameStateManager::game_state_pointer_;
 
 list<GameElement*> Level::game_element_list_[NUM_OF_GAME_ELEMENT_TYPE];

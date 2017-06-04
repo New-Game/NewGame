@@ -46,5 +46,4 @@ void Aimiliya::Draw() {
 void Aimiliya::Unload() {
 	AEGfxTextureUnload(texture_);
 	AEGfxMeshFree(mesh_);
-	delete original_;
 }

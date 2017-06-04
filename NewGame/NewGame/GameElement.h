@@ -14,19 +14,7 @@
 
 using namespace std;
 
-enum GameElements {
-	ROAD,
-	WALL,
-	TRAP,
-	CHARACTER,
-	MONSTER,
-	BULLET,
-	TREASURE,
-	BUFF,
-	NUM_OF_GAME_ELEMENT_TYPE,
-	Ending
-};
-
+// 游戏元素的面向方向
 enum Directions {
 	UP,
 	DOWN,

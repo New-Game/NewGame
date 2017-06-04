@@ -10,6 +10,7 @@
 
 #include "GameState.h"
 
+// 用来构造game_state_list_[]数组下标
 enum GameStates {
 	GAME_PREFACE,
 	BACKGROUND_STORY,
@@ -46,7 +47,7 @@ public:
 
 	// 是否还有下一个游戏状态
 	static bool HasNextGameState() {
-		return game_state_pointer_ != game_state_ + GAME_ENDING;
+		return game_state_pointer_ != game_state_list_ + GAME_ENDING;
 	}
 
 	// 把当前游戏状态更新为下一个状态（必须在HasNextGameState()返回true的情况下调用）
@@ -55,6 +56,6 @@ public:
 	}
 
 private:
-	static GameState* game_state_[NUM_OF_GAME_STATES];
+	static GameState* game_state_list_[NUM_OF_GAME_STATES];
 	static GameState** game_state_pointer_;
 };

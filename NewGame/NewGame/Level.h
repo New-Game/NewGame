@@ -22,6 +22,30 @@ namespace std {
 	struct hash<Rect> : _Bitwise_hash<Rect> {}; // hash functor for Rect
 }
 
+// 用来构造game_element_list_[]数组下标
+enum GameElements {
+	//ROAD,
+	//WALL,
+	TRAP,
+	CHARACTER,
+	MONSTER,
+	BULLET,
+	//TREASURE,
+	BUFF,
+	NUM_OF_GAME_ELEMENT_TYPE,
+};
+
+// 用来识别地图配置文件中的数字
+enum MapElements {
+	ROAD,
+	WALL,
+	STARTING_POINT,
+	ENDING_POINT,
+	MINION,
+	DEATHLESS,
+	BOSS 
+};
+
 // 关卡类，多实例类，每个关卡都是它的一个对象
 class Level : public GameState {
 public:
@@ -31,7 +55,8 @@ public:
 			num_of_map_height_grid_(20), 
 			character_status_bar_width_(100), 
 			map_config_file_(config_file_name), 
-			ending_(), 
+			starting_rect_(), 
+			ending_rect_(), 
 			original_character_info_(nullptr) {}
 	Level() : 
 			grid_size_(30), 
@@ -39,7 +64,8 @@ public:
 			num_of_map_height_grid_(20), 
 			character_status_bar_width_(100), 
 			map_config_file_(), 
-			ending_(), 
+			starting_rect_(), 
+			ending_rect_(), 
 			original_character_info_(nullptr) {}
 	~Level() {}
 
@@ -62,7 +88,8 @@ private:
 	const int character_status_bar_width_;
 
 	ifstream map_config_file_;
-	Rect ending_;
+	Rect starting_rect_;
+	Rect ending_rect_;
 	Character* original_character_info_;
 	list<Monster*> original_monster_info_;
 
