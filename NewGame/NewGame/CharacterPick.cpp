@@ -49,6 +49,11 @@ void CharacterPick::Process() {
 		//AEGfxSetBlendColor(0.0f, 0.0f, 0.0, 0.0f);
 		AEGfxMeshDraw(mesh_, AE_GFX_MDM_TRIANGLES);
 
+		//HDC current_hdc = GetWindowDC(GetActiveWindow());
+		//BeginPath(current_hdc);
+		//TextOut(current_hdc, 0, 500, "hello world", 11);
+		//EndPath(current_hdc);
+
 		AESysFrameEnd();
 	}
 }

@@ -230,7 +230,9 @@ void Level::BulletMonsterCollisionCheck() const {
 
 void Level::CharacterMonsterCollisionCheck() {
 	for (auto& i : game_element_list_[MONSTER]) {
-		if (game_element_list_[CHARACTER].back()->GetRect().IsCollision(i->GetRect()))
+		if (game_element_list_[CHARACTER].back()->GetRect().IsCollision(i->GetRect())) {
 			Reset();
+			break;
+		}
 	}
 }

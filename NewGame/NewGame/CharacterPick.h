@@ -8,7 +8,6 @@
 
 #pragma once
 
-#include <iostream>
 #include "GameState.h"
 #include "System.h"
 

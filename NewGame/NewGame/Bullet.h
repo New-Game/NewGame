@@ -15,9 +15,9 @@ public:
 	Bullet(Directions front, Rect rect, string picture_file_name) : 
 			GameElement(rect, picture_file_name), 
 			front_(front), 
-			speed_(6) {}
+			speed_(4) {}
 
-	Bullet() : front_(DOWN), speed_(0) {}
+	Bullet() : front_(DOWN), speed_(4) {}
 
 	~Bullet() {}
 

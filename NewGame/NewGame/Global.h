@@ -8,7 +8,6 @@
 
 #pragma once
 
-#include <fstream>
 #include <Windows.h>
 #include "AEEngine.h"
 #include "System.h"
@@ -23,9 +22,8 @@ const int System::window_height_;
 AESysInitInfo System::sys_init_info_;
 WNDCLASS System::win_class_;
 HINSTANCE System::h_instance_;
-//ofstream System::log_file_;
-streambuf* System::streambuf_pointer_;
-ofstream System::console_out_;
+//streambuf* System::streambuf_pointer_;
+//ofstream System::console_out_;
 
 KeyStatus Input::pressed_key_[NUM_OF_KEY];
 

@@ -29,16 +29,14 @@ void GameStateManager::Start() {
 	game_state_list_[GAME_ENDING] = new Interval("picture\\game_ending.png");
 	game_state_pointer_ = game_state_list_;
 
-	if (System::GetAESysInitInfo().mCreateConsole)
-		cout << "GameStateManager: Initialize." << endl;
+	//if (System::GetAESysInitInfo().mCreateConsole)
+	//	cout << "GameStateManager: Initialize." << endl;
 }
 
 void GameStateManager::End() {
-	//for (auto i = 0; i < NUM_OF_GAME_STATES; ++i)
-		//delete game_state_list_[i];
 	for (auto& i : game_state_list_)
 		delete i;
 
-	if (System::GetAESysInitInfo().mCreateConsole)
-		cout << "GameStateManager: Exit." << endl;
+	//if (System::GetAESysInitInfo().mCreateConsole)
+	//	cout << "GameStateManager: Exit." << endl;
 }

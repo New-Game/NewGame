@@ -7,7 +7,6 @@
  */
 
 #include <iostream>
-#include <fstream>
 #include "AEEngine.h"
 #include "System.h"
 #include "Input.h"
@@ -75,40 +74,34 @@ void System::Start(HINSTANCE hInstance, int nCmdShow) {
 	// 把世界坐标原点设为屏幕左上角
 	AEGfxSetWorldOriginMode(AE_WOM_TOP_LEFT);
 
-	// 分配控制台来帮助debug，把标准输出流重定向到AE系统的控制台
-	if (sys_init_info_.mCreateConsole) {
-		AllocConsole();
-		console_out_.open("CONOUT$");
-		streambuf_pointer_ = cout.rdbuf(console_out_.rdbuf());
-		cout << "Console is ready for debug." << endl;
-	}
-	// 之后所有标准输出都会在AE系统的控制台上打印出来
+	//// 分配控制台来帮助debug，把标准输出流重定向到AE系统的控制台
+	//if (sys_init_info_.mCreateConsole) {
+	//	AllocConsole();
+	//	console_out_.open("CONOUT$");
+	//	streambuf_pointer_ = cout.rdbuf(console_out_.rdbuf());
+	//	cout << "Console is ready for debug." << endl;
+	//}
+	//// 之后所有标准输出都会在AE系统的控制台上打印出来
 
-	//// 打开文件用于之后写log，该文件成为一个输出的流
-	//log_file_.open("log.txt", std::ios::out);
-
-	if (sys_init_info_.mCreateConsole)
-		cout << "System: Initialize." << endl;
+	//if (sys_init_info_.mCreateConsole)
+	//	cout << "System: Initialize." << endl;
 }
 
 // 系统退出函数
 void System::End() {
-	if (sys_init_info_.mCreateConsole)
-		cout << "System: Exit." << endl;
+	//if (sys_init_info_.mCreateConsole)
+	//	cout << "System: Exit." << endl;
 
-	// 如果选择开出AE系统控制台的话
-	if (sys_init_info_.mCreateConsole) {
-		// 恢复cout的流对象缓冲指针并关闭console_out_流
-		cout.rdbuf(streambuf_pointer_);
-		console_out_.close();
-	}
+	//// 如果选择开出AE系统控制台的话
+	//if (sys_init_info_.mCreateConsole) {
+	//	// 恢复cout的流对象缓冲指针并关闭console_out_流
+	//	cout.rdbuf(streambuf_pointer_);
+	//	console_out_.close();
+	//}
 
 	// Alpha系统退出
 	AESysExit();
 
 	// 窗口注销
 	UnregisterClass(win_class_.lpszClassName, h_instance_);
-
-	//// 关闭文件，结束对log记录文件的写入
-	//log_file_.close();
 }

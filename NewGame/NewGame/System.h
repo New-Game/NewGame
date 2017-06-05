@@ -33,11 +33,6 @@ public:
 		return h_instance_;
 	}
 
-	//// 返回用来写log的文件流对象
-	//static std::ofstream& GetLogFile() {
-	//	return log_file_;
-	//}
-
 private:
 	// 窗口宽度
 	static const int window_width_ = 1016;
@@ -54,12 +49,9 @@ private:
 	// 当前实例
 	static HINSTANCE h_instance_;
 
-	//// 生成一个文件流对象，可以通过它打开文件,之后就可以向该文件中写log
-	//static std::ofstream log_file_;
+	//// 生成一个文件流对象，用来和AE控制台输出流相连
+	//static std::ofstream console_out_;
 
-	// 生成一个文件流对象，用来和AE控制台输出流相连
-	static std::ofstream console_out_;
-
-	// 保存cout被重定向前的流对象缓冲指针，之后可用于恢复该流对象缓冲指针
-	static std::streambuf* streambuf_pointer_;
+	//// 保存cout被重定向前的流对象缓冲指针，之后可用于恢复该流对象缓冲指针
+	//static std::streambuf* streambuf_pointer_;
 };

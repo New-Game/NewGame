@@ -63,7 +63,11 @@ protected:
 	int skill_cold_down_;
 
 	void Move();
+
 	void Attack() const;
+
 	void UseSkill();
+
 	void GetBuff();
+
 };
