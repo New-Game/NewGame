@@ -10,8 +10,8 @@
 
 #include <list>
 #include <unordered_map>
+#include <fstream>
 #include "GameState.h"
-#include "System.h"
 #include "GameElement.h"
 #include "Wall.h"
 #include "Character.h"

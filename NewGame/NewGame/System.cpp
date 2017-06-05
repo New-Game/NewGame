@@ -19,16 +19,16 @@ using namespace std;
 // 系统初始化函数
 void System::Start(HINSTANCE hInstance, int nCmdShow) {
 	// 将实例句柄存储在全局变量中
-	h_instance_ = hInstance;
+	instance_ = hInstance;
 
 	// Alpha系统初始化信息设置
 	sys_init_info_.mAppInstance = hInstance;              // WinMain的第1个参数
 	sys_init_info_.mShow = nCmdShow;                      // WinMain的第4个参数
 	sys_init_info_.mWinWidth = window_width_;             // 窗口宽度
-	sys_init_info_.mWinHeight = window_height_;            // 窗口高度
+	sys_init_info_.mWinHeight = window_height_;           // 窗口高度
 	sys_init_info_.mCreateConsole = 0;                    // 是否需要打开控制台，1表示是，0表示否
 	sys_init_info_.mCreateWindow = 0;                     // 是否需要创建窗口，1表示是，0表示否
-	sys_init_info_.mMaxFrameRate = 120;                    // 设置帧率（使用Alpha的帧率控制功能）
+	sys_init_info_.mMaxFrameRate = frame_rate_;           // 设置帧率（使用Alpha的帧率控制功能）
 	sys_init_info_.mpWinCallBack = nullptr;               // 因为没用Alpha创建窗口，所以设置为NULL
 	sys_init_info_.mClassStyle = CS_HREDRAW | CS_VREDRAW; // 窗口类定义的重绘方式，水平重绘和垂直重绘
 	sys_init_info_.mWindowStyle = WS_OVERLAPPEDWINDOW;    // 窗口风格
@@ -60,12 +60,12 @@ void System::Start(HINSTANCE hInstance, int nCmdShow) {
 	 * hInstance,            WinMain的第1个参数
 	 * NULL);                WM_Create消息传递用到的
 	 */
-	HWND win_handle = CreateWindow(win_class_.lpszClassName, LPCSTR("从零开始的迷宫大作战"), WS_OVERLAPPEDWINDOW, 0, 0, window_width_, window_height_, nullptr, nullptr, hInstance, nullptr);
-	ShowWindow(win_handle, nCmdShow);
-	UpdateWindow(win_handle);
+	HWND handle = CreateWindow(win_class_.lpszClassName, LPCSTR("从零开始的迷宫大作战"), WS_OVERLAPPEDWINDOW, 0, 0, window_width_, window_height_, nullptr, nullptr, hInstance, nullptr);
+	ShowWindow(handle, nCmdShow);
+	UpdateWindow(handle);
 
 	// 设置Alpha系统窗口句柄
-	sys_init_info_.mWindowHandle = win_handle;
+	sys_init_info_.mWindowHandle = handle;
 
 	// Alpha系统初始化及模块重置
 	AESysInit(&sys_init_info_);
@@ -103,5 +103,5 @@ void System::End() {
 	AESysExit();
 
 	// 窗口注销
-	UnregisterClass(win_class_.lpszClassName, h_instance_);
+	UnregisterClass(win_class_.lpszClassName, instance_);
 }

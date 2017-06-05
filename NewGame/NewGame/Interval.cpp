@@ -59,6 +59,7 @@ void Interval::Process() {
 }
 
 void Interval::Unload() {
+	AEGfxTextureUnload(texture_);
 	AEGfxMeshFree(mesh_);
 	// 重置有效按键
 	Input::ResetPressedKey();

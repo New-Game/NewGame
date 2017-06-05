@@ -199,6 +199,7 @@
     <ClCompile Include="Minion.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="Trap.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>

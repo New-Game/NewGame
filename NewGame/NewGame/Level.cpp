@@ -14,6 +14,7 @@
 #include "Minion.h"
 #include "Deathless.h"
 #include "Boss.h"
+#include "Trap.h"
 
 void Level::Load() {
 	// 先设置本状态哪些键位是有效的
@@ -59,6 +60,8 @@ void Level::Load() {
 				case BOSS:
 					break;
 				case SLOW_DOWN:
+					game_element_list_[TRAP].push_back(new Trap(SLOW, temp_rect, "picture\\wall.png", "picture\\minion.png"));
+					game_element_list_[TRAP].back()->Load();
 					break;
 				case TIME:
 					break;
@@ -122,6 +125,8 @@ void Level::Reset() {
 
 	// 重置buff初始状态
 	//game_element_list_[BUFF].back()->Reset();
+
+	// 重置trap初始状态
 }
 
 void Level::Process() {
@@ -158,7 +163,7 @@ void Level::Process() {
 		// 画出墙体
 		for (auto& i : wall_list_)
 			i.second.Draw();
-		
+
 		AESysFrameEnd();
 	}
 }

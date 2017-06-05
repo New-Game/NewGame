@@ -48,17 +48,12 @@ void CharacterPick::Process() {
 		//AEGfxSetTransparency(1.0f);
 		//AEGfxSetBlendColor(0.0f, 0.0f, 0.0, 0.0f);
 		AEGfxMeshDraw(mesh_, AE_GFX_MDM_TRIANGLES);
-
-		//HDC current_hdc = GetWindowDC(GetActiveWindow());
-		//BeginPath(current_hdc);
-		//TextOut(current_hdc, 0, 500, "hello world", 11);
-		//EndPath(current_hdc);
-
 		AESysFrameEnd();
 	}
 }
 
 void CharacterPick::Unload() {
+	AEGfxTextureUnload(texture_);
 	AEGfxMeshFree(mesh_);
 	// 重置有效按键
 	Input::ResetPressedKey();

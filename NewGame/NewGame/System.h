@@ -9,7 +9,6 @@
 #pragma once
 
 #include "AEEngine.h"
-#include <fstream>
 #include <Windows.h>
 
 // System类的实现完全只是为了封装与它相关的状态量（成员变量）和行为（成员函数）
@@ -23,6 +22,11 @@ public:
 	// 系统退出函数
 	static void End();
 
+	// 返回游戏帧率值
+	static unsigned GetFrameRate() {
+		return frame_rate_;
+	}
+
 	// 返回AE系统初始化信息的结构体
 	static AESysInitInfo& GetAESysInitInfo() {
 		return sys_init_info_;
@@ -30,7 +34,7 @@ public:
 
 	// 返回当前窗口实例
 	static HINSTANCE& GetHInstance() {
-		return h_instance_;
+		return instance_;
 	}
 
 private:
@@ -40,6 +44,9 @@ private:
 	// 窗口高度（要把标题栏的高度考虑进去）
 	static const int window_height_ = 640;
 	
+	// 游戏帧率
+	static const unsigned frame_rate_ = 120;
+
 	// AE系统初始化信息的结构体
 	static AESysInitInfo sys_init_info_;
 
@@ -47,7 +54,7 @@ private:
 	static WNDCLASS win_class_;
 
 	// 当前实例
-	static HINSTANCE h_instance_;
+	static HINSTANCE instance_;
 
 	//// 生成一个文件流对象，用来和AE控制台输出流相连
 	//static std::ofstream console_out_;
