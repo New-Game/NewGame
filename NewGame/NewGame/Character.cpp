@@ -10,6 +10,7 @@
 #include "Input.h"
 #include "Level.h"
 #include "Bullet.h"
+#include "Buff.h"
 
 void Character::Move() {
 	if (Input::GetPressedKey(KEY_UP).GetIsPressed()) {
@@ -122,6 +123,24 @@ void Character::Attack() const {
 	}
 }
 
-void Character::UseSkill() {}
+void Character::GetBuff(Buffs type) {
+	switch (type) {
+		case SPEED:
+			break;
+		case DAMAGE:
+			break;
+		case CD:
+			break;
+		case INVINCIBLE:
+			break;
+		default:
+			break;
+	}
+}
 
-void Character::GetBuff() {}
+void Character::GetDebuff(Traps type) {
+	
+}
+
+
+void Character::UseSkill() {}

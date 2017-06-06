@@ -6,16 +6,16 @@
  * Purpose:      关卡类实现文件
  */
 
+#include <ctime>
 #include "Level.h"
 #include "Input.h"
-#include "Wall.h"
+#include "Number.h"
 #include "Aimiliya.h"
-#include "Monster.h"
 #include "Minion.h"
 #include "Deathless.h"
 #include "Boss.h"
 #include "Trap.h"
-#include "Number.h"
+#include "Buff.h"
 
 void Level::Load() {
 	// 先设置本状态哪些键位是有效的
@@ -60,11 +60,21 @@ void Level::Load() {
 					break;
 				case BOSS:
 					break;
-				case SLOW_DOWN:
+				case SLOW_TRAP:
 					game_element_list_[TRAP].push_back(new Trap(SLOW, temp_rect));
 					game_element_list_[TRAP].back()->Load();
 					break;
-				case TIME:
+				case KILL_TRAP:
+					break;
+				case BACK_TRAP:
+					break;
+				case WEAK_TRAP:
+					break;
+				case RANDOM_BUFF:
+					//srand(time(nullptr));
+					//Buffs type = static_cast<Buffs>(rand() % (NUM_OF_BUFF_TYPES - 1));
+					game_element_list_[BUFF].push_back(new Buff(TIME, temp_rect));
+					game_element_list_[BUFF].back()->Load();
 					break;
 				default:
 					break;
@@ -167,6 +177,7 @@ void Level::Process() {
 		BulletWallCollisionCheck();
 		BulletMonsterCollisionCheck();
 		CharacterMonsterCollisionCheck();
+		CharacterBuffCollisionCheck();
 
 		// 画出更新后的游戏元素
 		for (auto& list : game_element_list_)
@@ -230,7 +241,7 @@ bool Level::IsReachEnd() const {
 	return game_element_list_[CHARACTER].back()->GetRect() == ending_rect_;
 }
 
-void Level::BulletWallCollisionCheck() const {
+void Level::BulletWallCollisionCheck() {
 	for (auto i = game_element_list_[BULLET].begin(); i != game_element_list_[BULLET].end();) {
 		auto temp_j = (*i)->GetRect().GetX() / grid_size_;
 		auto temp_i = (*i)->GetRect().GetY() / grid_size_;
@@ -247,7 +258,7 @@ void Level::BulletWallCollisionCheck() const {
 	}
 }
 
-void Level::BulletMonsterCollisionCheck() const {
+void Level::BulletMonsterCollisionCheck() {
 	bool flag = true;
 	for (auto i = game_element_list_[BULLET].begin(); flag && i != game_element_list_[BULLET].end();) {
 		bool i_should_increase = true;
@@ -285,5 +296,34 @@ void Level::CharacterMonsterCollisionCheck() {
 			}
 			break;
 		}
+	}
+}
+
+void Level::CharacterBuffCollisionCheck() {
+	for (auto i = game_element_list_[BUFF].begin(); i != game_element_list_[BUFF].end();) {
+		if (dynamic_cast<Buff*>(*i)->GetStatus()) {
+			Character* p_character = dynamic_cast<Character*>(game_element_list_[CHARACTER].back());
+			if (p_character->GetRect().IsCollision((*i)->GetRect())) {
+				Buffs type = dynamic_cast<Buff*>(*i)->GetType();
+				switch (type) {
+					case TIME:
+						time_left_ += 15;
+						break;
+					case SCORE:
+						score_ += 100;
+						break;
+					default:
+						p_character->GetBuff(type);
+						break;
+				}
+				(*i)->Unload();
+				delete *i;
+				i = game_element_list_[BUFF].erase(i);
+			}
+			else
+				++i;
+		}
+		else
+			break;
 	}
 }

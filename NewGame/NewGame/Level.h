@@ -24,29 +24,15 @@ namespace std {
 
 // 用来构造game_element_list_[]数组下标
 enum GameElements {
-	//ROAD,
-	//WALL,
-	TRAP,
 	CHARACTER,
 	MONSTER,
-	BULLET,
-	//TREASURE,
 	BUFF,
-	NUM_OF_GAME_ELEMENT_TYPE,
+	TRAP,
+	BULLET,
+	NUM_OF_GAME_ELEMENT_TYPES
 };
 
-// 用来识别地图配置文件中的数字
-enum MapElements {
-	ROAD,
-	WALL,
-	STARTING_POINT,
-	ENDING_POINT,
-	MINION,
-	DEATHLESS,
-	BOSS,
-	SLOW_DOWN, // TRAP
-	TIME // BUFF
-};
+
 
 // 关卡类，多实例类，每个关卡都是它的一个对象
 class Level : public GameState {
@@ -78,13 +64,29 @@ public:
 	void Unload() override;
 
 	// 用来存所有指向游戏元素对象的指针
-	static list<GameElement*> game_element_list_[NUM_OF_GAME_ELEMENT_TYPE];
+	static list<GameElement*> game_element_list_[NUM_OF_GAME_ELEMENT_TYPES];
 
 	// 用来存所有指向墙体对象的指针
 	static unordered_map<Rect, Wall> wall_list_;
 	
 
 private:
+	// 用来识别地图配置文件中的数字
+	enum MapElements {
+		ROAD,
+		WALL,
+		STARTING_POINT,
+		ENDING_POINT,
+		MINION,
+		DEATHLESS,
+		BOSS,
+		SLOW_TRAP,
+		KILL_TRAP,
+		BACK_TRAP,
+		WEAK_TRAP,
+		RANDOM_BUFF
+	};
+
 	const int grid_size_;
 	const int num_of_map_width_grid_;
 	const int num_of_map_height_grid_;
@@ -104,10 +106,12 @@ private:
 
 	bool IsReachEnd() const;
 	
-	void BulletWallCollisionCheck() const;
+	void BulletWallCollisionCheck();
 	
-	void BulletMonsterCollisionCheck() const;
+	void BulletMonsterCollisionCheck();
 
 	void CharacterMonsterCollisionCheck();
+
+	void CharacterBuffCollisionCheck();
 
 };

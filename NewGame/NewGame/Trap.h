@@ -13,9 +13,8 @@
 class Character;
 
 enum Traps {
-	NONE,
-	KILL,
 	SLOW,
+	KILL,
 	BACK,
 	WEAK
 };
@@ -34,7 +33,7 @@ public:
 			attack_texture_(nullptr) {}
 
 	Trap() : 
-			type_(NONE), 
+			type_(SLOW), 
 			status_(false), 
 			period_(3), 
 			count_(0), 

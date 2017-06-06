@@ -31,7 +31,7 @@ KeyStatus Input::pressed_key_[NUM_OF_KEY];
 GameState* GameStateManager::game_state_list_[NUM_OF_GAME_STATES];
 GameState** GameStateManager::game_state_pointer_;
 
-list<GameElement*> Level::game_element_list_[NUM_OF_GAME_ELEMENT_TYPE];
+list<GameElement*> Level::game_element_list_[NUM_OF_GAME_ELEMENT_TYPES];
 unordered_map<Rect, Wall> Level::wall_list_;
 const string Level::number_picture_[10] = {
 	"picture\\0.png", "picture\\1.png", "picture\\2.png", "picture\\3.png", "picture\\4.png",

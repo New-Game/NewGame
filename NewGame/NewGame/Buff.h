@@ -9,36 +9,55 @@
 #pragma once
 
 #include "GameElement.h"
-#include "Character.h"
 
 enum Buffs {
-	NONE,
 	TIME,
 	SCORE,
 	SPEED,
 	DAMAGE,
 	CD,
-	INVINCIBLE
+	INVINCIBLE,
+	NUM_OF_BUFF_TYPES
 };
 
 class Buff : public GameElement {
 public:
-	Buff(Buffs type, Rect rect, string picture) : 
-			GameElement(rect, picture), 
-			type_(type), 
-			status_(false), 
-			count_(0), 
-			existing_time_(15), 
-			lasting_time_(15) {}
+	Buff(Buffs type, Rect rect) : GameElement(rect, ""), type_(type), status_(true), count_(0), existing_time_(15) {
+		switch(type) {
+			case TIME:
+				picture_ = "picture\\time_buff.png";
+				break;
+			case SCORE:
+				picture_ = "picture\\score_buff.png";
+				break;
+			case SPEED:
+				picture_ = "picture\\speed_buff.png";
+				break;
+			case DAMAGE:
+				picture_ = "picture\\damage_buff.png";
+				break;
+			case CD:
+				picture_ = "picture\\cd_buff.png";
+				break;
+			case INVINCIBLE:
+				picture_ = "picture\\invincible_buff.png";
+				break;
+			default:
+				break;
+		}
+	}
 
-	Buff() : 
-			type_(NONE), 
-			status_(false), 
-			count_(0), 
-			existing_time_(15), 
-			lasting_time_(15) {}
+	Buff() : type_(TIME), status_(true), count_(0), existing_time_(15) {}
 
 	~Buff() {}
+
+	Buffs GetType() const {
+		return type_;
+	}
+
+	bool GetStatus() const {
+		return status_;
+	}
 
 	void Load() override;
 
@@ -48,12 +67,9 @@ public:
 
 	void Unload() override;
 
-	void TakeEffect(Character* p_character);
-
 protected:
 	Buffs type_;
-	bool status_; // false表示existing（存在但被拾取），true表示lasting（存在且被拾取）
+	bool status_; // true表示存在且未被拾取，false表示存在时间结束后消失了
 	int count_;
 	int existing_time_;
-	int lasting_time_;
 };

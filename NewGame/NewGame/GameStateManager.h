@@ -10,25 +10,6 @@
 
 #include "GameState.h"
 
-// 用来构造game_state_list_[]数组下标
-enum GameStates {
-	GAME_PREFACE,
-	BACKGROUND_STORY,
-	CHARACTER_PICK,
-	LEVEL1_PREFACE,
-	LEVEL1,
-	LEVEL1_ENDING,
-	LEVEL2_PREFACE,
-	LEVEL2,
-	LEVEL2_ENDING,
-	LEVEL3_PREFACE,
-	LEVEL3,
-	LEVEL3_ENDING,
-	PRIZE,
-	GAME_ENDING,
-	NUM_OF_GAME_STATES
-};
-
 // GameStateManager类的实现完全只是为了封装与它相关的状态量（成员变量）和行为（成员函数）
 // 因此它的成员都是static的，static成员变量相当于全局变量，static成员函数相当于全局函数
 // GameStateManeger类不能用于生成对象（实例）
@@ -56,6 +37,25 @@ public:
 	}
 
 private:
+	// 用来构造game_state_list_[]数组下标
+	enum GameStates {
+		GAME_PREFACE,
+		BACKGROUND_STORY,
+		CHARACTER_PICK,
+		LEVEL1_PREFACE,
+		LEVEL1,
+		LEVEL1_ENDING,
+		LEVEL2_PREFACE,
+		LEVEL2,
+		LEVEL2_ENDING,
+		LEVEL3_PREFACE,
+		LEVEL3,
+		LEVEL3_ENDING,
+		PRIZE,
+		GAME_ENDING,
+		NUM_OF_GAME_STATES
+	};
+
 	static GameState* game_state_list_[NUM_OF_GAME_STATES];
 	static GameState** game_state_pointer_;
 };
