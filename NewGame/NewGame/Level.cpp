@@ -65,15 +65,21 @@ void Level::Load() {
 					game_element_list_[TRAP].back()->Load();
 					break;
 				case KILL_TRAP:
+					game_element_list_[TRAP].push_back(new Trap(KILL, temp_rect));
+					game_element_list_[TRAP].back()->Load();
 					break;
 				case BACK_TRAP:
+					game_element_list_[TRAP].push_back(new Trap(BACK, temp_rect));
+					game_element_list_[TRAP].back()->Load();
 					break;
 				case WEAK_TRAP:
+					game_element_list_[TRAP].push_back(new Trap(WEAK, temp_rect));
+					game_element_list_[TRAP].back()->Load();
 					break;
 				case RANDOM_BUFF:
-					//srand(time(nullptr));
-					//Buffs type = static_cast<Buffs>(rand() % (NUM_OF_BUFF_TYPES - 1));
-					game_element_list_[BUFF].push_back(new Buff(TIME, temp_rect));
+					buff_rect_ = temp_rect;
+					srand(unsigned(time(nullptr)));
+					game_element_list_[BUFF].push_back(new Buff(static_cast<Buffs>(rand() % NUM_OF_BUFF_TYPES), temp_rect));
 					game_element_list_[BUFF].back()->Load();
 					break;
 				default:
@@ -98,8 +104,11 @@ void Level::Load() {
 	}
 }
 
-// 重置人物、怪兽、物品的初始状态
 void Level::Reset() {
+	// 重置时间，分数
+	time_left_ = 60;
+	score_ = 0;
+
 	// 重置人物初始状态并完成初始化
 	*dynamic_cast<Character*>(game_element_list_[CHARACTER].back()) = *original_character_info_;
 
@@ -135,9 +144,19 @@ void Level::Reset() {
 	}
 
 	// 重置buff初始状态
-	//game_element_list_[BUFF].back()->Reset();
+	// 先释放掉剩下的buff
+	for (auto& i : game_element_list_[BUFF]) {
+		i->Unload();
+		delete i;
+	}
+	game_element_list_[BUFF].clear();
+	// 再在最开始的那个位置随机生成个buff
+	srand(unsigned(time(nullptr)));
+	game_element_list_[BUFF].push_back(new Buff(static_cast<Buffs>(rand() % NUM_OF_BUFF_TYPES), buff_rect_));
+	game_element_list_[BUFF].back()->Load();
 
 	// 重置trap初始状态
+
 }
 
 void Level::Process() {
@@ -221,16 +240,13 @@ void Level::Process() {
 
 
 void Level::Unload() {
-	for (auto& list : game_element_list_)
+	for (auto& list : game_element_list_) {
 		for (auto& i : list) {
-			if (i != nullptr) {
-				i->Unload();
-				delete i;
-			}
+			i->Unload();
+			delete i;
 		}
-
-	for (auto& list : game_element_list_)
 		list.clear();
+	}
 	wall_list_.clear();
 
 	// 重置有效按键
@@ -300,30 +316,26 @@ void Level::CharacterMonsterCollisionCheck() {
 }
 
 void Level::CharacterBuffCollisionCheck() {
-	for (auto i = game_element_list_[BUFF].begin(); i != game_element_list_[BUFF].end();) {
-		if (dynamic_cast<Buff*>(*i)->GetStatus()) {
+	for (auto& i : game_element_list_[BUFF]) {
+		if (dynamic_cast<Buff*>(i)->GetStatus() == EXISTING) {
 			Character* p_character = dynamic_cast<Character*>(game_element_list_[CHARACTER].back());
-			if (p_character->GetRect().IsCollision((*i)->GetRect())) {
-				Buffs type = dynamic_cast<Buff*>(*i)->GetType();
-				switch (type) {
+			if (p_character->GetRect().IsCollision(i->GetRect())) {
+				Buff* p_buff = dynamic_cast<Buff*>(i);
+				switch (p_buff->GetType()) {
 					case TIME:
 						time_left_ += 15;
+						p_buff->SetVanished();
 						break;
 					case SCORE:
 						score_ += 100;
+						p_buff->SetVanished();
 						break;
 					default:
-						p_character->GetBuff(type);
+						p_buff->SetTargetCharacter(p_character);
+						p_buff->TakeEffect();
 						break;
 				}
-				(*i)->Unload();
-				delete *i;
-				i = game_element_list_[BUFF].erase(i);
 			}
-			else
-				++i;
 		}
-		else
-			break;
 	}
 }

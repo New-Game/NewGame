@@ -99,6 +99,7 @@ private:
 	int score_;
 	Rect starting_rect_;
 	Rect ending_rect_;
+	Rect buff_rect_;
 	Character* original_character_info_;
 	list<Monster*> original_monster_info_;
 

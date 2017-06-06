@@ -9,6 +9,7 @@
 #pragma once
 
 #include "GameElement.h"
+#include "Character.h"
 
 enum Buffs {
 	TIME,
@@ -16,13 +17,26 @@ enum Buffs {
 	SPEED,
 	DAMAGE,
 	CD,
-	INVINCIBLE,
+	//INVINCIBLE,
 	NUM_OF_BUFF_TYPES
+};
+
+enum BuffStatus {
+	VANISHED,
+	EXISTING,
+	LASTING
 };
 
 class Buff : public GameElement {
 public:
-	Buff(Buffs type, Rect rect) : GameElement(rect, ""), type_(type), status_(true), count_(0), existing_time_(15) {
+	Buff(Buffs type, Rect rect) : 
+			GameElement(rect, ""), 
+			type_(type), 
+			status_(EXISTING), 
+			count_(0), 
+			existing_time_(15), 
+			lasting_time_(15), 
+			target_character_(nullptr) {
 		switch(type) {
 			case TIME:
 				picture_ = "picture\\time_buff.png";
@@ -39,15 +53,21 @@ public:
 			case CD:
 				picture_ = "picture\\cd_buff.png";
 				break;
-			case INVINCIBLE:
-				picture_ = "picture\\invincible_buff.png";
-				break;
+			//case INVINCIBLE:
+			//	picture_ = "picture\\invincible_buff.png";
+			//	break;
 			default:
 				break;
 		}
 	}
 
-	Buff() : type_(TIME), status_(true), count_(0), existing_time_(15) {}
+	Buff() : 
+			type_(TIME), 
+			status_(EXISTING), 
+			count_(0), 
+			existing_time_(15), 
+			lasting_time_(15), 
+			target_character_(nullptr) {}
 
 	~Buff() {}
 
@@ -55,8 +75,16 @@ public:
 		return type_;
 	}
 
-	bool GetStatus() const {
+	BuffStatus GetStatus() const {
 		return status_;
+	}
+
+	void SetVanished() {
+		status_ = VANISHED;
+	}
+
+	void SetTargetCharacter(Character* p_character) {
+		target_character_ = p_character;
 	}
 
 	void Load() override;
@@ -67,9 +95,15 @@ public:
 
 	void Unload() override;
 
+	void TakeEffect();
+
+	void LoseEffect();
+
 protected:
 	Buffs type_;
-	bool status_; // true表示存在且未被拾取，false表示存在时间结束后消失了
+	BuffStatus status_;
 	int count_;
 	int existing_time_;
+	int lasting_time_;
+	Character* target_character_;
 };

@@ -24,19 +24,24 @@ void Buff::Load() {
 }
 
 void Buff::Update() {
-	if (status_) {
+	if (status_ != VANISHED) {
 		++count_;
 		if (count_ == System::GetFrameRate()) {
 			count_ = 0;
-			--existing_time_;
+			if (status_ == EXISTING)
+				--existing_time_;
+			else if (status_ == LASTING)
+				--lasting_time_;
 		}
 		if (existing_time_ == 0)
-			status_ = false;
+			status_ = VANISHED;
+		else if (lasting_time_ == 0)
+			LoseEffect();
 	}
 }
 
 void Buff::Draw() {
-	if (status_) {
+	if (status_ == EXISTING) {
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 		AEGfxSetPosition(float(rect_.GetX()), float(rect_.GetY()));
 		AEGfxSetTextureMode(AE_GFX_TM_AVERAGE);
@@ -48,4 +53,38 @@ void Buff::Draw() {
 void Buff::Unload() {
 	AEGfxTextureUnload(texture_);
 	AEGfxMeshFree(mesh_);
+}
+
+void Buff::TakeEffect() {
+	status_ = LASTING;
+	switch(type_) {
+		case SPEED:
+			target_character_->SetSpeed(true);
+			break;
+		case DAMAGE:
+			target_character_->SetDamage(true);
+			break;
+		case CD:
+			target_character_->SetColdDown(true);
+			break;
+		default:
+			break;
+	}
+}
+
+void Buff::LoseEffect() {
+	status_ = VANISHED;
+	switch(type_) {
+		case SPEED:
+			target_character_->SetSpeed(false);
+			break;
+		case DAMAGE:
+			target_character_->SetDamage(false);
+			break;
+		case CD:
+			target_character_->SetColdDown(false);
+			break;
+		default:
+			break;
+	}
 }
