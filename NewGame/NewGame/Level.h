@@ -16,6 +16,7 @@
 #include "Wall.h"
 #include "Character.h"
 #include "Monster.h"
+#include "Trap.h"
 
 namespace std {
 	template<>
@@ -102,6 +103,7 @@ private:
 	Rect buff_rect_;
 	Character* original_character_info_;
 	list<Monster*> original_monster_info_;
+	list<Trap> original_trap_info_;
 
 	static const string number_picture_[10];
 

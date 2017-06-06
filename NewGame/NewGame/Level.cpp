@@ -63,18 +63,22 @@ void Level::Load() {
 				case SLOW_TRAP:
 					game_element_list_[TRAP].push_back(new Trap(SLOW, temp_rect));
 					game_element_list_[TRAP].back()->Load();
+					original_trap_info_.push_back(*dynamic_cast<Trap*>(game_element_list_[TRAP].back()));
 					break;
 				case KILL_TRAP:
 					game_element_list_[TRAP].push_back(new Trap(KILL, temp_rect));
 					game_element_list_[TRAP].back()->Load();
+					original_trap_info_.push_back(*dynamic_cast<Trap*>(game_element_list_[TRAP].back()));
 					break;
 				case BACK_TRAP:
 					game_element_list_[TRAP].push_back(new Trap(BACK, temp_rect));
 					game_element_list_[TRAP].back()->Load();
+					original_trap_info_.push_back(*dynamic_cast<Trap*>(game_element_list_[TRAP].back()));
 					break;
 				case WEAK_TRAP:
 					game_element_list_[TRAP].push_back(new Trap(WEAK, temp_rect));
 					game_element_list_[TRAP].back()->Load();
+					original_trap_info_.push_back(*dynamic_cast<Trap*>(game_element_list_[TRAP].back()));
 					break;
 				case RANDOM_BUFF:
 					buff_rect_ = temp_rect;
@@ -156,7 +160,13 @@ void Level::Reset() {
 	game_element_list_[BUFF].back()->Load();
 
 	// ÷ÿ÷√trap≥ı º◊¥Ã¨
-
+	auto i = game_element_list_[TRAP].begin();
+	auto j = original_trap_info_.begin();
+	while (i != game_element_list_[TRAP].end()) {
+		*dynamic_cast<Trap*>(*i) = *j;
+		++i;
+		++j;
+	}
 }
 
 void Level::Process() {

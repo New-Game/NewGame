@@ -32,6 +32,15 @@ public:
 			attack_picture_("picture\\minion.png"),
 			attack_texture_(nullptr) {}
 
+	Trap(const Trap& trap) : 
+			GameElement(trap), 
+			type_(trap.type_), 
+			status_(trap.status_), 
+			period_(trap.period_), 
+			count_(trap.count_), 
+			attack_picture_(trap.attack_picture_), 
+			attack_texture_(trap.attack_texture_) {}
+
 	Trap() : 
 			type_(SLOW), 
 			status_(false), 
