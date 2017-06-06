@@ -123,6 +123,9 @@
     <ClInclude Include="Boss.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Number.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />

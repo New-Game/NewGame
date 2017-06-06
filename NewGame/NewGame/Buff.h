@@ -23,14 +23,20 @@ enum Buffs {
 
 class Buff : public GameElement {
 public:
-	Buff(Buffs type, Rect rect, string picture_file_name) : 
-			GameElement(rect, picture_file_name), 
+	Buff(Buffs type, Rect rect, string picture) : 
+			GameElement(rect, picture), 
 			type_(type), 
+			status_(false), 
+			count_(0), 
 			existing_time_(15), 
-			lasting_time_(15), 
-			status_(false) {}
+			lasting_time_(15) {}
 
-	Buff() : type_(NONE), existing_time_(15), lasting_time_(15), status_(false) {}
+	Buff() : 
+			type_(NONE), 
+			status_(false), 
+			count_(0), 
+			existing_time_(15), 
+			lasting_time_(15) {}
 
 	~Buff() {}
 
@@ -42,11 +48,12 @@ public:
 
 	void Unload() override;
 
-	void Affect(Character* p_character);
+	void TakeEffect(Character* p_character);
 
 protected:
 	Buffs type_;
+	bool status_; // false表示existing（存在但被拾取），true表示lasting（存在且被拾取）
+	int count_;
 	int existing_time_;
 	int lasting_time_;
-	bool status_;      // false表示存在但不生效，true表示存在且生效
 };

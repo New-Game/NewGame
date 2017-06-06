@@ -12,12 +12,12 @@
 
 class Bullet : public GameElement {
 public:
-	Bullet(Directions front, Rect rect, string picture_file_name) : 
-			GameElement(rect, picture_file_name), 
+	Bullet(Directions front, Rect rect, string picture) : 
+			GameElement(rect, picture), 
 			front_(front), 
-			speed_(4) {}
+			speed_(6) {}
 
-	Bullet() : front_(DOWN), speed_(4) {}
+	Bullet() : front_(DOWN), speed_(6) {}
 
 	~Bullet() {}
 

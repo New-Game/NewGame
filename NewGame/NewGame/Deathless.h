@@ -12,7 +12,7 @@
 
 class Deathless : public Monster {
 public:
-	Deathless(Rect rect, string picture_file_name) : Monster(rect, picture_file_name) {}
+	Deathless(Rect rect) : Monster(rect, "") {}
 
 	Deathless(const Deathless& deathless) : Monster(deathless) {}
 

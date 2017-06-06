@@ -19,7 +19,7 @@ void Bullet::Load() {
 		float(rect_.GetSize()), float(rect_.GetSize()), 0xFFFF0000, 1.0f, 1.0f,
 		0.0f, float(rect_.GetSize()), 0xFFFF0000, 0.0f, 1.0f);
 	mesh_ = AEGfxMeshEnd();
-	texture_ = AEGfxTextureLoad(picture_file_name_.c_str());
+	texture_ = AEGfxTextureLoad(picture_.c_str());
 }
 
 void Bullet::Update() {

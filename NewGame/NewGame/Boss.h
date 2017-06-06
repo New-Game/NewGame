@@ -12,7 +12,7 @@
 
 class Boss : public Monster {
 public:
-	Boss(Rect rect, string picture_file_name) : Monster(rect, picture_file_name) {}
+	Boss(Rect rect) : Monster(rect, "picture\\boss.png") {}
 
 	Boss(const Boss& boss) : Monster(boss) {}
 

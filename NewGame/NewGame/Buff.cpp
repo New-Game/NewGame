@@ -24,6 +24,6 @@ void Buff::Unload() {
 	
 }
 
-void Buff::Affect(Character* p_character) {
+void Buff::TakeEffect(Character* p_character) {
 	
 }

@@ -170,6 +170,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Minion.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="Number.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="System.h" />

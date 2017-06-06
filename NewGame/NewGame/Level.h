@@ -57,19 +57,15 @@ public:
 			num_of_map_height_grid_(20), 
 			character_status_bar_width_(100), 
 			map_config_file_(config_file_name), 
+			is_game_over_(false), 
+			count_(0), 
+			time_left_(60), 
+			score_(0), 
 			starting_rect_(), 
 			ending_rect_(), 
 			original_character_info_(nullptr) {}
 
-	Level() : 
-			grid_size_(30), 
-			num_of_map_width_grid_(30), 
-			num_of_map_height_grid_(20), 
-			character_status_bar_width_(100), 
-			map_config_file_(), 
-			starting_rect_(), 
-			ending_rect_(), 
-			original_character_info_(nullptr) {}
+	Level() : Level("") {}
 
 	~Level() {}
 
@@ -95,10 +91,16 @@ private:
 	const int character_status_bar_width_;
 
 	ifstream map_config_file_;
+	bool is_game_over_;
+	int count_;
+	int time_left_;
+	int score_;
 	Rect starting_rect_;
 	Rect ending_rect_;
 	Character* original_character_info_;
 	list<Monster*> original_monster_info_;
+
+	static const string number_picture_[10];
 
 	bool IsReachEnd() const;
 	

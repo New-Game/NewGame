@@ -12,7 +12,7 @@
 
 class Aimiliya : public Character {
 public:
-	Aimiliya(Rect rect, string picture_file_name) : Character(rect, picture_file_name) {}
+	Aimiliya(Rect rect) : Character(rect, "picture\\aimiliya.png") {}
 
 	Aimiliya(const Aimiliya& aimiliya) : Character(aimiliya) {}
 	

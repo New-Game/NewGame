@@ -14,10 +14,11 @@
 // 用于派生具体怪物类，成员函数使用虚函数来实现多态
 class Monster : public GameElement {
 public:
-	Monster(Rect rect, string picture_file_name) : 
-			GameElement(rect, picture_file_name), 
+	Monster(Rect rect, string picture) : 
+			GameElement(rect, picture), 
 			front_(DOWN), 
-			speed_(1), 
+			health_(100),
+			speed_(2), 
 			x_min_(0), 
 			x_max_(0), 
 			y_min_(0), 
@@ -25,20 +26,29 @@ public:
 
 	// 怪物类复制构造函数不会复制mesh_和texture_的信息，而人物类的会
 	Monster(const Monster& monster) : 
-			GameElement(monster.rect_, monster.picture_file_name_), 
+			GameElement(monster.rect_, monster.picture_), 
 			front_(monster.front_), 
+			health_(monster.health_),
 			speed_(monster.speed_), 
 			x_min_(monster.x_min_),
 			x_max_(monster.x_max_),
 			y_min_(monster.y_min_),
 			y_max_(monster.y_max_) {}
 
-	Monster() : front_(DOWN), speed_(1), x_min_(0), x_max_(0), y_min_(0), y_max_(0) {}
+	Monster() : front_(DOWN), health_(100), speed_(2), x_min_(0), x_max_(0), y_min_(0), y_max_(0) {}
 
 	virtual ~Monster() {}
 
 	Monster* GetClassType() override {
 		return this;
+	}
+
+	int GetHealth() const {
+		return health_;
+	}
+
+	int GetSpeed() const {
+		return speed_;
 	}
 
 	void SetFront(Directions front) {
@@ -57,6 +67,7 @@ public:
 
 protected:
 	Directions front_;
+	int health_;
 	int speed_;
 	int x_min_;
 	int x_max_;

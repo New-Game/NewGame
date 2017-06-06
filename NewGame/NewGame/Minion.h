@@ -12,7 +12,7 @@
 
 class Minion : public Monster {
 public:
-	Minion(Rect rect, string picture_file_name) : Monster(rect, picture_file_name) {}
+	Minion(Rect rect) : Monster(rect, "picture\\minion.png") {}
 
 	Minion(const Minion& minion) : Monster(minion) {}
 

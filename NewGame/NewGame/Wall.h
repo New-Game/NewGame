@@ -13,7 +13,7 @@
 // 墙体类，可直接生成对象
 class Wall : public GameElement {
 public:
-	Wall(Rect rect, string picture_file_name) : GameElement(rect, picture_file_name) {}
+	Wall(Rect rect) : GameElement(rect, "picture\\ice.png") {}
 
 	Wall() {}
 

@@ -15,6 +15,7 @@
 #include "Deathless.h"
 #include "Boss.h"
 #include "Trap.h"
+#include "Number.h"
 
 void Level::Load() {
 	// 先设置本状态哪些键位是有效的
@@ -39,12 +40,12 @@ void Level::Load() {
 					// do nothing
 					break;
 				case WALL:
-					wall_list_.insert(make_pair(temp_rect, Wall(temp_rect, "picture\\ice.png")));
+					wall_list_.insert(make_pair(temp_rect, Wall(temp_rect)));
 					wall_list_[temp_rect].Load();
 					break;
 				case STARTING_POINT:
 					starting_rect_ = temp_rect;
-					game_element_list_[CHARACTER].push_back(new Aimiliya(temp_rect, "picture\\aimiliya.png"));
+					game_element_list_[CHARACTER].push_back(new Aimiliya(temp_rect));
 					game_element_list_[CHARACTER].back()->Load();
 					original_character_info_ = new Aimiliya(*dynamic_cast<Aimiliya*>(game_element_list_[CHARACTER].back()));
 					break;
@@ -52,7 +53,7 @@ void Level::Load() {
 					ending_rect_ = temp_rect;
 					break;
 				case MINION:
-					game_element_list_[MONSTER].push_back(new Minion(temp_rect, "picture\\minion.png"));
+					game_element_list_[MONSTER].push_back(new Minion(temp_rect));
 					game_element_list_[MONSTER].back()->Load();
 					break;
 				case DEATHLESS:
@@ -60,7 +61,7 @@ void Level::Load() {
 				case BOSS:
 					break;
 				case SLOW_DOWN:
-					game_element_list_[TRAP].push_back(new Trap(SLOW, temp_rect, "picture\\wall.png", "picture\\minion.png"));
+					game_element_list_[TRAP].push_back(new Trap(SLOW, temp_rect));
 					game_element_list_[TRAP].back()->Load();
 					break;
 				case TIME:
@@ -133,6 +134,17 @@ void Level::Process() {
 	while (!GetIsReadyForExit() && !GetIsReadyForRestart() && !GetIsReadyForNextGameState()) {
 		AESysFrameStart();
 
+		// 处理游戏倒计时
+		++count_;
+		if (count_ == System::GetFrameRate()) {
+			count_ = 0;
+			--time_left_;
+		}
+		if (time_left_ == 0) {
+			is_game_over_ = true;
+			// 调用game_over会话框
+		}
+
 		// 处理游戏状态切换
 		if (Input::GetPressedKey(KEY_ESC).GetIsPressed()) {
 			SetIsReadyForExit();
@@ -164,7 +176,35 @@ void Level::Process() {
 		for (auto& i : wall_list_)
 			i.second.Draw();
 
+		// 显示时间
+		Number time_left_tens_digit(time_left_ / 10, number_picture_[time_left_ / 10], 910, 10);
+		time_left_tens_digit.Draw();
+		Number time_left_units_digit(time_left_ % 10, number_picture_[time_left_ % 10], 925, 10);
+		time_left_units_digit.Draw();
+
+		// 显示分数
+		// 
+
+		// 显示状态信息
+		// 获取人物对象指针
+		Character* p_character = dynamic_cast<Character*>(game_element_list_[CHARACTER].back());
+		// 人物剩余生命数
+		Number lives(p_character->GetLives(), number_picture_[p_character->GetLives()], 910, 100);
+		lives.Draw();
+		// 人物攻击力数值
+		int damage = p_character->GetDamage();
+		Number damage_tens_digit(damage / 10, number_picture_[damage / 10], 910, 120);
+		damage_tens_digit.Draw();
+		Number damage_units_digit(damage % 10, number_picture_[damage % 10], 925, 120);
+		damage_units_digit.Draw();
+		// 人物移动速度
+		Number speed(p_character->GetSpeed(), number_picture_[p_character->GetSpeed()], 910, 140);
+		speed.Draw();
+		// 人物技能冷却缩减
+		//
+
 		AESysFrameEnd();
+
 	}
 }
 
@@ -236,7 +276,13 @@ void Level::BulletMonsterCollisionCheck() const {
 void Level::CharacterMonsterCollisionCheck() {
 	for (auto& i : game_element_list_[MONSTER]) {
 		if (game_element_list_[CHARACTER].back()->GetRect().IsCollision(i->GetRect())) {
-			Reset();
+			if (dynamic_cast<Character*>(game_element_list_[CHARACTER].back())->DecLives()) {
+				game_element_list_[CHARACTER].back()->SetRect(starting_rect_);
+			}
+			else {
+ 				is_game_over_ = true;
+				// 调用game_over会话框
+			}
 			break;
 		}
 	}

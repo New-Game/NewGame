@@ -16,12 +16,12 @@ using namespace std;
 // 人物选择类，单实例类
 class CharacterPick : public GameState {
 public:
-	CharacterPick(string picture_file_name) : 
-			picture_file_name_(picture_file_name), 
+	CharacterPick(string picture) : 
+			picture_(picture), 
 			mesh_(nullptr), 
 			texture_(nullptr) {}
 
-	CharacterPick() : picture_file_name_(nullptr), mesh_(nullptr), texture_(nullptr) {}
+	CharacterPick() : picture_(nullptr), mesh_(nullptr), texture_(nullptr) {}
 
 	~CharacterPick() {}
 
@@ -34,7 +34,7 @@ public:
 	void Unload() override;
 
 private:
-	string picture_file_name_;
+	string picture_;
 	AEGfxVertexList* mesh_;
 	AEGfxTexture* texture_;
 };

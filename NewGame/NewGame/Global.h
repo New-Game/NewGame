@@ -33,3 +33,6 @@ GameState** GameStateManager::game_state_pointer_;
 
 list<GameElement*> Level::game_element_list_[NUM_OF_GAME_ELEMENT_TYPE];
 unordered_map<Rect, Wall> Level::wall_list_;
+const string Level::number_picture_[10] = {
+	"picture\\0.png", "picture\\1.png", "picture\\2.png", "picture\\3.png", "picture\\4.png",
+	"picture\\5.png", "picture\\6.png", "picture\\7.png", "picture\\8.png", "picture\\9.png"};

@@ -14,13 +14,13 @@
 // 用于派生具体人物类，成员函数使用虚函数来实现多态
 class Character : public GameElement {
 public:
-	Character(Rect rect, string picture_file_name) : 
-			GameElement(rect, picture_file_name), 
+	Character(Rect rect, string picture) : 
+			GameElement(rect, picture), 
 			front_(DOWN), 
 			lives_(3), 
-			damage_(100), 
+			damage_(10), 
 			speed_(3), 
-			skill_cold_down_(0) {}
+			cold_down_(0) {}
 
 	// 人物类的复制构造函数会复制所有信息（包括mesh_和texture_的信息)，而怪物类的不会
 	Character(const Character& character) :
@@ -29,14 +29,34 @@ public:
 			lives_(character.lives_), 
 			damage_(character.damage_), 
 			speed_(character.speed_), 
-			skill_cold_down_(character.skill_cold_down_) {}
+			cold_down_(character.cold_down_) {}
 
-	Character() : front_(DOWN), lives_(3), damage_(100), speed_(3), skill_cold_down_(0) {}
+	Character() : front_(DOWN), lives_(3), damage_(10), speed_(3), cold_down_(0) {}
 
 	virtual ~Character() {}
 
 	Character* GetClassType() override {
 		return this;
+	}
+	
+	int GetLives() const {
+		return lives_;
+	}
+
+	int GetDamage() const {
+		return damage_;
+	}
+
+	int GetSpeed() const {
+		return speed_;
+	}
+
+	int GetColdDonw() const {
+		return cold_down_;
+	}
+
+	bool DecLives() {
+		return --lives_ > 0 ? true : false;
 	}
 
 	void SetLives(int lives) {
@@ -52,7 +72,7 @@ public:
 	}
 
 	void SetSkillColdDown(int operation) {
-		operation == 0 ? skill_cold_down_ >>= 1 : skill_cold_down_ <<= 1;
+		operation == 0 ? cold_down_ >>= 1 : cold_down_ <<= 1;
 	}
 
 protected:
@@ -60,7 +80,7 @@ protected:
 	int lives_; // 生命数
 	int damage_;
 	int speed_;
-	int skill_cold_down_;
+	int cold_down_;
 
 	void Move();
 
