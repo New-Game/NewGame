@@ -293,11 +293,16 @@ void Level::BulletMonsterCollisionCheck() {
 				if ((*i)->GetRect().IsCollision((*j)->GetRect())) {
 					int damage = dynamic_cast<Character*>(game_element_list_[CHARACTER].back())->GetDamage();
 					if (!dynamic_cast<Monster*>(*j)->DecHealth(damage)) {
+						Rect temp_monster_rect = (*j)->GetRect();
 						(*j)->Unload();
 						delete *j;
 						j = game_element_list_[MONSTER].erase(j);
+						srand(unsigned(time(nullptr)));
+						game_element_list_[BUFF].push_back(new Buff(static_cast<Buffs>(rand() % NUM_OF_BUFF_TYPES), temp_monster_rect));
+						game_element_list_[BUFF].back()->Load();
 					}
-					++j;
+					if (j != game_element_list_[MONSTER].end())
+						++j;
 					(*i)->Unload();
 					delete *i;
 					i = game_element_list_[BULLET].erase(i);

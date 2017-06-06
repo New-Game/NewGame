@@ -19,7 +19,7 @@ public:
 			front_(DOWN), 
 			lives_(3), 
 			damage_(10), 
-			speed_(3), 
+			speed_(2), 
 			cold_down_(0) {}
 
 	// 人物类的复制构造函数会复制所有信息（包括mesh_和texture_的信息)，而怪物类的不会
@@ -35,7 +35,7 @@ public:
 			front_(DOWN), 
 			lives_(3), 
 			damage_(10), 
-			speed_(3), 
+			speed_(2), 
 			cold_down_(0) {}
 
 	virtual ~Character() {}
