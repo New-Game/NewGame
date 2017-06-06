@@ -51,6 +51,11 @@ public:
 		return speed_;
 	}
 
+	bool DecHealth(int damage) {
+		health_ -= damage;
+		return health_ > 0 ? true : false;
+	}
+
 	void SetFront(Directions front) {
 		front_ = front;
 	}
