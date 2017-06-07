@@ -8,7 +8,10 @@
 
 #pragma once
 
+#include <unordered_map>
 #include "GameElement.h"
+#include "Bullet.h"
+#include "Skill.h"
 
 // 人物类，继承了GameElement类，同样还是抽象类，不能用于生成对象
 // 用于派生具体人物类，成员函数使用虚函数来实现多态
@@ -19,7 +22,7 @@ public:
 			front_(DOWN), 
 			lives_(3), 
 			damage_(10), 
-			speed_(2), 
+			speed_(1), 
 			cold_down_(0) {}
 
 	// 人物类的复制构造函数会复制所有信息（包括mesh_和texture_的信息)，而怪物类的不会
@@ -35,13 +38,21 @@ public:
 			front_(DOWN), 
 			lives_(3), 
 			damage_(10), 
-			speed_(2), 
+			speed_(1), 
 			cold_down_(0) {}
 
 	virtual ~Character() {}
 
+	virtual Bullet* Attack() = 0;
+
+	virtual Skill* UseSkill() = 0;
+
 	Character* GetClassType() override {
 		return this;
+	}
+
+	Directions GetFront() const {
+		return front_;
 	}
 	
 	int GetLives() const {
@@ -84,9 +95,5 @@ protected:
 	int cold_down_;
 
 	void Move();
-
-	void Attack() const;
-
-	void UseSkill();
 
 };

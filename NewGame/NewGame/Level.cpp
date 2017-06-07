@@ -23,12 +23,12 @@ void Level::Load() {
 	Input::GetPressedKey(KEY_SPACE).SetIsValid(true);
 	Input::GetPressedKey(KEY_BACKSPACE).SetIsValid(true);
 	Input::GetPressedKey(KEY_ESC).SetIsValid(true);
-	Input::GetPressedKey(KEY_A).SetIsValid(true);
-	Input::GetPressedKey(KEY_S).SetIsValid(true);
-	Input::GetPressedKey(KEY_UP).SetIsValid(true);
-	Input::GetPressedKey(KEY_DOWN).SetIsValid(true);
-	Input::GetPressedKey(KEY_LEFT).SetIsValid(true);
-	Input::GetPressedKey(KEY_RIGHT).SetIsValid(true);
+	//Input::GetPressedKey(KEY_A).SetIsValid(true);
+	//Input::GetPressedKey(KEY_S).SetIsValid(true);
+	//Input::GetPressedKey(KEY_UP).SetIsValid(true);
+	//Input::GetPressedKey(KEY_DOWN).SetIsValid(true);
+	//Input::GetPressedKey(KEY_LEFT).SetIsValid(true);
+	//Input::GetPressedKey(KEY_RIGHT).SetIsValid(true);
 
 	// 读取文件中的数字矩阵，把所有游戏对象信息加入链表保存，墙体对象放入哈希表保存
 	for (auto i = 0; i < num_of_map_height_grid_; ++i) {
@@ -46,9 +46,9 @@ void Level::Load() {
 					break;
 				case STARTING_POINT:
 					starting_rect_ = temp_rect;
-					game_element_list_[CHARACTER].push_back(new Aimiliya(temp_rect));
-					game_element_list_[CHARACTER].back()->Load();
-					original_character_info_ = new Aimiliya(*dynamic_cast<Aimiliya*>(game_element_list_[CHARACTER].back()));
+					character_ = new Aimiliya(temp_rect);
+					character_->Load();
+					original_character_info_ = new Aimiliya(*dynamic_cast<Aimiliya*>(character_));
 					break;
 				case ENDING_POINT:
 					ending_rect_ = temp_rect;
@@ -115,7 +115,7 @@ void Level::Reset() {
 	score_ = 0;
 
 	// 重置人物初始状态并完成初始化
-	*dynamic_cast<Character*>(game_element_list_[CHARACTER].back()) = *original_character_info_;
+	*character_ = *original_character_info_;
 
 	// 释放掉当前已生成的子弹
 	for (auto& i : game_element_list_[BULLET]) {
@@ -173,6 +173,7 @@ void Level::Reset() {
 void Level::Process() {
 	while (!GetIsReadyForExit() && !GetIsReadyForRestart() && !GetIsReadyForNextGameState()) {
 		AESysFrameStart();
+		AEInputUpdate();
 
 		// 处理游戏状态切换
 		if (Input::GetPressedKey(KEY_ESC).GetIsPressed()) {
@@ -210,17 +211,27 @@ void Level::Process() {
 		}
 
 		// 更新游戏元素
+		character_->Update();
+		if (AEInputCheckTriggered('A')) {
+			game_element_list_[BULLET].push_back(character_->Attack());
+			game_element_list_[BULLET].back()->Load();
+		}
+		else if (AEInputCheckTriggered('S')) {
+			//game_element_list_[SKILL].push_back(character_->UseSkill());
+			//game_element_list_[SKILL].back()->Load();
+		}
 		for (auto& list : game_element_list_)
 			for (auto& i : list)
 				i->Update();
 
-		// 碰撞检测（人物和墙体的碰撞检测不在下列）
+		// 碰撞检测（人和墙体的碰撞检测写在Move()里了）
 		BulletWallCollisionCheck();
 		BulletMonsterCollisionCheck();
 		CharacterMonsterCollisionCheck();
 		CharacterBuffCollisionCheck();
 
 		// 画出更新后的游戏元素
+		character_->Draw();
 		for (auto& list : game_element_list_)
 			for (auto& i : list)
 				i->Draw();
@@ -238,19 +249,17 @@ void Level::Process() {
 		// 
 
 		// 显示状态信息
-		// 获取人物对象指针
-		Character* p_character = dynamic_cast<Character*>(game_element_list_[CHARACTER].back());
 		// 人物剩余生命数
-		Number lives(p_character->GetLives(), number_picture_[p_character->GetLives()], 910, 100);
+		Number lives(character_->GetLives(), number_picture_[character_->GetLives()], 910, 100);
 		lives.Draw();
 		// 人物攻击力数值
-		int damage = p_character->GetDamage();
+		int damage = character_->GetDamage();
 		Number damage_tens_digit(damage / 10, number_picture_[damage / 10], 910, 120);
 		damage_tens_digit.Draw();
 		Number damage_units_digit(damage % 10, number_picture_[damage % 10], 925, 120);
 		damage_units_digit.Draw();
 		// 人物移动速度
-		Number speed(p_character->GetSpeed(), number_picture_[p_character->GetSpeed()], 910, 140);
+		Number speed(character_->GetSpeed(), number_picture_[character_->GetSpeed()], 910, 140);
 		speed.Draw();
 		// 人物技能冷却缩减
 		//
@@ -261,6 +270,8 @@ void Level::Process() {
 
 
 void Level::Unload() {
+	character_->Unload();
+	delete character_;
 	for (auto& list : game_element_list_) {
 		for (auto& i : list) {
 			i->Unload();
@@ -270,12 +281,18 @@ void Level::Unload() {
 	}
 	wall_list_.clear();
 
+	delete original_character_info_;
+	for (auto& i : original_monster_info_)
+		delete i;
+	original_monster_info_.clear();
+	original_trap_info_.clear();
+
 	// 重置有效按键
 	Input::ResetPressedKey();
 }
 
 bool Level::IsReachEnd() const {
-	return game_element_list_[CHARACTER].back()->GetRect() == ending_rect_;
+	return character_->GetRect() == ending_rect_;
 }
 
 void Level::BulletWallCollisionCheck() {
@@ -302,7 +319,7 @@ void Level::BulletMonsterCollisionCheck() {
 		for (auto j = game_element_list_[MONSTER].begin(); flag && j != game_element_list_[MONSTER].end();) {
 			if (i != game_element_list_[BULLET].end()) {
 				if ((*i)->GetRect().IsCollision((*j)->GetRect())) {
-					int damage = dynamic_cast<Character*>(game_element_list_[CHARACTER].back())->GetDamage();
+					int damage = character_->GetDamage();
 					if (!dynamic_cast<Monster*>(*j)->DecHealth(damage)) {
 						Rect temp_monster_rect = (*j)->GetRect();
 						(*j)->Unload();
@@ -332,9 +349,9 @@ void Level::BulletMonsterCollisionCheck() {
 
 void Level::CharacterMonsterCollisionCheck() {
 	for (auto& i : game_element_list_[MONSTER]) {
-		if (game_element_list_[CHARACTER].back()->GetRect().IsCollision(i->GetRect())) {
-			if (dynamic_cast<Character*>(game_element_list_[CHARACTER].back())->DecLives()) {
-				game_element_list_[CHARACTER].back()->SetRect(starting_rect_);
+		if (character_->GetRect().IsCollision(i->GetRect())) {
+			if (character_->DecLives()) {
+				character_->SetRect(starting_rect_);
 			}
 			else {
  				is_game_over_ = true;
@@ -349,8 +366,7 @@ void Level::CharacterMonsterCollisionCheck() {
 void Level::CharacterBuffCollisionCheck() {
 	for (auto& i : game_element_list_[BUFF]) {
 		if (dynamic_cast<Buff*>(i)->GetStatus() == EXISTING) {
-			Character* p_character = dynamic_cast<Character*>(game_element_list_[CHARACTER].back());
-			if (p_character->GetRect().IsCollision(i->GetRect())) {
+			if (character_->GetRect().IsCollision(i->GetRect())) {
 				Buff* p_buff = dynamic_cast<Buff*>(i);
 				switch (p_buff->GetType()) {
 					case TIME:
@@ -362,7 +378,7 @@ void Level::CharacterBuffCollisionCheck() {
 						p_buff->SetVanished();
 						break;
 					default:
-						p_buff->SetTargetCharacter(p_character);
+						p_buff->SetTargetCharacter(character_);
 						p_buff->TakeEffect();
 						break;
 				}

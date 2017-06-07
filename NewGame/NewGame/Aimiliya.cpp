@@ -25,14 +25,6 @@ void Aimiliya::Load() {
 
 void Aimiliya::Update() {
 	Move();
-	if (Input::GetPressedKey(KEY_A).GetIsPressed()) {
-		Attack();
-		Input::GetPressedKey(KEY_A).SetIsPressed(false);
-	}
-	else if (Input::GetPressedKey(KEY_S).GetIsPressed()) {
-		UseSkill();
-		Input::GetPressedKey(KEY_S).SetIsPressed(false);
-	}
 }
 
 void Aimiliya::Draw() {
@@ -47,3 +39,33 @@ void Aimiliya::Unload() {
 	AEGfxTextureUnload(texture_);
 	AEGfxMeshFree(mesh_);
 }
+
+Bullet* Aimiliya::Attack() {
+	string bullet_picture = "picture\\bullet.png";
+	auto temp_size = 6;
+	switch (front_) {
+		case UP: {
+			Rect temp_rect(temp_size, rect_.GetX() + rect_.GetSize() / 2, rect_.GetY() - temp_size / 2);
+			return new Bullet(UP, temp_rect, bullet_picture);
+		}
+		case DOWN: {
+			Rect temp_rect(temp_size, rect_.GetX() + rect_.GetSize() / 2, rect_.GetY() + rect_.GetSize() + temp_size / 2);
+			return new Bullet(DOWN, temp_rect, bullet_picture);
+		}
+		case LEFT: {
+			Rect temp_rect(temp_size, rect_.GetX() - temp_size / 2, rect_.GetY() + rect_.GetSize() / 2);
+			return new Bullet(LEFT, temp_rect, bullet_picture);
+		}
+		case RIGHT: {
+			Rect temp_rect(temp_size, rect_.GetX() + rect_.GetSize() + temp_size / 2, rect_.GetY() + rect_.GetSize() / 2);
+			return new Bullet(RIGHT, temp_rect, bullet_picture);
+		}
+		default:
+			return nullptr;
+	}
+}
+
+Skill* Aimiliya::UseSkill() {
+	return nullptr;
+}
+

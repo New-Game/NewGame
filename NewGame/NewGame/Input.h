@@ -16,12 +16,12 @@ enum Keys {
 	KEY_SPACE,
 	KEY_BACKSPACE,
 	KEY_ESC,
-	KEY_A,
-	KEY_S,
-	KEY_UP,
-	KEY_DOWN,
-	KEY_LEFT,
-	KEY_RIGHT,
+//	KEY_A,
+//	KEY_S,
+//	KEY_UP,
+//	KEY_DOWN,
+//	KEY_LEFT,
+//	KEY_RIGHT,
 	NUM_OF_KEY
 };
 

@@ -173,6 +173,7 @@
     <ClInclude Include="Number.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Skill.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Trap.h" />
     <ClInclude Include="Wall.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Minion.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Skill.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Trap.cpp" />
     <ClCompile Include="Wall.cpp" />

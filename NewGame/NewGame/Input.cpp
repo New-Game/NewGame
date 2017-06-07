@@ -69,7 +69,7 @@ LRESULT CALLBACK Input::MainHandle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 				if (pressed_key_[KEY_ESC].GetIsValid())
 					DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_EXIT), hWnd, HandleForExit);
 			}
-			else {
+			/*else {
 				if (wParam == 'A') {
 					if (pressed_key_[KEY_A].GetIsValid())
 						pressed_key_[KEY_A].SetIsPressed(true);
@@ -94,7 +94,7 @@ LRESULT CALLBACK Input::MainHandle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 					if (pressed_key_[KEY_RIGHT].GetIsValid())
 						pressed_key_[KEY_RIGHT].SetIsPressed(true);
 				}
-			}
+			}*/
 			break;
 
 		// 窗口发生移动

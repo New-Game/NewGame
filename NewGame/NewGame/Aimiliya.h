@@ -32,5 +32,9 @@ public:
 
 	void Unload() override;
 
+	Bullet* Attack() override;
+
+	Skill* UseSkill() override;
+
 private:
 };

@@ -126,6 +126,9 @@
     <ClInclude Include="Number.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
@@ -184,6 +187,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Trap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

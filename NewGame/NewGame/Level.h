@@ -23,18 +23,6 @@ namespace std {
 	struct hash<Rect> : _Bitwise_hash<Rect> {}; // hash functor for Rect
 }
 
-// 用来构造game_element_list_[]数组下标
-enum GameElements {
-	CHARACTER,
-	MONSTER,
-	BUFF,
-	TRAP,
-	BULLET,
-	NUM_OF_GAME_ELEMENT_TYPES
-};
-
-
-
 // 关卡类，多实例类，每个关卡都是它的一个对象
 class Level : public GameState {
 public:
@@ -43,10 +31,11 @@ public:
 			num_of_map_width_grid_(30), 
 			num_of_map_height_grid_(20), 
 			character_status_bar_width_(100), 
+			character_(nullptr), 
 			map_config_file_(config_file_name), 
 			is_game_over_(false), 
 			count_(0), 
-			time_left_(5), 
+			time_left_(60), 
 			score_(0), 
 			starting_rect_(), 
 			ending_rect_(), 
@@ -56,6 +45,9 @@ public:
 
 	~Level() {}
 
+	// 用来存所有墙体对象（为了更高效的访问，故做成全局变量）
+	static unordered_map<Rect, Wall> wall_list_;
+
 	void Load() override;
 
 	void Reset() override;
@@ -64,14 +56,17 @@ public:
 
 	void Unload() override;
 
-	// 用来存所有指向游戏元素对象的指针
-	static list<GameElement*> game_element_list_[NUM_OF_GAME_ELEMENT_TYPES];
-
-	// 用来存所有指向墙体对象的指针
-	static unordered_map<Rect, Wall> wall_list_;
-	
-
 private:
+	// 用来构造game_element_list_[]数组下标
+	enum GameElements {
+		MONSTER,
+		BUFF,
+		TRAP,
+		BULLET,
+		SKILL,
+		NUM_OF_GAME_ELEMENT_TYPES
+	};
+
 	// 用来识别地图配置文件中的数字
 	enum MapElements {
 		ROAD,
@@ -93,6 +88,12 @@ private:
 	const int num_of_map_height_grid_;
 	const int character_status_bar_width_;
 
+	// 存指向人物对象的指针
+	Character* character_;
+
+	// 用来存所有指向游戏元素对象的指针（人物、墙体除外）
+	list<GameElement*> game_element_list_[NUM_OF_GAME_ELEMENT_TYPES];
+
 	ifstream map_config_file_;
 	bool is_game_over_;
 	int count_;
@@ -108,7 +109,7 @@ private:
 	static const string number_picture_[10];
 
 	bool IsReachEnd() const;
-	
+
 	void BulletWallCollisionCheck();
 	
 	void BulletMonsterCollisionCheck();
