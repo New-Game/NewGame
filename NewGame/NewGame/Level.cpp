@@ -7,6 +7,7 @@
  */
 
 #include <ctime>
+#include "resource.h"
 #include "Level.h"
 #include "Input.h"
 #include "Number.h"
@@ -173,6 +174,30 @@ void Level::Process() {
 	while (!GetIsReadyForExit() && !GetIsReadyForRestart() && !GetIsReadyForNextGameState()) {
 		AESysFrameStart();
 
+		// 处理游戏状态切换
+		if (Input::GetPressedKey(KEY_ESC).GetIsPressed()) {
+			SetIsReadyForExit();
+			Input::GetPressedKey(KEY_ESC).SetIsPressed(false);
+			continue;
+		}
+		if (Input::GetPressedKey(KEY_BACKSPACE).GetIsPressed()) {
+			SetIsReadyForRestart();
+			Input::GetPressedKey(KEY_BACKSPACE).SetIsPressed(false);
+			continue;
+		}
+		// 检查人物是否已经到终点了
+		if (IsReachEnd()) {
+			SetIsReadyForNextGameState();
+			continue;
+		}
+
+		// 处理上次循环倒计时到0时该弹出的会话框
+		if (is_game_over_) {
+			// 调用game_over会话框
+			DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_GAME_OVER), System::GetHandle(), Input::HandleForGameOver);
+			continue;
+		}
+
 		// 处理游戏倒计时
 		++count_;
 		if (count_ == System::GetFrameRate()) {
@@ -181,22 +206,9 @@ void Level::Process() {
 		}
 		if (time_left_ == 0) {
 			is_game_over_ = true;
-			// 调用game_over会话框
+			// 在下次循环时调用会话框，以便把时间倒计时到0的数字画出来
 		}
 
-		// 处理游戏状态切换
-		if (Input::GetPressedKey(KEY_ESC).GetIsPressed()) {
-			SetIsReadyForExit();
-			Input::GetPressedKey(KEY_ESC).SetIsPressed(false);
-		}
-		else if (Input::GetPressedKey(KEY_BACKSPACE).GetIsPressed()) {
-			SetIsReadyForRestart();
-			Input::GetPressedKey(KEY_BACKSPACE).SetIsPressed(false);
-		}
-		// 检查人物是否已经到终点了
-		if (IsReachEnd())
-			SetIsReadyForNextGameState();
-		
 		// 更新游戏元素
 		for (auto& list : game_element_list_)
 			for (auto& i : list)
@@ -215,7 +227,7 @@ void Level::Process() {
 		// 画出墙体
 		for (auto& i : wall_list_)
 			i.second.Draw();
-
+	
 		// 显示时间
 		Number time_left_tens_digit(time_left_ / 10, number_picture_[time_left_ / 10], 910, 10);
 		time_left_tens_digit.Draw();
@@ -244,7 +256,6 @@ void Level::Process() {
 		//
 
 		AESysFrameEnd();
-
 	}
 }
 
@@ -328,6 +339,7 @@ void Level::CharacterMonsterCollisionCheck() {
 			else {
  				is_game_over_ = true;
 				// 调用game_over会话框
+				DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_GAME_OVER), System::GetHandle(), Input::HandleForGameOver);
 			}
 			break;
 		}

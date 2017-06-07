@@ -161,3 +161,23 @@ INT_PTR Input::HandleForRestart(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
 	}
 }
 
+INT_PTR Input::HandleForGameOver(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
+	UNREFERENCED_PARAMETER(lParam);
+	switch(msg) {
+		case WM_INITDIALOG:
+			return INT_PTR(true);
+		case WM_COMMAND:
+			if (LOWORD(wParam) == IDRESTART) {
+				pressed_key_[KEY_BACKSPACE].SetIsPressed(true);
+				EndDialog(hDlg, LOWORD(wParam));
+				return INT_PTR(true);
+			}
+			if (LOWORD(wParam) == IDEXIT) {
+				pressed_key_[KEY_ESC].SetIsPressed(true);
+				EndDialog(hDlg, LOWORD(wParam));
+				return INT_PTR(true);
+			}
+		default:
+			return INT_PTR(false);
+	}
+}

@@ -23,6 +23,7 @@ const unsigned System::frame_rate_;
 AESysInitInfo System::sys_init_info_;
 WNDCLASS System::win_class_;
 HINSTANCE System::instance_;
+HWND System::handle_;
 //streambuf* System::streambuf_pointer_;
 //ofstream System::console_out_;
 

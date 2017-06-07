@@ -81,6 +81,4 @@ protected:
 
 	void Move();
 
-	void DropBuff();
-
 };

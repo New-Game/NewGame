@@ -60,12 +60,12 @@ void System::Start(HINSTANCE hInstance, int nCmdShow) {
 	 * hInstance,            WinMain的第1个参数
 	 * NULL);                WM_Create消息传递用到的
 	 */
-	HWND handle = CreateWindow(win_class_.lpszClassName, LPCSTR("从零开始的迷宫大作战"), WS_OVERLAPPEDWINDOW, 0, 0, window_width_, window_height_, nullptr, nullptr, hInstance, nullptr);
-	ShowWindow(handle, nCmdShow);
-	UpdateWindow(handle);
+	handle_ = CreateWindow(win_class_.lpszClassName, LPCSTR("从零开始的迷宫大作战"), WS_OVERLAPPEDWINDOW, 0, 0, window_width_, window_height_, nullptr, nullptr, hInstance, nullptr);
+	ShowWindow(handle_, nCmdShow);
+	UpdateWindow(handle_);
 
 	// 设置Alpha系统窗口句柄
-	sys_init_info_.mWindowHandle = handle;
+	sys_init_info_.mWindowHandle = handle_;
 
 	// Alpha系统初始化及模块重置
 	AESysInit(&sys_init_info_);

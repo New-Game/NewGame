@@ -37,6 +37,11 @@ public:
 		return instance_;
 	}
 
+	// 返回当前窗口句柄
+	static HWND& GetHandle() {
+		return handle_;
+	}
+
 private:
 	// 窗口宽度
 	static const int window_width_ = 1016;
@@ -55,6 +60,9 @@ private:
 
 	// 当前实例
 	static HINSTANCE instance_;
+
+	// 当前窗口句柄
+	static HWND handle_;
 
 	//// 生成一个文件流对象，用来和AE控制台输出流相连
 	//static std::ofstream console_out_;

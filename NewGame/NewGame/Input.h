@@ -70,6 +70,8 @@ public:
 	
 	static INT_PTR CALLBACK HandleForRestart(HWND, UINT, WPARAM, LPARAM);
 
+	static INT_PTR CALLBACK HandleForGameOver(HWND, UINT, WPARAM, LPARAM);
+
 	static KeyStatus& GetPressedKey(Keys keys) {
 		return pressed_key_[keys];
 	}

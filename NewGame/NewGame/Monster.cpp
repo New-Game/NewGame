@@ -58,7 +58,3 @@ void Monster::Move() {
 		}
 	}
 }
-
-void Monster::DropBuff() {
-	
-}

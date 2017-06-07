@@ -46,7 +46,7 @@ public:
 			map_config_file_(config_file_name), 
 			is_game_over_(false), 
 			count_(0), 
-			time_left_(60), 
+			time_left_(5), 
 			score_(0), 
 			starting_rect_(), 
 			ending_rect_(), 
