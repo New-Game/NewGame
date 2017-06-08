@@ -40,10 +40,12 @@ void Interval::Process() {
 		if (Input::GetPressedKey(KEY_ESC).GetIsPressed()) {
 			SetIsReadyForExit();
 			Input::GetPressedKey(KEY_ESC).SetIsPressed(false);
+			continue;
 		}
-		else if (Input::GetPressedKey(KEY_ENTER).GetIsPressed()) {
+		if (Input::GetPressedKey(KEY_ENTER).GetIsPressed()) {
 			SetIsReadyForNextGameState();
 			Input::GetPressedKey(KEY_ENTER).SetIsPressed(false);
+			continue;
 		}
 
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE); // 设置绘制模式

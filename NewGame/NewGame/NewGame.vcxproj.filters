@@ -192,6 +192,9 @@
     <ClCompile Include="Skill.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="NewGame.rc">

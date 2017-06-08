@@ -29,14 +29,6 @@ LRESULT CALLBACK Input::MainHandle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 			break;
 		}
 
-		// 按下了鼠标左键
-		case WM_LBUTTONDOWN:
-			break;
-
-		// 鼠标移动了
-		case WM_MOUSEMOVE:
-			break;
-
 		// 窗口重绘
 		case WM_PAINT: {
 			PAINTSTRUCT ps; // 重绘结构

@@ -224,7 +224,7 @@ void Level::Process() {
 			for (auto& i : list)
 				i->Update();
 
-		// 碰撞检测（人和墙体的碰撞检测写在Move()里了）
+		// 碰撞检测（人和墙体的碰撞检测写在Character::Move()里了）
 		BulletWallCollisionCheck();
 		BulletMonsterCollisionCheck();
 		CharacterMonsterCollisionCheck();
