@@ -196,6 +196,7 @@ void Level::Process() {
 		if (is_game_over_) {
 			// 调用game_over会话框
 			DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_GAME_OVER), System::GetHandle(), Input::HandleForGameOver);
+			is_game_over_ = false;
 			continue;
 		}
 
@@ -353,11 +354,8 @@ void Level::CharacterMonsterCollisionCheck() {
 			if (character_->DecLives()) {
 				character_->SetRect(starting_rect_);
 			}
-			else {
+			else
  				is_game_over_ = true;
-				// 调用game_over会话框
-				DialogBox(System::GetHInstance(), MAKEINTRESOURCE(IDD_DIALOG_FOR_GAME_OVER), System::GetHandle(), Input::HandleForGameOver);
-			}
 			break;
 		}
 	}
