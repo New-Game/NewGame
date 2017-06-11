@@ -144,9 +144,6 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GameStateManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -163,9 +160,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Aimiliya.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
@@ -190,6 +184,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Skill.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Aimiliya.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

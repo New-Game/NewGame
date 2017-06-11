@@ -76,7 +76,7 @@ private:
 		MINION,
 		DEATHLESS,
 		BOSS,
-		SLOW_TRAP,
+		STUN_TRAP,
 		KILL_TRAP,
 		BACK_TRAP,
 		WEAK_TRAP,
@@ -117,5 +117,7 @@ private:
 	void CharacterMonsterCollisionCheck();
 
 	void CharacterBuffCollisionCheck();
+
+	void CharacterTrapCollisionCheck();
 
 };

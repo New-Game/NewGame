@@ -61,8 +61,8 @@ void Level::Load() {
 					break;
 				case BOSS:
 					break;
-				case SLOW_TRAP:
-					game_element_list_[TRAP].push_back(new Trap(SLOW, temp_rect));
+				case STUN_TRAP:
+					game_element_list_[TRAP].push_back(new Trap(STUN, temp_rect));
 					game_element_list_[TRAP].back()->Load();
 					original_trap_info_.push_back(*dynamic_cast<Trap*>(game_element_list_[TRAP].back()));
 					break;
@@ -230,15 +230,16 @@ void Level::Process() {
 		BulletMonsterCollisionCheck();
 		CharacterMonsterCollisionCheck();
 		CharacterBuffCollisionCheck();
+		CharacterTrapCollisionCheck();
 
 		// 画出更新后的游戏元素
-		character_->Draw();
 		for (auto& list : game_element_list_)
 			for (auto& i : list)
 				i->Draw();
 		// 画出墙体
 		for (auto& i : wall_list_)
 			i.second.Draw();
+		character_->Draw();
 	
 		// 显示时间
 		Number time_left_tens_digit(time_left_ / 10, number_picture_[time_left_ / 10], 910, 10);
@@ -384,3 +385,29 @@ void Level::CharacterBuffCollisionCheck() {
 		}
 	}
 }
+
+void Level::CharacterTrapCollisionCheck() {
+	for (auto& i : game_element_list_[TRAP]) {
+		if (dynamic_cast<Trap*>(i)->GetStatus()) {
+			if (character_->GetRect().IsCollision(i->GetRect())) {
+				Trap* p_trap = dynamic_cast<Trap*>(i);
+				switch(p_trap->GetType()) {
+					case KILL:
+						if (character_->DecLives())
+							character_->SetRect(starting_rect_);
+						else
+							is_game_over_ = true;
+						break;
+					case BACK:
+						character_->SetRect(starting_rect_);
+						break;
+					default:
+						p_trap->SetTargetCharacter(character_);
+						p_trap->TakeEffect();
+						break;
+				}
+			}
+		}
+	}
+}
+

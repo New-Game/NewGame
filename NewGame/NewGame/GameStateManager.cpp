@@ -14,7 +14,7 @@
 
 void GameStateManager::Start() {
 	game_state_list_[GAME_PREFACE] = new Interval("picture\\game_preface.png");
-	game_state_list_[BACKGROUND_STORY] = new Interval("picture\\background_story.png");
+	game_state_list_[BACKGROUND_STORY] = new Interval("picture\\story1.png");
 	game_state_list_[CHARACTER_PICK] = new CharacterPick("picture\\character_pick.png");
 	game_state_list_[LEVEL1_PREFACE] = new Interval("picture\\level1_preface.png");
 	game_state_list_[LEVEL1] = new Level("text\\level1.txt"); // level1  ¹Ø¿¨1

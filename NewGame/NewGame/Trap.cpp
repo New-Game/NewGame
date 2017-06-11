@@ -32,6 +32,8 @@ void Trap::Update() {
 	if (count_ == System::GetFrameRate()) {
 		count_ = 0;
 		--period_;
+		if (target_character_ != nullptr)
+			--lasting_time_;
 	}
 	if (period_ == 0) {
 		if (status_)
@@ -40,8 +42,11 @@ void Trap::Update() {
 			status_ = true;
 		period_ = 3;
 	}
-	//Active();
-	//Inactive();
+	if (lasting_time_ == 0) {
+		LoseEffect();
+		lasting_time_ = 3;
+		target_character_ = nullptr;
+	}
 }
 
 void Trap::Draw() {
@@ -61,48 +66,28 @@ void Trap::Unload() {
 	AEGfxMeshFree(mesh_);
 }
 
-
-/*void Trap::Active() {
-	++count_;
-	if (type_ == KILL) {
-		if (count_ % 600 == 10)
-			state_ = true;
+void Trap::TakeEffect() {
+	switch(type_) {
+		case STUN:
+			target_character_->SetStun(true);
+			break;
+		case WEAK:
+			target_character_->SetWeak(true);
+			break;
+		default:
+			break;
 	}
-	if (type_ == SLOW) {
-		if (count_ % 600 == 20)
-			state_ = true;
-	}
-	if (type_ == BACK) {
-		if (count_ % 600 == 30)
-			state_ = true;
-	}
-	if (type_ == WEAK) {
-		if (count_ % 600 == 40)
-			state_ = true;
-	}
-	if (count_>3600)
-		count_ = 0;
 }
 
-void Trap::Inactive() {
-	if (type_ == KILL) {
-		if (count_ % 1200 == 10)
-			state_ = false;
+void Trap::LoseEffect() {
+	switch(type_) {
+		case STUN:
+			target_character_->SetStun(false);
+			break;
+		case WEAK:
+			target_character_->SetWeak(false);
+			break;
+		default:
+			break;
 	}
-	if (type_ == SLOW) {
-		if (count_ % 1200 == 20)
-			state_ = false;
-	}
-	if (type_ == BACK) {
-		if (count_ % 1200 == 30)
-			state_ = false;
-	}
-	if (type_ == WEAK) {
-		if (count_ % 1200 == 40)
-			state_ = false;
-	}
-}*/
-
-void Trap::TakeEffect(Character* p_character) {
-	
 }

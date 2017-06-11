@@ -76,15 +76,23 @@ public:
 	}
 
 	void SetDamage(bool operation) {
-		operation ? damage_ <<= 1 : damage_ >>= 1;
+		operation ? damage_ = 20 : damage_ = 10;
 	}
 
 	void SetSpeed(bool operation) {
-		operation ? speed_ <<= 1 : speed_ >>= 1;
+		operation ? speed_ = 2 : speed_ = 1;
 	}
 
 	void SetColdDown(bool operation) {
-		operation ? cold_down_ = 50 : cold_down_ = 0;
+		operation ? cold_down_ >>= 1 : cold_down_ <<= 1;
+	}
+
+	void SetStun(bool operation) {
+		operation ? speed_ = 0 : speed_ = 1;
+	}
+
+	void SetWeak(bool operation) {
+		operation ? damage_ = 5 : damage_ = 10;
 	}
 
 protected:

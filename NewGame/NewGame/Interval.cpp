@@ -18,11 +18,11 @@ void Interval::Load() {
 	AEGfxTriAdd(
 		1000.0f, 0.0f, 0xFFFF0000, 1.0f, 0.0f,
 		0.0f, 0.0f, 0xFFFF0000, 0.0f, 0.0f,
-		0.0f, 250.0f, 0xFFFF0000, 0.0f, 1.0f);
+		0.0f, 600.0f, 0xFFFF0000, 0.0f, 1.0f);
 	AEGfxTriAdd(
 		1000.0f, 0.0f, 0xFFFF0000, 1.0f, 0.0f,
-		1000.0f, 250.0f, 0xFFFF0000, 1.0f, 1.0f,
-		0.0f, 250.0f, 0xFFFF0000, 0.0f, 1.0f);
+		1000.0f, 600.0f, 0xFFFF0000, 1.0f, 1.0f,
+		0.0f, 600.0f, 0xFFFF0000, 0.0f, 1.0f);
 	mesh_ = AEGfxMeshEnd();
 	texture_ = AEGfxTextureLoad(picture_.c_str());
 }

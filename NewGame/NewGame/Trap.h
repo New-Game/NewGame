@@ -13,7 +13,7 @@
 class Character;
 
 enum Traps {
-	SLOW,
+	STUN,
 	KILL,
 	BACK,
 	WEAK
@@ -27,8 +27,10 @@ public:
 			GameElement(rect, "picture\\wall.png"),
 			type_(type),
 			status_(false), 
-			period_(3), 
 			count_(0), 
+			period_(3), 
+			lasting_time_(3), 
+			target_character_(nullptr), 
 			attack_picture_("picture\\minion.png"),
 			attack_texture_(nullptr) {}
 
@@ -36,20 +38,36 @@ public:
 			GameElement(trap), 
 			type_(trap.type_), 
 			status_(trap.status_), 
-			period_(trap.period_), 
 			count_(trap.count_), 
+			period_(trap.period_), 
+			lasting_time_(trap.lasting_time_), 
+			target_character_(trap.target_character_), 
 			attack_picture_(trap.attack_picture_), 
 			attack_texture_(trap.attack_texture_) {}
 
 	Trap() : 
-			type_(SLOW), 
+			type_(STUN), 
 			status_(false), 
-			period_(3), 
 			count_(0), 
+			period_(3), 
+			lasting_time_(3), 
+			target_character_(nullptr), 
 			attack_picture_(""),
 			attack_texture_(nullptr) {}
 
 	~Trap() {}
+
+	Traps GetType() const {
+		return type_;
+	}
+
+	bool GetStatus() const {
+		return status_;
+	}
+
+	void SetTargetCharacter(Character* p_character) {
+		target_character_ = p_character;
+	}
 
 	void Load() override;
 
@@ -59,18 +77,17 @@ public:
 
 	void Unload() override;
 
+	void TakeEffect();
+
+	void LoseEffect();
+
 protected:
 	Traps type_; // 陷阱种类 
 	bool status_; // 触发状态 陷阱触发为true，陷阱关闭为false 
-	int period_; // 陷阱周期
 	int count_;	// 循环计数，用于判断陷阱是否触发 
+	int period_; // 陷阱周期
+	int lasting_time_; // debuff持续时间
+	Character* target_character_;
 	string attack_picture_;
 	AEGfxTexture* attack_texture_;
-
-	//void Active();
-
-	//void Inactive();
-
-	void TakeEffect(Character* p_character);
-
 };

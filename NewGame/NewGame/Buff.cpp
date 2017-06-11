@@ -60,6 +60,10 @@ void Buff::TakeEffect() {
 	switch(type_) {
 		case SPEED:
 			target_character_->SetSpeed(true);
+			if (target_character_->GetRect().GetX() % 2 == 1)
+				target_character_->GetRect().MoveLeft(1);
+			if (target_character_->GetRect().GetY() % 2 == 1)
+				target_character_->GetRect().MoveUp(1);
 			break;
 		case DAMAGE:
 			target_character_->SetDamage(true);
