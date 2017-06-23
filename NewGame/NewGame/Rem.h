@@ -13,11 +13,15 @@
 
 class Rem : public Character {
 public:
-	Rem(Rect rect) : Character(rect, "picture\\Rem_small.png") {}
+	Rem(Rect rect) : Character(rect, "picture\\Rem_small.png") {
+		cold_down_ = 6;
+	}
 
 	Rem(const Rem& rem) : Character(rem) {}
 
-	Rem() : Character("picture\\Rem_small.png") {}
+	Rem() : Character("picture\\Rem_small.png") {
+		cold_down_ = 6;
+	}
 
 	~Rem() {}
 

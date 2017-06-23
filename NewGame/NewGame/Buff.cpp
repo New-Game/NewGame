@@ -69,7 +69,7 @@ void Buff::TakeEffect() {
 			target_character_->SetDamage(true);
 			break;
 		case CD:
-			target_character_->SetColdDown(true);
+			target_character_->DecColdDown();
 			break;
 		default:
 			break;
@@ -86,7 +86,7 @@ void Buff::LoseEffect() {
 			target_character_->SetDamage(false);
 			break;
 		case CD:
-			target_character_->SetColdDown(false);
+			// do nothing
 			break;
 		default:
 			break;

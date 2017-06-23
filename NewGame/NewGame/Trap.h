@@ -44,6 +44,7 @@ public:
 				attack_picture_ = "picture\\back.png";
 				break;
 			case WEAK:
+				// todo
 				attack_picture_ = "picture\\back.png";
 				break;
 			default:

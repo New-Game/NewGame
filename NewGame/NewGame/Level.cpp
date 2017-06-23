@@ -238,10 +238,9 @@ void Level::Process() {
 			game_element_list_[BULLET].back()->Load();
 		}
 		else if (AEInputCheckTriggered('S')) {
-			if (character_->GetColdDown() == 0)
-			{
+			if (character_->GetColdDown() == 0) {
 				SkillWork();
-				character_->StartColdDown(60);
+				character_->ResetColdDownCounter();
 			}
 		}
 		for (auto& list : game_element_list_)
@@ -483,15 +482,25 @@ void Level::DrawCharacterStatus() {
 	Number lives_units_digit(character_->GetLives(), number_picture_[character_->GetLives()], 920, 250);
 	lives_units_digit.Draw();
 
-/*	// 人物攻击力数值
-	int damage = character_->GetDamage();
-	Number damage_tens_digit(damage / 10, number_picture_[damage / 10], 910, 120);
+	// 人物攻击力数值
+	Picture damage("picture\\time.png", 910, 280); // todo
+	damage.Draw();
+	Number damage_tens_digit(character_->GetDamage() / 10, number_picture_[character_->GetDamage() / 10], 920, 340);
 	damage_tens_digit.Draw();
-	Number damage_units_digit(damage % 10, number_picture_[damage % 10], 925, 120);
+	Number damage_units_digit(character_->GetDamage() % 10, number_picture_[character_->GetDamage() % 10], 935, 340);
 	damage_units_digit.Draw();
+
 	// 人物移动速度
-	Number speed(character_->GetSpeed(), number_picture_[character_->GetSpeed()], 910, 140);
+	Picture speed("picture\\lives.png", 910, 370); // todo
 	speed.Draw();
-	// 人物技能冷却缩减
-	//*/
+	Number speed_units_digit(character_->GetSpeed(), number_picture_[character_->GetSpeed()], 920, 430);
+	speed_units_digit.Draw();
+
+	// 人物技能冷却时间
+	Picture cd("picture\\cd.png", 910, 460);
+	cd.Draw();
+	Number cd_tens_digit(character_->GetColdDown() / 10, number_picture_[character_->GetDamage() / 10], 920, 520);
+	cd_tens_digit.Draw();
+	Number cd_units_digit(character_->GetColdDown() % 10, number_picture_[character_->GetColdDown() % 10], 935, 520);
+	cd_units_digit.Draw();
 }

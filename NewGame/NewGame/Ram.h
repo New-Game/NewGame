@@ -12,11 +12,15 @@
 
 class Ram : public Character {
 public:
-	Ram(Rect rect) : Character(rect, "picture\\Ram_small.png") {}
+	Ram(Rect rect) : Character(rect, "picture\\Ram_small.png") {
+		cold_down_ = 12;
+	}
 
 	Ram(const Ram& ram) : Character(ram) {}
 
-	Ram() : Character("picture\\Ram_small.png") {}
+	Ram() : Character("picture\\Ram_small.png") {
+		cold_down_ = 12;
+	}
 
 	~Ram() {}
 

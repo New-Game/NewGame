@@ -12,11 +12,15 @@
 
 class Fillis : public Character {
 public:
-	Fillis(Rect rect) : Character(rect, "picture\\Fillis_small.png") {}
+	Fillis(Rect rect) : Character(rect, "picture\\Fillis_small.png") {
+		cold_down_ = 6;
+	}
 
 	Fillis(const Fillis& fillis) : Character(fillis) {}
 
-	Fillis() : Character("picture\\Fillis_small.png") {}
+	Fillis() : Character("picture\\Fillis_small.png") {
+		cold_down_ = 6;
+	}
 
 	~Fillis() {}
 

@@ -12,11 +12,15 @@
 
 class Felt : public Character {
 public:
-	Felt(Rect rect) : Character(rect, "picture\\Felt_small.png") {}
+	Felt(Rect rect) : Character(rect, "picture\\Felt_small.png") {
+		cold_down_ = 6;
+	}
 
 	Felt(const Felt& felt) : Character(felt) {}
 
-	Felt() : Character("picture\\Felt_small.png") {}
+	Felt() : Character("picture\\Felt_small.png") {
+		cold_down_ = 6;
+	}
 
 	~Felt() {}
 

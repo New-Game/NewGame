@@ -26,10 +26,10 @@ void Ram::Load() {
 void Ram::Update() {
 	Move();
 	if (cold_down_ != 0) {
-		count_++;
+		++count_;
 		if (count_ == System::GetFrameRate()) {
 			count_ = 0;
-			cold_down_ -= 10;
+			--cold_down_;
 		}
 	}
 }

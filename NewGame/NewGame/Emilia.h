@@ -12,11 +12,15 @@
 
 class Emilia : public Character {
 public:
-	Emilia(Rect rect) : Character(rect, "picture\\emilia_small.png") {}
+	Emilia(Rect rect) : Character(rect, "picture\\emilia_small.png") {
+		cold_down_ = 12;
+	}
 
 	Emilia(const Emilia& aimiliya) : Character(aimiliya) {}
 	
-	Emilia() : Character("picture\\emilia_small.png"){}
+	Emilia() : Character("picture\\emilia_small.png") {
+		cold_down_ = 12;
+	}
 
 	~Emilia() {}
 

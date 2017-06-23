@@ -23,6 +23,7 @@ public:
 		damage_(10), 
 		speed_(1), 
 		cold_down_(0), 
+		cold_down_counter_(cold_down_), 
 		count_(0) {}
 
 	// 人物类的复制构造函数会复制所有信息（包括mesh_和texture_的信息)，而怪物类的不会
@@ -33,6 +34,7 @@ public:
 		damage_(character.damage_), 
 		speed_(character.speed_), 
 		cold_down_(character.cold_down_), 
+		cold_down_counter_(character.cold_down_counter_), 
 		count_(character.count_) {}
 
 	Character(string picture) :
@@ -42,6 +44,7 @@ public:
 		damage_(10), 
 		speed_(1), 
 		cold_down_(0), 
+		cold_down_counter_(cold_down_), 
 		count_(0) {}
 
 	Character() : 
@@ -50,6 +53,7 @@ public:
 		damage_(10), 
 		speed_(1), 
 		cold_down_(0), 
+		cold_down_counter_(cold_down_), 
 		count_(0) {}
 
 	virtual ~Character() {}
@@ -92,8 +96,12 @@ public:
 		operation ? speed_ = 2 : speed_ = 1;
 	}
 
-	void SetColdDown(bool operation) {
-		operation ? cold_down_ >>= 1 : cold_down_ <<= 1;
+	void DecColdDown() {
+		cold_down_counter_ >= 4 ? cold_down_counter_ -= 4 : cold_down_counter_ = 0;
+	}
+
+	void ResetColdDownCounter() {
+		cold_down_counter_ = cold_down_;
 	}
 
 	void SetStun(bool operation) {
@@ -104,16 +112,13 @@ public:
 		operation ? damage_ = 5 : damage_ = 10;
 	}
 
-	void StartColdDown(int i) {
-		cold_down_ = i;
-	}
-
 protected:
 	Directions front_; // 面向方向
 	int lives_; // 生命数
 	int damage_;
 	int speed_;
 	int cold_down_;
+	int cold_down_counter_;
 	int count_;
 
 	void Move();
