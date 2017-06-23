@@ -12,7 +12,7 @@
 
 class Deathless : public Monster {
 public:
-	Deathless(Rect rect) : Monster(rect, "") {}
+	Deathless(Rect rect) : Monster(rect, "picture\\minion.png") {}
 
 	Deathless(const Deathless& deathless) : Monster(deathless) {}
 

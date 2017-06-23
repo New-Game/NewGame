@@ -9,8 +9,7 @@
 #pragma once
 
 #include "GameElement.h"
-
-class Character;
+#include "Character.h"
 
 enum Traps {
 	STUN,
@@ -24,15 +23,33 @@ enum Traps {
 class Trap : public GameElement {
 public:
 	Trap(Traps type, Rect rect) :
-			GameElement(rect, "picture\\wall.png"),
+			GameElement(rect, "picture\\trap.png"),
 			type_(type),
-			status_(false), 
-			count_(0), 
-			period_(3), 
-			lasting_time_(3), 
-			target_character_(nullptr), 
-			attack_picture_("picture\\minion.png"),
-			attack_texture_(nullptr) {}
+			status_(false),
+			count_(0),
+			period_(3),
+			lasting_time_(3),
+			target_character_(nullptr),
+			attack_texture_(nullptr), 
+			AnimationController(80), 
+			AnimationCurFrame(1) {
+		switch(type) {
+			case STUN:
+				attack_picture_ = "picture\\stop.png";
+				break;
+			case KILL:
+				attack_picture_ = "picture\\kill.png";
+				break;
+			case BACK:
+				attack_picture_ = "picture\\back.png";
+				break;
+			case WEAK:
+				attack_picture_ = "picture\\back.png";
+				break;
+			default:
+				break;
+		}
+	}
 
 	Trap(const Trap& trap) : 
 			GameElement(trap), 
@@ -43,7 +60,9 @@ public:
 			lasting_time_(trap.lasting_time_), 
 			target_character_(trap.target_character_), 
 			attack_picture_(trap.attack_picture_), 
-			attack_texture_(trap.attack_texture_) {}
+			attack_texture_(trap.attack_texture_), 
+			AnimationController(trap.AnimationController), 
+			AnimationCurFrame(trap.AnimationCurFrame) {}
 
 	Trap() : 
 			type_(STUN), 
@@ -53,7 +72,9 @@ public:
 			lasting_time_(3), 
 			target_character_(nullptr), 
 			attack_picture_(""),
-			attack_texture_(nullptr) {}
+			attack_texture_(nullptr), 
+			AnimationController(80), 
+			AnimationCurFrame(1) {}
 
 	~Trap() {}
 
@@ -90,4 +111,7 @@ protected:
 	Character* target_character_;
 	string attack_picture_;
 	AEGfxTexture* attack_texture_;
+
+	int AnimationController;
+	int AnimationCurFrame;
 };

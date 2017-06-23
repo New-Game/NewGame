@@ -24,6 +24,20 @@ void Minion::Load() {
 
 void Minion::Update() {
 	Move();
+
+	if (speed_ == 0) status_ = 1;
+	if (status_ == 1) {
+		count_++;
+		if (count_ == 120) {
+			count_ = 0;
+			time_++;
+		}
+		if (time_ == 3) {
+			status_ = 0;
+			time_ = 0;
+			SetSpeed(2);
+		}
+	}
 }
 
 void Minion::Draw() {

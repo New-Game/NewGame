@@ -2,7 +2,7 @@
  * Project:      NewGame
  * File Name:    Number.h
  * Author:       Atlas Shen
- * Date:         2017/6/69
+ * Date:         2017/6/09
  * Purpose:      数字类头文件
  */
 

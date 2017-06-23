@@ -12,7 +12,7 @@
 
 class Boss : public Monster {
 public:
-	Boss(Rect rect) : Monster(rect, "picture\\boss.png") {}
+	Boss(Rect rect) : Monster(rect, "picture\\minion.png") {}
 
 	Boss(const Boss& boss) : Monster(boss) {}
 

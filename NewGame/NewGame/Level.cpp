@@ -11,12 +11,17 @@
 #include "Level.h"
 #include "Input.h"
 #include "Number.h"
-#include "Aimiliya.h"
+#include "Picture.h"
+#include "Emilia.h"
 #include "Minion.h"
 #include "Deathless.h"
 #include "Boss.h"
 #include "Trap.h"
 #include "Buff.h"
+#include "Ram.h"
+#include "Rem.h"
+#include "Fillis.h"
+#include "Felt.h"
 
 void Level::Load() {
 	// 先设置本状态哪些键位是有效的
@@ -46,9 +51,19 @@ void Level::Load() {
 					break;
 				case STARTING_POINT:
 					starting_rect_ = temp_rect;
-					character_ = new Aimiliya(temp_rect);
+					character_ = picked_character_;
+					character_->SetRect(temp_rect);
 					character_->Load();
-					original_character_info_ = new Aimiliya(*dynamic_cast<Aimiliya*>(character_));
+					if (typeid(*(character_->GetClassType())) == typeid(Emilia))
+						original_character_info_ = new Emilia(*dynamic_cast<Emilia*>(character_));
+					else if (typeid(*(character_->GetClassType())) == typeid(Rem))
+						original_character_info_ = new Rem(*dynamic_cast<Rem*>(character_));
+					else if (typeid(*(character_->GetClassType())) == typeid(Ram))
+						original_character_info_ = new Ram(*dynamic_cast<Ram*>(character_));
+					else if (typeid(*(character_->GetClassType())) == typeid(Fillis))
+						original_character_info_ = new Fillis(*dynamic_cast<Fillis*>(character_));
+					else if (typeid(*(character_->GetClassType())) == typeid(Felt))
+						original_character_info_ = new Felt(*dynamic_cast<Felt*>(character_));
 					break;
 				case ENDING_POINT:
 					ending_rect_ = temp_rect;
@@ -58,8 +73,12 @@ void Level::Load() {
 					game_element_list_[MONSTER].back()->Load();
 					break;
 				case DEATHLESS:
+					game_element_list_[MONSTER].push_back(new Deathless(temp_rect));
+					game_element_list_[MONSTER].back()->Load();
 					break;
 				case BOSS:
+					game_element_list_[MONSTER].push_back(new Boss(temp_rect));
+					game_element_list_[MONSTER].back()->Load();
 					break;
 				case STUN_TRAP:
 					game_element_list_[TRAP].push_back(new Trap(STUN, temp_rect));
@@ -188,6 +207,7 @@ void Level::Process() {
 		}
 		// 检查人物是否已经到终点了
 		if (IsReachEnd()) {
+			*character_ = *original_character_info_;
 			SetIsReadyForNextGameState();
 			continue;
 		}
@@ -218,8 +238,11 @@ void Level::Process() {
 			game_element_list_[BULLET].back()->Load();
 		}
 		else if (AEInputCheckTriggered('S')) {
-			//game_element_list_[SKILL].push_back(character_->UseSkill());
-			//game_element_list_[SKILL].back()->Load();
+			if (character_->GetColdDown() == 0)
+			{
+				SkillWork();
+				character_->StartColdDown(60);
+			}
 		}
 		for (auto& list : game_element_list_)
 			for (auto& i : list)
@@ -241,30 +264,8 @@ void Level::Process() {
 			i.second.Draw();
 		character_->Draw();
 	
-		// 显示时间
-		Number time_left_tens_digit(time_left_ / 10, number_picture_[time_left_ / 10], 910, 10);
-		time_left_tens_digit.Draw();
-		Number time_left_units_digit(time_left_ % 10, number_picture_[time_left_ % 10], 925, 10);
-		time_left_units_digit.Draw();
-
-		// 显示分数
-		// 
-
-		// 显示状态信息
-		// 人物剩余生命数
-		Number lives(character_->GetLives(), number_picture_[character_->GetLives()], 910, 100);
-		lives.Draw();
-		// 人物攻击力数值
-		int damage = character_->GetDamage();
-		Number damage_tens_digit(damage / 10, number_picture_[damage / 10], 910, 120);
-		damage_tens_digit.Draw();
-		Number damage_units_digit(damage % 10, number_picture_[damage % 10], 925, 120);
-		damage_units_digit.Draw();
-		// 人物移动速度
-		Number speed(character_->GetSpeed(), number_picture_[character_->GetSpeed()], 910, 140);
-		speed.Draw();
-		// 人物技能冷却缩减
-		//
+		DrawLevelStatus();
+		DrawCharacterStatus();
 
 		AESysFrameEnd();
 	}
@@ -273,7 +274,7 @@ void Level::Process() {
 
 void Level::Unload() {
 	character_->Unload();
-	delete character_;
+	//delete character_;
 	for (auto& list : game_element_list_) {
 		for (auto& i : list) {
 			i->Unload();
@@ -294,7 +295,12 @@ void Level::Unload() {
 }
 
 bool Level::IsReachEnd() const {
-	return character_->GetRect() == ending_rect_;
+	//if(character_->GetRect() == ending_rect_)
+	//return true;
+	if (abs(character_->GetRect().GetX() - ending_rect_.GetX()) <= 1
+		&& (abs(character_->GetRect().GetY() - ending_rect_.GetY()) <= 1))
+		return true;
+	return false;
 }
 
 void Level::BulletWallCollisionCheck() {
@@ -321,12 +327,17 @@ void Level::BulletMonsterCollisionCheck() {
 		for (auto j = game_element_list_[MONSTER].begin(); flag && j != game_element_list_[MONSTER].end();) {
 			if (i != game_element_list_[BULLET].end()) {
 				if ((*i)->GetRect().IsCollision((*j)->GetRect())) {
-					int damage = character_->GetDamage();
+					int damage;
+					if(typeid(*dynamic_cast<Monster*>(*j)->GetClassType())==typeid(Minion)
+						|| typeid(*dynamic_cast<Monster*>(*j)->GetClassType()) == typeid(Boss))
+					 damage = character_->GetDamage();
+					else damage = 0;
 					if (!dynamic_cast<Monster*>(*j)->DecHealth(damage)) {
 						Rect temp_monster_rect = (*j)->GetRect();
 						(*j)->Unload();
 						delete *j;
 						j = game_element_list_[MONSTER].erase(j);
+						score_ += 10;
 						srand(unsigned(time(nullptr)));
 						game_element_list_[BUFF].push_back(new Buff(static_cast<Buffs>(rand() % NUM_OF_BUFF_TYPES), temp_monster_rect));
 						game_element_list_[BUFF].back()->Load();
@@ -373,7 +384,7 @@ void Level::CharacterBuffCollisionCheck() {
 						p_buff->SetVanished();
 						break;
 					case SCORE:
-						score_ += 100;
+						score_ += 10;
 						p_buff->SetVanished();
 						break;
 					default:
@@ -411,3 +422,76 @@ void Level::CharacterTrapCollisionCheck() {
 	}
 }
 
+void Level::SkillWork() {
+	if (typeid(*character_->GetClassType()) == typeid(Emilia)) {
+		for (auto& i : game_element_list_[MONSTER]) {
+			Monster* p = dynamic_cast<Monster*>(i);
+			p->SetSpeed(0);
+		}
+	}
+	else if (typeid(*character_->GetClassType()) == typeid(Ram)) {
+		for (auto i = game_element_list_[MONSTER].begin(); i != game_element_list_[MONSTER].end();) {
+			Monster*p = dynamic_cast<Monster*>(*i);
+			int damage = 10;
+			if (!p->DecHealth(damage)) {
+				Rect temp_monster_rect = p->GetRect();
+				(*i)->Unload();
+				delete *i;
+				i = game_element_list_[MONSTER].erase(i);
+				srand(unsigned(time(nullptr)));
+				game_element_list_[BUFF].push_back(new Buff(static_cast<Buffs>(rand() % NUM_OF_BUFF_TYPES), temp_monster_rect));
+				game_element_list_[BUFF].back()->Load();
+			}
+			else
+				++i;
+		}
+	}
+	else if(typeid(*character_->GetClassType()) == typeid(Rem)){
+		character_->SetDamage(true);
+	}
+	else if(typeid(*character_->GetClassType()) == typeid(Fillis)) {
+		if (character_->GetSpeed() < 1) character_->SetSpeed(true);
+		if (character_->GetDamage() < 10) character_->SetDamage(true);
+	}
+	else if (typeid(*character_->GetClassType()) == typeid(Felt)) {
+		// todo
+	}
+}
+
+void Level::DrawLevelStatus() {
+	// 显示时间
+	Picture time("picture\\time.png", 910, 10);
+	time.Draw();
+	Number time_left_tens_digit(time_left_ / 10, number_picture_[time_left_ / 10], 920, 70);
+	time_left_tens_digit.Draw();
+	Number time_left_units_digit(time_left_ % 10, number_picture_[time_left_ % 10], 935, 70);
+	time_left_units_digit.Draw();
+
+	// 显示分数
+	Picture score("picture\\score.png", 910, 100);
+	score.Draw();
+	Number score_tens_digit(score_ / 10, number_picture_[score_ / 10], 920, 160);
+	score_tens_digit.Draw();
+	Number score_units_digit(score_ % 10, number_picture_[score_ % 10], 935, 160);
+	score_units_digit.Draw();
+}
+
+void Level::DrawCharacterStatus() {
+	// 人物剩余生命数
+	Picture lives("picture\\lives.png", 910, 190);
+	lives.Draw();
+	Number lives_units_digit(character_->GetLives(), number_picture_[character_->GetLives()], 920, 250);
+	lives_units_digit.Draw();
+
+/*	// 人物攻击力数值
+	int damage = character_->GetDamage();
+	Number damage_tens_digit(damage / 10, number_picture_[damage / 10], 910, 120);
+	damage_tens_digit.Draw();
+	Number damage_units_digit(damage % 10, number_picture_[damage % 10], 925, 120);
+	damage_units_digit.Draw();
+	// 人物移动速度
+	Number speed(character_->GetSpeed(), number_picture_[character_->GetSpeed()], 910, 140);
+	speed.Draw();
+	// 人物技能冷却缩减
+	//*/
+}

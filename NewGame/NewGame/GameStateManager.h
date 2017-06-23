@@ -36,11 +36,16 @@ public:
 		++game_state_pointer_;
 	}
 
+	//static LPCSTR music[10];
+
 private:
 	// 用来构造game_state_list_[]数组下标
 	enum GameStates {
 		GAME_PREFACE,
+		MENU,
 		BACKGROUND_STORY,
+		EMILIA,
+		REMRAM,
 		CHARACTER_PICK,
 		LEVEL1_PREFACE,
 		LEVEL1,

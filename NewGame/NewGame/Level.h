@@ -120,4 +120,10 @@ private:
 
 	void CharacterTrapCollisionCheck();
 
+	void SkillWork();
+
+	void DrawLevelStatus();
+
+	void DrawCharacterStatus();
+
 };

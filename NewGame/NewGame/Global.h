@@ -15,6 +15,8 @@
 #include "GameStateManager.h"
 #include "Level.h"
 
+
+
 // 必须为静态成员变量提供类外部的声明，否则链接时会出问题（不可被修改）
 //
 const int System::window_width_;
@@ -27,10 +29,18 @@ HWND System::handle_;
 //streambuf* System::streambuf_pointer_;
 //ofstream System::console_out_;
 
-KeyStatus Input::pressed_key_[NUM_OF_KEY];
+KeyStatus Input::pressed_key_[NUM_OF_KEYS];
+POINT Input::pos_mouse_;
 
+//BACKGROUND_STORY
 GameState* GameStateManager::game_state_list_[NUM_OF_GAME_STATES];
 GameState** GameStateManager::game_state_pointer_;
+/*LPCSTR GameStateManager::music[]={
+	"music\\Layers.wav","music\\Hyouka.wav","music\\Paradise.wav","music\\Redo.wav",
+	"music\\Layers.wav","music\\Hyouka.wav","music\\Paradise.wav","music\\Redo.wav", 
+	"music\\Redo.wav","music\\Redo.wav"};*/
+
+Character* GameState::picked_character_;
 
 unordered_map<Rect, Wall> Level::wall_list_;
 const string Level::number_picture_[10] = {

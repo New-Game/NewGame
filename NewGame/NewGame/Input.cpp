@@ -28,7 +28,18 @@ LRESULT CALLBACK Input::MainHandle(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 			SetWindowPos(hWnd, HWND_TOPMOST, rect.left, rect.top, rect.right, rect.bottom, SWP_SHOWWINDOW);
 			break;
 		}
+		
+		case WM_LBUTTONDOWN: {
+			if (pressed_key_[KEY_MOUSE].GetIsValid())
+				pressed_key_[KEY_MOUSE].SetIsPressed(true);
+			break;
+		}
 
+		case WM_MOUSEMOVE:{
+			GetCursorPos(&pos_mouse_);
+			ScreenToClient(hWnd, &pos_mouse_);
+			break;
+		}
 		// 窗口重绘
 		case WM_PAINT: {
 			PAINTSTRUCT ps; // 重绘结构
@@ -119,7 +130,7 @@ INT_PTR CALLBACK Input::HandleForExit(HWND hDlg, UINT msg, WPARAM wParam, LPARAM
 	}
 }
 
-INT_PTR Input::HandleForResume(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
+INT_PTR CALLBACK Input::HandleForResume(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
 	UNREFERENCED_PARAMETER(lParam);
 	switch (msg) {
 		case WM_INITDIALOG:
@@ -136,7 +147,7 @@ INT_PTR Input::HandleForResume(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam
 	}
 }
 
-INT_PTR Input::HandleForRestart(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
+INT_PTR CALLBACK Input::HandleForRestart(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
 	UNREFERENCED_PARAMETER(lParam);
 	switch(msg) {
 		case WM_INITDIALOG:
@@ -153,7 +164,7 @@ INT_PTR Input::HandleForRestart(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
 	}
 }
 
-INT_PTR Input::HandleForGameOver(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
+INT_PTR CALLBACK Input::HandleForGameOver(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
 	UNREFERENCED_PARAMETER(lParam);
 	switch(msg) {
 		case WM_INITDIALOG:
@@ -166,6 +177,21 @@ INT_PTR Input::HandleForGameOver(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPar
 			}
 			if (LOWORD(wParam) == IDEXIT) {
 				pressed_key_[KEY_ESC].SetIsPressed(true);
+				EndDialog(hDlg, LOWORD(wParam));
+				return INT_PTR(true);
+			}
+		default:
+			return INT_PTR(false);
+	}
+}
+
+INT_PTR CALLBACK Input::HandleForInfo(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
+	UNREFERENCED_PARAMETER(lParam);
+	switch (msg) {
+		case WM_INITDIALOG:
+			return INT_PTR(true);
+		case WM_COMMAND:
+			if (LOWORD(wParam) == IDOK) {
 				EndDialog(hDlg, LOWORD(wParam));
 				return INT_PTR(true);
 			}

@@ -102,9 +102,6 @@
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Aimiliya.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -126,16 +123,63 @@
     <ClInclude Include="Number.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Skill.h">
+    <ClInclude Include="Emilia.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="music.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_codec.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_dsp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_errors.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_memoryinfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_output.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Picture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Felt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Fillis.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Ram.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Rem.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
     <None Include="glew32.dll" />
+    <None Include="fmodex.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Alpha_Engine.lib" />
+    <Library Include="fmodex_vc.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Input.cpp">
@@ -183,13 +227,28 @@
     <ClCompile Include="Trap.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Skill.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Aimiliya.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="System.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Emilia.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Felt.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Fillis.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Ram.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Rem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -200,6 +259,21 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="picture\icon.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="picture\wpjs.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="picture\about.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="picture\operation.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="picture\trapintro.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="picture\bitmap4.bmp">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

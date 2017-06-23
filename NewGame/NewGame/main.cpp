@@ -9,12 +9,11 @@
 #include <Windows.h>
 #include "GameStateManager.h"
 #include "System.h"
-#include<mmsystem.h>
-#include<Digitalv.h>
-#include <mciapi.h>
+
 
 #pragma comment (lib, "Alpha_Engine.lib")
-#pragma comment (lib,"winmm.lib")
+
+/*
 
 void Play() {
 	AllocConsole();
@@ -34,13 +33,13 @@ void Play() {
 		WriteConsole(hd, "hello hplonline", sizeof("hello hplonline"), NULL, NULL);
 		CloseHandle(hd);
 	}
-}
+}*/
 
 // 程序主函数，我们只需要用到第一个和第四个参数
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
-	Play();
+	/*Play();*/
 	System::Start(hInstance, nCmdShow);
 	GameStateManager::Start();
 	

@@ -16,12 +16,17 @@ using namespace std;
 // 人物选择类，单实例类
 class CharacterPick : public GameState {
 public:
-	CharacterPick(string picture) : 
-			picture_(picture), 
-			mesh_(nullptr), 
-			texture_(nullptr) {}
-
-	CharacterPick() : picture_(nullptr), mesh_(nullptr), texture_(nullptr) {}
+	CharacterPick() {
+		for (int i = 0; i < NUM_OF_CHARACTERS; ++i) {
+			mesh_[i] = nullptr;
+			texture_[i] = nullptr;
+		}
+		picture_[EMILIA] = "picture\\emilia_large.png";
+		picture_[REM] = "picture\\rem_large.png";
+		picture_[RAM] = "picture\\ram_large.png";
+		picture_[FILLIS] = "picture\\fillis_large.png";
+		picture_[FELT] = "picture\\felt_large.png";
+	}
 
 	~CharacterPick() {}
 
@@ -34,7 +39,16 @@ public:
 	void Unload() override;
 
 private:
-	string picture_;
-	AEGfxVertexList* mesh_;
-	AEGfxTexture* texture_;
+	enum CharacterNames {
+		EMILIA,
+		REM,
+		RAM,
+		FILLIS,
+		FELT,
+		NUM_OF_CHARACTERS
+	};
+
+	string picture_[NUM_OF_CHARACTERS];
+	AEGfxVertexList* mesh_[NUM_OF_CHARACTERS];
+	AEGfxTexture* texture_[NUM_OF_CHARACTERS];
 };

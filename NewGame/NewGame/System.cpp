@@ -60,7 +60,7 @@ void System::Start(HINSTANCE hInstance, int nCmdShow) {
 	 * hInstance,            WinMain的第1个参数
 	 * NULL);                WM_Create消息传递用到的
 	 */
-	handle_ = CreateWindow(win_class_.lpszClassName, LPCSTR("从零开始的迷宫大作战"), WS_OVERLAPPEDWINDOW, 0, 0, window_width_, window_height_, nullptr, nullptr, hInstance, nullptr);
+	handle_ = CreateWindow(win_class_.lpszClassName, LPCSTR("从零开始的迷宫大冒险"), WS_OVERLAPPEDWINDOW, 0, 0, window_width_, window_height_, nullptr, nullptr, hInstance, nullptr);
 	ShowWindow(handle_, nCmdShow);
 	UpdateWindow(handle_);
 

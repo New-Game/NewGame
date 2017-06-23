@@ -22,7 +22,10 @@ public:
 			x_min_(0), 
 			x_max_(0), 
 			y_min_(0), 
-			y_max_(0) {}
+			y_max_(0), 
+			count_(0), 
+			status_(0), 
+			time_(0) {}
 
 	// 怪物类复制构造函数不会复制mesh_和texture_的信息，而人物类的会
 	Monster(const Monster& monster) : 
@@ -33,9 +36,22 @@ public:
 			x_min_(monster.x_min_),
 			x_max_(monster.x_max_),
 			y_min_(monster.y_min_),
-			y_max_(monster.y_max_) {}
+			y_max_(monster.y_max_), 
+			count_(monster.count_), 
+			status_(monster.status_),
+			time_(monster.time_) {}
 
-	Monster() : front_(DOWN), health_(100), speed_(2), x_min_(0), x_max_(0), y_min_(0), y_max_(0) {}
+	Monster() : 
+			front_(DOWN), 
+			health_(100), 
+			speed_(2), 
+			x_min_(0), 
+			x_max_(0), 
+			y_min_(0), 
+			y_max_(0), 
+			count_(0), 
+			status_(0),
+			time_(0) {}
 
 	virtual ~Monster() {}
 
@@ -70,6 +86,10 @@ public:
 		y_max_ = i_max * rect_.GetSize();
 	}
 
+	void SetSpeed(int speed) {
+		speed_ = speed;
+	}
+
 protected:
 	Directions front_;
 	int health_;
@@ -78,6 +98,9 @@ protected:
 	int x_max_;
 	int y_min_;
 	int y_max_;
+	int count_;
+	int status_;
+	int time_;
 
 	void Move();
 

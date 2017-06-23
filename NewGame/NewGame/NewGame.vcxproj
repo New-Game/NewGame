@@ -154,53 +154,74 @@
     <ClInclude Include="AETypes.h" />
     <ClInclude Include="AEUtil.h" />
     <ClInclude Include="AEVec2.h" />
-    <ClInclude Include="Aimiliya.h" />
+    <ClInclude Include="Emilia.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterPick.h" />
     <ClInclude Include="Deathless.h" />
+    <ClInclude Include="Felt.h" />
+    <ClInclude Include="Fillis.h" />
+    <ClInclude Include="fmod.h" />
+    <ClInclude Include="fmod.hpp" />
+    <ClInclude Include="fmod_codec.h" />
+    <ClInclude Include="fmod_dsp.h" />
+    <ClInclude Include="fmod_errors.h" />
+    <ClInclude Include="fmod_memoryinfo.h" />
+    <ClInclude Include="fmod_output.h" />
     <ClInclude Include="GameElement.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Interval.h" />
     <ClInclude Include="Buff.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Minion.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="music.h" />
     <ClInclude Include="Number.h" />
+    <ClInclude Include="Picture.h" />
+    <ClInclude Include="Ram.h" />
     <ClInclude Include="Rect.h" />
+    <ClInclude Include="Rem.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Skill.h" />
+    <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Trap.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Alpha_Engine.dll" />
+    <None Include="fmodex.dll" />
     <None Include="glew32.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Alpha_Engine.lib" />
+    <Library Include="fmodex_vc.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Aimiliya.cpp" />
+    <ClCompile Include="Emilia.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Buff.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterPick.cpp" />
     <ClCompile Include="Deathless.cpp" />
+    <ClCompile Include="Felt.cpp" />
+    <ClCompile Include="Fillis.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Interval.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Minion.cpp" />
     <ClCompile Include="Monster.cpp" />
-    <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="Ram.cpp" />
+    <ClCompile Include="Rem.cpp" />
+    <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Trap.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -209,7 +230,12 @@
     <ResourceCompile Include="NewGame.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="picture\about.bmp" />
+    <Image Include="picture\bitmap4.bmp" />
     <Image Include="picture\icon.ico" />
+    <Image Include="picture\operation.bmp" />
+    <Image Include="picture\trapintro.bmp" />
+    <Image Include="picture\wpjs.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -22,7 +22,8 @@ enum Keys {
 //	KEY_DOWN,
 //	KEY_LEFT,
 //	KEY_RIGHT,
-	NUM_OF_KEY
+	KEY_MOUSE,
+	NUM_OF_KEYS
 };
 
 class KeyStatus {
@@ -72,6 +73,8 @@ public:
 
 	static INT_PTR CALLBACK HandleForGameOver(HWND, UINT, WPARAM, LPARAM);
 
+	static INT_PTR CALLBACK HandleForInfo(HWND, UINT, WPARAM, LPARAM);
+
 	static KeyStatus& GetPressedKey(Keys keys) {
 		return pressed_key_[keys];
 	}
@@ -82,6 +85,11 @@ public:
 			i.SetIsValid(false);
 	}
 
+	static POINT GetMousePos() {
+		return pos_mouse_;
+	}
+
 private:
-	static KeyStatus pressed_key_[NUM_OF_KEY];
+	static KeyStatus pressed_key_[NUM_OF_KEYS];
+	static POINT pos_mouse_;
 };

@@ -11,11 +11,25 @@
 #include "Interval.h"
 #include "Level.h"
 #include "System.h"
+#include <mmsystem.h>
+#include <Digitalv.h>
+#include <windows.h>
+#include "Menu.h"
+#pragma comment(lib,"WinMM.Lib")
 
 void GameStateManager::Start() {
+	/*for(int i=0;i<=9;i++) {
+		GameState::mciopen[i].lpstrDeviceType = "mpegvedio";
+		GameState::mciopen[i].lpstrElementName = music[i];
+		mciSendCommand(0, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, (DWORD)& GameState::mciopen[i]);
+		GameState::ID[i] = GameState::mciopen[i].wDeviceID;
+	}*/
 	game_state_list_[GAME_PREFACE] = new Interval("picture\\game_preface.png");
+	game_state_list_[MENU] = new Menu("picture\\game_start.png");
 	game_state_list_[BACKGROUND_STORY] = new Interval("picture\\story1.png");
-	game_state_list_[CHARACTER_PICK] = new CharacterPick("picture\\character_pick.png");
+	game_state_list_[EMILIA] = new Interval("picture\\introduction2.png");
+	game_state_list_[REMRAM] = new Interval("picture\\introduction1.png");
+	game_state_list_[CHARACTER_PICK] = new CharacterPick();
 	game_state_list_[LEVEL1_PREFACE] = new Interval("picture\\level1_preface.png");
 	game_state_list_[LEVEL1] = new Level("text\\level1.txt"); // level1  ¹Ø¿¨1
 	game_state_list_[LEVEL1_ENDING] = new Interval("picture\\level1_ending.png");

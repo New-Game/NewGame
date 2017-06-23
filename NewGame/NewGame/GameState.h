@@ -9,6 +9,7 @@
 #pragma once
 
 #include <string>
+#include "Character.h"
 
 using namespace std;
 
@@ -74,6 +75,12 @@ public:
 	void SetIsReadyForExit() {
 		is_ready_for_exit_ = true;
 	}
+
+	static Character* picked_character_;
+
+	//static UINT ID[10];
+	//static MCI_OPEN_PARMS mciopen[10];
+	//static MCI_PLAY_PARMS mcipaly[10];
 
 protected:
 	// 用来控制游戏流程的flag
