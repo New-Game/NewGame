@@ -41,6 +41,7 @@ GameState** GameStateManager::game_state_pointer_;
 	"music\\Redo.wav","music\\Redo.wav"};*/
 
 Character* GameState::picked_character_;
+int GameState::total_score_;
 
 unordered_map<Rect, Wall> Level::wall_list_;
 const string Level::number_picture_[10] = {

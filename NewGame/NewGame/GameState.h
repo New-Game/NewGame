@@ -77,6 +77,7 @@ public:
 	}
 
 	static Character* picked_character_;
+	static int total_score_;
 
 	//static UINT ID[10];
 	//static MCI_OPEN_PARMS mciopen[10];

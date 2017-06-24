@@ -208,6 +208,7 @@ void Level::Process() {
 		// 检查人物是否已经到终点了
 		if (IsReachEnd()) {
 			*character_ = *original_character_info_;
+			total_score_ += score_;
 			SetIsReadyForNextGameState();
 			continue;
 		}
@@ -469,9 +470,12 @@ void Level::DrawLevelStatus() {
 	// 显示分数
 	Picture score("picture\\score.png", 910, 100);
 	score.Draw();
-	Number score_tens_digit(score_ / 10, number_picture_[score_ / 10], 920, 160);
+	int temp_score = total_score_ + score_;
+	Number score_hundreds_digit(temp_score / 100, number_picture_[temp_score / 100], 920, 160);
+	score_hundreds_digit.Draw();
+	Number score_tens_digit(temp_score / 10 % 10, number_picture_[temp_score / 10 % 10], 935, 160);
 	score_tens_digit.Draw();
-	Number score_units_digit(score_ % 10, number_picture_[score_ % 10], 935, 160);
+	Number score_units_digit(temp_score % 10, number_picture_[temp_score % 10], 950, 160);
 	score_units_digit.Draw();
 }
 
